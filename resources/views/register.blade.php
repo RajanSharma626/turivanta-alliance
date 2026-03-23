@@ -17,19 +17,22 @@
 
             <!-- Glassmorphic Form Card -->
             <div class="w-full bg-[#0a0a0f]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                <form action="#" method="POST" class="w-full flex flex-col gap-6">
+                <form action="{{ route('register.submit') }}" method="POST" class="w-full flex flex-col gap-6">
+                    @csrf
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- First Name -->
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-semibold text-gray-300 ml-1">First Name</label>
-                            <input type="text" placeholder="John" class="w-full bg-[#131215] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all">
+                            <input type="text" name="first_name" placeholder="John" value="{{ old('first_name') }}" class="w-full bg-[#131215] border @error('first_name') border-rose-500 @else border-white/10 @enderror rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all" required>
+                            @error('first_name') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror
                         </div>
                         
                         <!-- Last Name -->
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-semibold text-gray-300 ml-1">Last Name</label>
-                            <input type="text" placeholder="Doe" class="w-full bg-[#131215] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all">
+                            <input type="text" name="last_name" placeholder="Doe" value="{{ old('last_name') }}" class="w-full bg-[#131215] border @error('last_name') border-rose-500 @else border-white/10 @enderror rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all" required>
+                            @error('last_name') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
@@ -38,20 +41,22 @@
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-semibold text-gray-300 ml-1">Gender</label>
                             <div class="relative">
-                                <select class="w-full bg-[#131215] border border-white/10 rounded-xl px-5 py-3.5 text-white appearance-none focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all">
+                                <select name="gender" class="w-full bg-[#131215] border @error('gender') border-rose-500 @else border-white/10 @enderror rounded-xl px-5 py-3.5 text-white appearance-none focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all shadow-lg" required>
                                     <option value="" disabled selected class="text-gray-600">Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
+                                    <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                                    <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                                    <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
                                 </select>
                                 <svg class="w-5 h-5 absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                @error('gender') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <!-- D.O.B -->
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-semibold text-gray-300 ml-1">Date of Birth</label>
-                            <input type="date" class="w-full bg-[#131215] border border-white/10 rounded-xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all [color-scheme:dark]">
+                            <input type="date" name="dob" value="{{ old('dob') }}" class="w-full bg-[#131215] border @error('dob') border-rose-500 @else border-white/10 @enderror rounded-xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all [color-scheme:dark]" required>
+                            @error('dob') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
@@ -59,28 +64,40 @@
                         <!-- Contact No. -->
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-semibold text-gray-300 ml-1">Contact No.</label>
-                            <input type="tel" placeholder="+1 (555) 000-0000" class="w-full bg-[#131215] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all">
+                            <input type="tel" name="contact_no" placeholder="+1 (555) 000-0000" value="{{ old('contact_no') }}" class="w-full bg-[#131215] border @error('contact_no') border-rose-500 @else border-white/10 @enderror rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all" required>
+                            @error('contact_no') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- Email -->
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-semibold text-gray-300 ml-1">Email Address</label>
-                            <input type="email" placeholder="john@example.com" class="w-full bg-[#131215] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all">
+                            <input type="email" name="email" placeholder="john@example.com" value="{{ old('email') }}" class="w-full bg-[#131215] border @error('email') border-rose-500 @else border-white/10 @enderror rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all" required>
+                            @error('email') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <!-- Business Type -->
-                    <div class="flex flex-col gap-2">
-                        <label class="text-sm font-semibold text-gray-300 ml-1">Business Type</label>
-                        <div class="relative">
-                            <select class="w-full bg-[#131215] border border-white/10 rounded-xl px-5 py-3.5 text-white appearance-none focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all">
-                                <option value="" disabled selected class="text-gray-600">Select Business Type</option>
-                                <option value="Accommodation">Accommodation</option>
-                                <option value="Transportation">Transportation</option>
-                                <option value="Travel Agency">Travel Agency</option>
-                                <option value="Airline">Airline</option>
-                            </select>
-                            <svg class="w-5 h-5 absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                         <!-- Business Type -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-semibold text-gray-300 ml-1">Business Type</label>
+                            <div class="relative">
+                                <select name="business_type" class="w-full bg-[#131215] border @error('business_type') border-rose-500 @else border-white/10 @enderror rounded-xl px-5 py-3.5 text-white appearance-none focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all shadow-lg" required>
+                                    <option value="" disabled selected class="text-gray-600">Select Business Type</option>
+                                    <option value="Accommodation" {{ old('business_type') == 'Accommodation' ? 'selected' : '' }}>Accommodation</option>
+                                    <option value="Transportation" {{ old('business_type') == 'Transportation' ? 'selected' : '' }}>Transportation</option>
+                                    <option value="Travel Agency" {{ old('business_type') == 'Travel Agency' ? 'selected' : '' }}>Travel Agency</option>
+                                    <option value="Airline" {{ old('business_type') == 'Airline' ? 'selected' : '' }}>Airline</option>
+                                </select>
+                                <svg class="w-5 h-5 absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                @error('business_type') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-semibold text-gray-300 ml-1">Password</label>
+                            <input type="password" name="password" placeholder="••••••••" class="w-full bg-[#131215] border @error('password') border-rose-500 @else border-white/10 @enderror rounded-xl px-5 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all" required>
+                            @error('password') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
@@ -91,7 +108,6 @@
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </button>
                     </div>
-
                 </form>
             </div>
         </div>

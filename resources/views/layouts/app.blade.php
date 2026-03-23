@@ -44,8 +44,33 @@
             <a href="{{ route('contact') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Contact</a>
         </div>
         <div class="hidden md:flex items-center justify-end">
-            <a href="{{ route('login') }}" class="text-white hover:text-[#ff014f] text-sm font-bold mr-6 transition-colors">Login</a>
-            <a href="{{ route('register') }}" class="px-6 py-2 bg-[#ff014f] text-white text-sm font-bold rounded-full transition-all duration-300 hover:bg-[#e11d48] hover:shadow-[0_0_15px_rgba(255,1,79,0.3)] hover:-translate-y-0.5">Register</a>
+            @guest
+                <a href="{{ route('login') }}" class="text-white hover:text-[#ff014f] text-sm font-bold mr-6 transition-colors">Login</a>
+                <a href="{{ route('register') }}" class="px-6 py-2 bg-[#ff014f] text-white text-sm font-bold rounded-full transition-all duration-300 hover:bg-[#e11d48] hover:shadow-[0_0_15px_rgba(255,1,79,0.3)] hover:-translate-y-0.5">Register</a>
+            @else
+                <div class="relative group">
+                    <button class="flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 transition-all hover:bg-white/10">
+                        <span class="text-sm font-bold text-white">{{ Auth::user()->first_name }}</span>
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#ff014f] to-rose-400 flex items-center justify-center text-white font-black text-xs">
+                            {{ substr(Auth::user()->first_name, 0, 1) }}{{ substr(Auth::user()->last_name, 0, 1) }}
+                        </div>
+                    </button>
+                    <!-- Dropdown -->
+                    <div class="absolute right-0 mt-2 w-48 bg-[#0a0a0f] border border-white/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-white/5 bg-white/5">
+                            <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Signed in as</p>
+                            <p class="text-sm text-white font-bold truncate">{{ Auth::user()->email }}</p>
+                        </div>
+                        <a href="{{ route('profile.index') }}" class="block px-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">My Profile</a>
+                        <a href="{{ route('settings') }}" class="block px-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Settings</a>
+                        <div class="border-t border-white/5"></div>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-6 py-3 text-sm text-rose-500 hover:text-rose-400 hover:bg-rose-500/5 transition-colors font-bold">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            @endguest
         </div>
     </nav>
 
