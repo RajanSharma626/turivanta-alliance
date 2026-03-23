@@ -52,7 +52,7 @@
 
                 <div
                     class="relative z-10 w-[85%] max-w-[340px] aspect-square bg-[#0f0f11]/70 backdrop-blur-3xl border border-[#ffffff0a] rounded-3xl flex flex-col items-center justify-center p-8 text-center shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                    <h3 class="text-6xl lg:text-7xl font-extrabold mb-4 tracking-tight">1</h3>
+                    <h3 class="text-2xl lg:text-3xl font-extrabold tracking-tight">Single</h3>
                     <p class="text-2xl lg:text-3xl font-bold leading-[1.3] tracking-wide">Identity<br />for tourism</p>
                 </div>
 

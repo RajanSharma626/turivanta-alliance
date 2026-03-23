@@ -12,7 +12,6 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // \Illuminate\Support\Facades\Log::info('Profile index load', ['id' => $user->id, 'step' => $user->current_step]);
         $application = Application::firstOrCreate(['user_id' => $user->id]);
         return view('profile', compact('user', 'application'));
     }
