@@ -49,3 +49,18 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
+
+Route::get('/terms-and-conditions', function () {
+    return view('terms-and-conditions');
+})->name('terms-conditions');
+
+Route::get('/frequently-asked-questions', function () {
+    return view('faq');
+})->name('faq');
+
+
+

@@ -24,7 +24,12 @@
         .hero-img-container { animation: float 6s ease-in-out infinite; position: relative; }
         .hero-img-wave { animation: wave 8s ease-in-out infinite alternate; box-shadow: 0 0 30px rgba(255, 1, 79, 0.4), inset 0 0 20px rgba(255, 1, 79, 0.4); transition: all 0.5s ease; position: relative; z-index: 2; overflow: hidden; background: linear-gradient(135deg, #e11d48, #ff014f); padding: 4px; }
         .hero-img-inner { width: 100%; height: 100%; animation: wave 8s ease-in-out infinite alternate; overflow: hidden; background: #030712; }
+        
+        main p { text-align: justify; }
+        main input:hover, main select:hover, main textarea:hover { border-color: #ff014f !important; }
     </style>
+
+
 </head>
 <body class="antialiased selection:bg-[#ff014f] selection:text-white relative min-h-screen flex flex-col bg-[#030510]">
     <div id="tsparticles" class="absolute inset-0 z-0"></div>
@@ -41,8 +46,19 @@
         <div class="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
             <a href="{{ route('home') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Home</a>
             <a href="{{ route('about') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('about') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">About</a>
+            <a href="{{ route('faq') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('faq') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">FAQ's</a>
             <a href="{{ route('contact') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Contact</a>
         </div>
+
+        <!-- Search Box -->
+        <div class="hidden lg:flex flex-grow max-w-xs mx-8">
+            <div class="relative w-full group">
+                <input type="text" placeholder="Search identity..." class="w-full bg-white/5 border border-white/10 rounded-full px-12 py-2.5 text-xs font-medium text-white placeholder-gray-500 focus:outline-none focus:border-[#ff014f]/50 transition-all focus:bg-white/10 backdrop-blur-md">
+                <svg class="w-4 h-4 absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-500 group-focus-within:text-[#ff014f] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+        </div>
+
+
         <div class="hidden md:flex items-center justify-end">
             @guest
                 <a href="{{ route('login') }}" class="text-white hover:text-[#ff014f] text-sm font-bold mr-6 transition-colors">Login</a>
@@ -86,19 +102,19 @@
                     <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Turivanta Alliance Logo" class="h-10 w-auto object-contain">
                 </a>
                 <h2 class="text-3xl font-extrabold text-white leading-tight">
-                    Get Ready <span class="text-gray-400 font-light">To Create</span><br/> Great
+                    Get Ready <span class="text-gray-400 font-light"> to be </span><br/> endorsed?
                 </h2>
             </div>
             
             <!-- Middle: Quick Links -->
             <div class="md:w-1/3 flex flex-col md:items-center">
                 <div class="flex flex-col border-l border-white/5 pl-8 md:pl-0 md:border-none">
-                    <h3 class="text-white text-lg font-bold mb-6">Quick Link</h3>
+                    <h3 class="text-white text-lg font-bold mb-6">Quick Links</h3>
                     <ul class="flex flex-col gap-4 text-gray-400 text-sm font-medium">
                         <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a></li>
                         <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
                         <li><a href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="{{ route('login') }}" class="hover:text-white transition-colors">Login</a></li>
+                        <li><a href="{{ route('faq') }}" class="hover:text-white transition-colors">FAQ's</a></li>
                     </ul>
                 </div>
             </div>
@@ -119,13 +135,8 @@
                         </div>
                         <span class="leading-relaxed">Ward No. 32, Lower Pouni Chack,<br>Jammu, J&K, India</span>
                     </li>
-                    <li class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0">
-                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                        </div>
-                        <span>+91 98765 43210</span>
-                    </li>
                 </ul>
+
             </div>
         </div>
 
@@ -133,7 +144,8 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-12 border-t border-white/10 pt-8 mt-4 flex items-center justify-between">
             <p class="text-gray-500 text-sm font-medium">© {{ date('Y') }} | All Rights Reserved</p>
             <div class="flex gap-4">
-                <a href="{{ route('contact') }}" class="text-gray-500 hover:text-white text-sm transition-colors">Contact Us</a>
+                <a href="{{ route('privacy-policy') }}" class="text-gray-500 hover:text-white text-sm transition-colors">Privacy </a>
+                <a href="{{ route('terms-conditions') }}" class="text-gray-500 hover:text-white text-sm transition-colors">Terms</a>
             </div>
         </div>
     </footer>

@@ -76,6 +76,7 @@
                         </div>
                     </div>
 
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                          <!-- Business Type -->
                         <div class="flex flex-col gap-2">
