@@ -43,6 +43,7 @@ class AuthController extends Controller
         ]);
 
         Auth::login($user);
+        session(['verification_email' => $user->email]);
 
         return redirect()->route('verification.notice');
     }
@@ -64,8 +65,10 @@ class AuthController extends Controller
 
         $otp = rand(100000, 999999);
         $user->otp = $otp;
-        $user->otp_expires_at = now()->addMinutes(10);
+        $user->otp_expires_at = now()->addMinutes(5);
         $user->save();
+
+        session(['verification_email' => $user->email]);
 
         Log::info("Verification OTP for {$user->email}: {$otp}");
         Mail::to($user->email)->send(new VerifyOTPMail($otp));
@@ -80,7 +83,9 @@ class AuthController extends Controller
         if ($user->email_verified_at) return redirect()->route('home');
         if (!$user->otp) return redirect()->route('verification.notice');
 
-        return view('verify-otp');
+        return view('verify-otp', [
+            'expires_at' => $user->otp_expires_at->timestamp
+        ]);
     }
 
     public function verifyOtp(Request $request)

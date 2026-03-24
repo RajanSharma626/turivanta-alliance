@@ -41,9 +41,15 @@
                     <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
                 
-                <div class="text-center">
+                <div class="text-center pt-4">
                     <p class="text-gray-400 text-sm mb-2">Didn't receive the code?</p>
-                    <button type="button" class="text-white hover:text-[#ff014f] text-sm font-bold transition-colors">Resend Verification Code</button>
+                    <div id="resend-container">
+                        <p id="timer-text" class="text-xs text-gray-500 mb-2">Resend available in <span id="timer" class="font-bold text-[#ff014f]">05:00</span></p>
+                        <form id="resend-form" action="{{ route('otp.send') }}" method="POST" class="hidden">
+                            @csrf
+                            <button type="submit" class="text-white hover:text-[#ff014f] text-sm font-bold transition-colors">Resend Verification Code</button>
+                        </form>
+                    </div>
                 </div>
             </form>
         </div>
@@ -53,6 +59,7 @@
 
 @push('scripts')
 <script>
+    // OTP Input Navigation
     const inputs = document.querySelectorAll('.otp-input');
     inputs.forEach((input, index) => {
         input.addEventListener('keyup', (e) => {
@@ -63,15 +70,40 @@
             }
         });
         
-        // Handle paste
         input.addEventListener('paste', (e) => {
             e.preventDefault();
-            const data = e.clipboardData.getData('text').split('');
+            const data = e.clipboardData.getData('text').slice(0, 6).split('');
             inputs.forEach((input, i) => {
                 if (data[i]) input.value = data[i];
             });
             if (data.length > 0) inputs[Math.min(data.length, inputs.length) - 1].focus();
         });
     });
+
+    // Countdown Timer
+    const expiresAt = {{ $expires_at }} * 1000;
+    const timerDisplay = document.getElementById('timer');
+    const timerText = document.getElementById('timer-text');
+    const resendForm = document.getElementById('resend-form');
+
+    function updateTimer() {
+        const now = new Date().getTime();
+        const distance = expiresAt - now;
+
+        if (distance <= 0) {
+            timerText.classList.add('hidden');
+            resendForm.classList.remove('hidden');
+            return;
+        }
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        timerDisplay.innerHTML = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        setTimeout(updateTimer, 1000);
+    }
+
+    updateTimer();
 </script>
 @endpush
+
