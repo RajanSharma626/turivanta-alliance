@@ -25,7 +25,7 @@
             {{ $otp }}
         </div>
         
-        <p class="notice">This code will expire in 10 minutes. If you did not request this code, please ignore this email.</p>
+        <p class="notice">This code will expire in 5 minutes. If you did not request this code, please ignore this email.</p>
         
         <div class="footer">
             &copy; {{ date('Y') }} Turivanta Alliance. All rights reserved.
