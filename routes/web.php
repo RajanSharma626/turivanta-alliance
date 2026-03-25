@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,6 +51,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile/next', [ProfileController::class, 'nextStep'])->name('profile.next');
     Route::post('/profile/back', [ProfileController::class, 'backStep'])->name('profile.back');
+
+    // Admin Panel Routes (Restricted)
+    Route::middleware('admin')->group(function () {
+        Route::redirect('/admin', '/admin-control-panel');
+        Route::prefix('admin-control-panel')->group(function () {
+            Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+            Route::get('/members', [AdminController::class, 'members'])->name('admin.members');
+            Route::get('/applications', [AdminController::class, 'applications'])->name('admin.applications');
+            Route::get('/admins', [AdminController::class, 'admins'])->name('admin.admins');
+        });
+    });
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
