@@ -27,6 +27,19 @@ Route::middleware('guest')->group(function () {
     })->name('login');
 
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+
+    // Step 1: Request OTP
+    Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
+    Route::post('/forgot-password', [AuthController::class, 'sendResetOtp'])->name('password.email');
+
+    // Step 2: Verify OTP
+    Route::get('/reset-password/verify', [AuthController::class, 'showVerifyResetOtpForm'])->name('password.verify.form');
+    Route::post('/reset-password/verify', [AuthController::class, 'verifyResetOtp'])->name('password.verify.submit');
+    Route::post('/reset-password/resend', [AuthController::class, 'resendResetOtp'])->name('password.resend');
+
+    // Step 3: New Password
+    Route::get('/reset-password/new', [AuthController::class, 'showNewPasswordForm'])->name('password.reset.form');
+    Route::post('/reset-password/new', [AuthController::class, 'updatePassword'])->name('password.update.submit');
 });
 
 Route::middleware('auth')->group(function () {

@@ -52,22 +52,34 @@ class ProfileController extends Controller
         } elseif ($step == 3) {
             $request->validate([
                 'legal_name' => 'required',
-                'trade_name' => 'required',
                 'office_phone' => 'required',
                 'office_email' => 'required|email',
+                'service_tax' => 'required',
                 'billing_country' => 'required',
+                'shipping_country' => 'required',
+                'billing_state' => 'required',
                 'billing_city' => 'required',
+                'shipping_city' => 'required',
                 'billing_street' => 'required',
+                'shipping_street' => 'required',
+                'commencement_date' => 'required|date',
+                'trade_registration_no' => 'required',
+                'registration_granted_date' => 'required|date',
+                'iata_registered' => 'required',
             ]);
             
             // Validate and save application section
             $application = Application::where('user_id', $user->id)->first();
-            $application->update($request->only([
-                'legal_name', 'trade_name', 'office_phone', 'office_email', 'website', 'service_tax',
+            $data = $request->only([
+                'legal_name', 'trade_name', 'office_phone', 'office_email', 'mobile', 'website', 'fax', 'service_tax',
                 'billing_country', 'billing_state', 'billing_city', 'billing_street', 'billing_postal_code',
-                'same_as_billing', 'shipping_country', 'shipping_state', 'shipping_city', 'shipping_street', 'shipping_postal_code',
-                'fiduciary_breach', 'breach_details', 'commencement_date', 'trade_registration_no', 'registration_granted_date', 'iata_registered'
-            ]));
+                'shipping_country', 'shipping_state', 'shipping_city', 'shipping_street', 'shipping_postal_code',
+                'breach_details', 'commencement_date', 'trade_registration_no', 'registration_granted_date', 'iata_no'
+            ]);
+            $data['same_as_billing'] = $request->has('same_as_billing');
+            $data['fiduciary_breach'] = $request->fiduciary_breach == 'yes';
+            $data['iata_registered'] = $request->iata_registered == 'yes';
+            $application->update($data);
             
             // Handle contacts json
             if ($request->has('contacts')) {
@@ -76,12 +88,18 @@ class ProfileController extends Controller
 
             $user->update(['current_step' => 4]);
         } elseif ($step == 4) {
+            $application = $user->application;
             $rules = [
                 'tax_proof' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
                 'tax_receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
                 'owner_ids' => 'required|array|min:1',
                 'owner_ids.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
+                'recommendation_letter' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
             ];
+
+            if ($application->iata_registered) {
+                $rules['iata_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+            }
 
             if (in_array($user->legal_status, ['Corporation', 'Limited Company'])) {
                 $rules['cert_inc'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
@@ -91,8 +109,19 @@ class ProfileController extends Controller
             } elseif (in_array($user->legal_status, ['Limited Partnership', 'Partnership', 'Joint Venture'])) {
                 $rules['partnership_deed'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
                 $rules['ca_letter_part'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+                $rules['summary_form'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+            } elseif (in_array($user->legal_status, ['Co-operative', 'Association', 'State Owned Enterprise'])) {
+                $rules['registration_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+                $rules['bye_laws'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+            } elseif ($user->legal_status == 'Servicing Professionals') {
+                $rules['exp_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+            } elseif ($user->legal_status == 'Students') {
+                $rules['endorsement_letter'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
             } else {
                 $rules['trade_license'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+                if ($user->legal_status == 'Trust Company') {
+                    $rules['trust_deed'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+                }
             }
 
             $request->validate($rules);
@@ -107,52 +136,57 @@ class ProfileController extends Controller
                 $application->application_no = 'TA-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(4));
             }
 
-            $docs = $application->uploaded_documents ?? [];
+            $application->status = 'pending';
+            $docInfo = $application->uploaded_documents ?? [];
+            $allUploadedFilesPaths = [];
 
-// Debug: log received files for troubleshooting
-// \Illuminate\Support\Facades\Log::info('Document upload attempt', ['files' => $request->allFiles()]);
+            $fileInputs = [
+                'cert_inc', 'art_mem', 'annual_return', 'ca_letter_share',
+                'partnership_deed', 'ca_letter_part', 'summary_form', 'trade_license', 'trust_deed',
+                'registration_cert', 'bye_laws',
+                'exp_cert', 'endorsement_letter', 'recommendation_letter', 'iata_cert',
+                'tax_proof', 'tax_receipt', 'owner_ids'
+            ];
 
-// Collect files without storing
-$allUploadedFiles = [];
-$docInfo = [];
+            foreach ($fileInputs as $inputName) {
+                if ($request->hasFile($inputName)) {
+                    $files = is_array($request->file($inputName)) ? $request->file($inputName) : [$request->file($inputName)];
+                    foreach ($files as $index => $file) {
+                        if (!$file) continue;
+                        
+                        // Store file
+                        $filename = $file->getClientOriginalName();
+                        $path = $file->storeAs('applications/' . $application->application_no, $filename, 'public');
+                        $fullPath = storage_path('app/public/' . $path);
+                        $allUploadedFilesPaths[] = $fullPath;
 
-$fileInputs = [
-    'cert_inc', 'art_mem', 'annual_return', 'ca_letter_share',
-    'partnership_deed', 'ca_letter_part', 'trade_license',
-    'tax_proof', 'tax_receipt', 'owner_ids'
-];
-
-foreach ($fileInputs as $inputName) {
-    if ($request->hasFile($inputName)) {
-        $files = is_array($request->file($inputName)) ? $request->file($inputName) : [$request->file($inputName)];
-        foreach ($files as $index => $file) {
-            if (!$file) continue;
-            $allUploadedFiles[] = $file;
-            if (is_array($request->file($inputName))) {
-                $docInfo[$inputName . '_' . ($index + 1)] = $file->getClientOriginalName() . ' (Not stored)';
-            } else {
-                $docInfo[$inputName] = $file->getClientOriginalName() . ' (Not stored)';
+                        $key = (is_array($request->file($inputName))) ? $inputName . '_' . ($index + 1) : $inputName;
+                        $docInfo[$key] = [
+                            'path' => $path,
+                            'name' => $filename,
+                            'status' => 'pending'
+                        ];
+                    }
+                }
             }
-        }
-    }
-}
 
-$application->uploaded_documents = $docInfo;
-$application->status = 'pending';
-$application->save();
+            $application->uploaded_documents = $docInfo;
+            $application->save();
 
-            // Mark completed BEFORE sending email to avoid timeout issues
-            $user->update(['current_step' => 5]);
-
-            // Send Email
+            // Dispatch background job for mailing (commented out as per user request due to cron/job worker issues)
             try {
-                /** @var \App\Models\User $currentUser */
-                $currentUser = auth()->user();
-                \Illuminate\Support\Facades\Mail::to(config('mail.doc_mail'))->send(new \App\Mail\MembershipApplicationSubmitted($currentUser, $application, $allUploadedFiles));
+                // \App\Jobs\SendApplicationMailJob::dispatch($user, $application, $allUploadedFilesPaths);
+                
+                // Directly send mail instead
+                /** @var \App\Models\User $user */
+                $user = auth()->user();
+                \Illuminate\Support\Facades\Mail::to(config('mail.doc_mail'))
+                    ->send(new \App\Mail\MembershipApplicationSubmitted($user, $application, $allUploadedFilesPaths));
             } catch (\Exception $e) {
-                // Log and continue
-                \Illuminate\Support\Facades\Log::error('Mail failed: ' . $e->getMessage());
+                \Illuminate\Support\Facades\Log::error('Direct mail send failed: ' . $e->getMessage());
             }
+
+            $user->update(['current_step' => 5]);
             return redirect()->route('profile.index')->with('success', 'Application submitted successfully.');
         }
 

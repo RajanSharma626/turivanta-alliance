@@ -45,11 +45,14 @@ class MembershipApplicationSubmitted extends Mailable
     {
         $attachments = [];
 
-        foreach ($this->files as $name => $file) {
+        foreach ($this->files as $file) {
             if ($file instanceof \Illuminate\Http\UploadedFile) {
                 $attachments[] = Attachment::fromPath($file->getRealPath())
                     ->as($file->getClientOriginalName())
                     ->withMime($file->getClientMimeType());
+            } elseif (is_string($file) && file_exists($file)) {
+                $attachments[] = Attachment::fromPath($file)
+                    ->as(basename($file));
             }
         }
 

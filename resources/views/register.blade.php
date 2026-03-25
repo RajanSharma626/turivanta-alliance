@@ -17,7 +17,7 @@
 
             <!-- Glassmorphic Form Card -->
             <div class="w-full bg-[#0a0a0f]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                <form action="{{ route('register.submit') }}" method="POST" class="w-full flex flex-col gap-6">
+                <form id="registration-form" action="{{ route('register.submit') }}" method="POST" class="w-full flex flex-col gap-6">
                     @csrf
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -104,13 +104,29 @@
 
                     <!-- Submit Button -->
                     <div class="pt-6 mt-4 border-t border-white/5 text-center sm:text-right">
-                        <button type="submit" class="inline-flex items-center justify-center gap-2 px-10 py-[14px] bg-[#ff014f] text-white font-bold rounded-full transition-all duration-300 hover:bg-[#e11d48] w-full sm:w-auto hover:shadow-[0_0_20px_rgba(255,1,79,0.4)] hover:-translate-y-1">
-                            <span class="text-[15px]">Complete Registration</span>
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        <button type="submit" id="submit-btn" class="inline-flex items-center justify-center gap-2 px-10 py-[14px] bg-[#ff014f] text-white font-bold rounded-full transition-all duration-300 hover:bg-[#e11d48] w-full sm:w-auto hover:shadow-[0_0_20px_rgba(255,1,79,0.4)] hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span id="btn-text" class="text-[15px]">Complete Registration</span>
+                            <svg id="btn-icon" class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </main>
+@push('scripts')
+<script>
+    const regForm = document.getElementById('registration-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnTxt = document.getElementById('btn-text');
+    const btnIcn = document.getElementById('btn-icon');
+
+    if (regForm) {
+        regForm.addEventListener('submit', function() {
+            submitBtn.disabled = true;
+            btnTxt.innerText = 'Creating Account...';
+            btnIcn.classList.add('hidden');
+        });
+    }
+</script>
+@endpush
 @endsection

@@ -31,7 +31,7 @@
                     <div class="flex flex-col gap-3">
                         <div class="flex justify-between items-center px-1">
                             <label class="text-[13px] font-bold text-white tracking-wide ml-1">Password</label>
-                            <a href="#" class="text-[12px] text-gray-500 hover:text-[#ff014f] transition-colors font-medium">Forgot Password?</a>
+                            <a href="{{ route('password.request') }}" class="text-[12px] text-gray-500 hover:text-[#ff014f] transition-colors font-medium">Forgot Password?</a>
                         </div>
                         <input type="password" name="password" required placeholder="••••••••" class="w-full bg-[#131215] border @error('password') border-rose-500 @else border-white/5 @enderror rounded-2xl px-6 py-[14px] text-white placeholder-gray-500 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all text-[14px]">
                         @error('password') <span class="text-rose-500 text-[11px] font-bold ml-3">{{ $message }}</span> @enderror
