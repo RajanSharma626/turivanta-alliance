@@ -18,11 +18,13 @@ class MembershipApplicationSubmitted extends Mailable
 
     public $user;
     public $application;
+    public $files;
 
-    public function __construct(User $user, Application $application)
+    public function __construct(User $user, Application $application, $files = [])
     {
         $this->user = $user;
         $this->application = $application;
+        $this->files = $files;
     }
 
     public function envelope(): Envelope
@@ -43,11 +45,11 @@ class MembershipApplicationSubmitted extends Mailable
     {
         $attachments = [];
 
-        if ($this->application->uploaded_documents) {
-            foreach ($this->application->uploaded_documents as $type => $filePath) {
-                if ($filePath && file_exists(storage_path('app/private/' . $filePath))) {
-                    $attachments[] = Attachment::fromPath(storage_path('app/private/' . $filePath));
-                }
+        foreach ($this->files as $name => $file) {
+            if ($file instanceof \Illuminate\Http\UploadedFile) {
+                $attachments[] = Attachment::fromPath($file->getRealPath())
+                    ->as($file->getClientOriginalName())
+                    ->withMime($file->getClientMimeType());
             }
         }
 

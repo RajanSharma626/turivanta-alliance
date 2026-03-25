@@ -73,7 +73,7 @@ class AuthController extends Controller
         Log::info("Verification OTP for {$user->email}: {$otp}");
         Mail::to($user->email)->send(new VerifyOTPMail($otp));
 
-        return redirect()->route('otp.verify');
+        return redirect()->route('otp.verify')->with('success', 'A new 6-digit verification code has been sent to your email.');
     }
 
     public function showVerifyForm()

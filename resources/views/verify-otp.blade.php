@@ -15,6 +15,13 @@
             </p>
         </div>
 
+        @if (session('success'))
+            <div class="w-full max-w-[550px] mb-8 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-emerald-500 text-sm font-bold flex items-center justify-center gap-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="w-full max-w-[550px] bg-[#0a0a0f]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <form action="{{ route('otp.verify.submit') }}" method="POST" class="flex flex-col items-center gap-8 w-full">
                 @csrf
@@ -40,18 +47,23 @@
                     <span class="text-[15px]">Verify Account</span>
                     <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
-                
-                <div class="text-center pt-4">
-                    <p class="text-gray-400 text-sm mb-2">Didn't receive the code?</p>
-                    <div id="resend-container">
-                        <p id="timer-text" class="text-xs text-gray-500 mb-2">Resend available in <span id="timer" class="font-bold text-[#ff014f]">05:00</span></p>
-                        <form id="resend-form" action="{{ route('otp.send') }}" method="POST" class="hidden">
-                            @csrf
-                            <button type="submit" class="text-white hover:text-[#ff014f] text-sm font-bold transition-colors">Resend Verification Code</button>
-                        </form>
-                    </div>
-                </div>
             </form>
+
+            <div class="text-center pt-8 border-t border-white/5 mt-8 w-full">
+                <p class="text-gray-400 text-sm mb-3">Didn't receive the code?</p>
+                <div id="resend-container">
+                    <p id="timer-text" class="text-xs text-gray-500">
+                        Resend available in <span id="timer" class="font-bold text-[#ff014f]">05:00</span>
+                    </p>
+                    <form id="resend-form" action="{{ route('otp.send') }}" method="POST" class="hidden">
+                        @csrf
+                        <button type="submit" class="text-white hover:text-[#ff014f] text-sm font-bold transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2">
+                            <span>Resend Verification Code</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </main>

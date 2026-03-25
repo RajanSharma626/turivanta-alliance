@@ -102,7 +102,7 @@
                     <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Turivanta Alliance Logo" class="h-10 w-auto object-contain">
                 </a>
                 <h2 class="text-3xl font-extrabold text-white leading-tight">
-                    Get Ready <span class="text-gray-400 font-light"> to be </span><br/> endorsed?
+                    Ready <span class="text-gray-400 font-light"> to be </span><br/> endorsed?
                 </h2>
             </div>
             

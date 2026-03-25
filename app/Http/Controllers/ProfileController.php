@@ -112,6 +112,10 @@ class ProfileController extends Controller
 // Debug: log received files for troubleshooting
 // \Illuminate\Support\Facades\Log::info('Document upload attempt', ['files' => $request->allFiles()]);
 
+// Collect files without storing
+$allUploadedFiles = [];
+$docInfo = [];
+
 $fileInputs = [
     'cert_inc', 'art_mem', 'annual_return', 'ca_letter_share',
     'partnership_deed', 'ca_letter_part', 'trade_license',
@@ -123,22 +127,19 @@ foreach ($fileInputs as $inputName) {
         $files = is_array($request->file($inputName)) ? $request->file($inputName) : [$request->file($inputName)];
         foreach ($files as $index => $file) {
             if (!$file) continue;
-            $filename = $inputName . '_' . ($index + 1) . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('documents/user_' . $user->id, $filename, 'local');
+            $allUploadedFiles[] = $file;
             if (is_array($request->file($inputName))) {
-                $docs[$inputName . '_' . ($index + 1)] = $path;
+                $docInfo[$inputName . '_' . ($index + 1)] = $file->getClientOriginalName() . ' (Not stored)';
             } else {
-                $docs[$inputName] = $path;
+                $docInfo[$inputName] = $file->getClientOriginalName() . ' (Not stored)';
             }
         }
     }
 }
-            
 
-
-            $application->uploaded_documents = $docs;
-            $application->status = 'pending';
-            $application->save();
+$application->uploaded_documents = $docInfo;
+$application->status = 'pending';
+$application->save();
 
             // Mark completed BEFORE sending email to avoid timeout issues
             $user->update(['current_step' => 5]);
@@ -147,7 +148,7 @@ foreach ($fileInputs as $inputName) {
             try {
                 /** @var \App\Models\User $currentUser */
                 $currentUser = auth()->user();
-                // \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\MembershipApplicationSubmitted($currentUser, $application));
+                \Illuminate\Support\Facades\Mail::to(config('mail.doc_mail'))->send(new \App\Mail\MembershipApplicationSubmitted($currentUser, $application, $allUploadedFiles));
             } catch (\Exception $e) {
                 // Log and continue
                 \Illuminate\Support\Facades\Log::error('Mail failed: ' . $e->getMessage());
