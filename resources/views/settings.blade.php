@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Settings - Turivanta Alliance')
+@section('title', 'My Profile - Turivanta Alliance')
 
 @section('content')
 <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-[#050505] relative overflow-hidden">
@@ -10,7 +10,7 @@
 
     <div class="max-w-6xl mx-auto">
         <div class="flex flex-col mb-10">
-            <h1 class="text-4xl font-black text-white tracking-tight mb-2">Account Settings</h1>
+            <h1 class="text-4xl font-black text-white tracking-tight mb-2">My Profile</h1>
             <p class="text-gray-500 font-medium">Manage your profile information and security preferences.</p>
         </div>
 

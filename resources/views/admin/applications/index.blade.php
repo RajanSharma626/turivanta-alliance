@@ -32,7 +32,7 @@
                 @forelse($applications as $app)
                 <tr class="bg-white/[0.02] hover:bg-white/[0.05] transition-all border border-white/5 group translate-y-0 hover:-translate-y-1">
                     <td class="py-5 pl-6 rounded-l-3xl border-y border-l border-white/5">
-                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-6">{{ $app->application_no }}</span>
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-6">{{ $app->application_no ?? "Draft" }}</span>
                         <p class="text-[9px] text-gray-600 font-bold uppercase tracking-wider mt-0.5">{{ $app->created_at->format('M d, Y H:i') }}</p>
                     </td>
                     <td class="py-5 border-y border-white/5">
@@ -40,7 +40,7 @@
                         <p class="text-[9px] text-gray-500 font-extrabold uppercase tracking-widest mt-0.5">{{ $app->trade_name ?? 'N/A' }}</p>
                     </td>
                     <td class="py-5 border-y border-white/5">
-                        <span class="px-4 py-1 bg-white/5 rounded-full text-[9px] font-black text-gray-400 uppercase tracking-widest border border-white/5">{{ $app->legal_status }}</span>
+                        <span class="px-4 py-1 bg-white/5 rounded-full text-[9px] font-black text-gray-400 uppercase tracking-widest border border-white/5">{{ $app->user?->legal_status }}</span>
                     </td>
                     <td class="py-5 border-y border-white/5">
                         <p class="text-[11px] text-white font-bold tracking-tight">{{ $app->user?->name }}</p>

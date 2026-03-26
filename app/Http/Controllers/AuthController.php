@@ -144,7 +144,7 @@ class AuthController extends Controller
             Auth::login($user);
         }
 
-        return redirect()->route('home');
+        return redirect()->route('profile.index');
     }
 
     public function showForgotPasswordForm()
@@ -263,7 +263,7 @@ class AuthController extends Controller
                 return redirect()->route('verification.notice');
             }
             
-            return redirect()->intended(route('home'));
+            return redirect()->intended(route('profile.index'));
         }
 
         return back()->withErrors([

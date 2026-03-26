@@ -77,8 +77,8 @@
                             <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Signed in as</p>
                             <p class="text-sm text-white font-bold truncate">{{ Auth::user()->email }}</p>
                         </div>
-                        <a href="{{ route('profile.index') }}" class="block px-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">My Profile</a>
-                        <a href="{{ route('settings') }}" class="block px-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Settings</a>
+                        <a href="{{ route('profile.index') }}" class="block px-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">My Application</a>
+                        <a href="{{ route('settings') }}" class="block px-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">My Profile</a>
                         <div class="border-t border-white/5"></div>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

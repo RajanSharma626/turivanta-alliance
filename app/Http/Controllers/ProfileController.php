@@ -64,6 +64,7 @@ class ProfileController extends Controller
                 'shipping_street' => 'required',
                 'commencement_date' => 'required|date',
                 'trade_registration_no' => 'required',
+                'registrant' => 'required',
                 'registration_granted_date' => 'required|date',
                 'iata_registered' => 'required',
             ]);
@@ -74,11 +75,14 @@ class ProfileController extends Controller
                 'legal_name', 'trade_name', 'office_phone', 'office_email', 'mobile', 'website', 'fax', 'service_tax',
                 'billing_country', 'billing_state', 'billing_city', 'billing_street', 'billing_postal_code',
                 'shipping_country', 'shipping_state', 'shipping_city', 'shipping_street', 'shipping_postal_code',
-                'breach_details', 'commencement_date', 'trade_registration_no', 'registration_granted_date', 'iata_no'
+                'breach_details', 'breach_full_name', 'breach_concerned_company', 'breach_relationship', 'breach_tax_id',
+                'commencement_date', 'trade_registration_no', 'registrant', 'registration_granted_date', 'iata_no',
+                'tourism_board_name', 'tourism_board_reg_no'
             ]);
             $data['same_as_billing'] = $request->has('same_as_billing');
             $data['fiduciary_breach'] = $request->fiduciary_breach == 'yes';
             $data['iata_registered'] = $request->iata_registered == 'yes';
+            $data['tourism_board_registered'] = $request->tourism_board_registered == 'yes';
             $application->update($data);
             
             // Handle contacts json

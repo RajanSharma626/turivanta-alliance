@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Membership Application - Turivanta Alliance')
+@section('title', 'My Application - Turivanta Alliance')
 
 @section('content')
 <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-[#050505] relative overflow-hidden">
@@ -141,7 +141,7 @@
                                     <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-xs mb-6 px-4 py-2 bg-[#ff014f]/5 rounded-lg inline-block">Proof of TAX Registration</h3>
                                     <ul class="space-y-3 text-gray-400 text-sm leading-relaxed ml-4">
                                         <li class="flex gap-3"><span>•</span> Valid Proof of Tax Registration</li>
-                                        <li class="flex gap-3"><span>•</span> Acknowledgement Receipt of Tax by Authorities</li>
+                                        <li class="flex gap-3"><span>•</span> Acknowledgement Receipt of Tax by Authorities for last 04 years</li>
                                     </ul>
                                 </section>
 
@@ -181,8 +181,7 @@
                             Important Note
                         </h4>
                         <ul class="space-y-3 text-gray-400 text-[13px] leading-relaxed">
-                            <li class="flex gap-3"><span>•</span> Date of Commencement of business must be 4 Years Old from the date of application</li>
-                            <li class="flex gap-3"><span class="text-[#ff014f] font-black uppercase text-[10px] mt-0.5">OR</span> <span>You must have minimum <span class="text-white font-bold">10 years</span> of Experience of the industry</span></li>
+                            <li class="flex gap-3"><span>•</span> <span>Date of Commencement of business must be 4 Years Old from the date of application OR You must have minimum <span class="text-white font-bold">10 years</span> of Experience of the industry</span></li>
                             <li class="flex gap-3"><span>•</span> Letter of recommendation from Turivanta Member on their letter head with date, sign and stamp.</li>
                             <li class="flex gap-3"><span>•</span> A separate online application is required for each agency location for which approval is sought.</li>
                             <li class="flex gap-3"><span>•</span> Draft Applications must be submitted within 7 days, otherwise you will need to restart the process.</li>
@@ -196,10 +195,7 @@
                         <div class="flex flex-col gap-2">
                             <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Country Concerned</label>
                             <select name="country_concerned" class="bg-[#131215] border @error('country_concerned') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none">
-                                <option value="">Select Country</option>
-                                @foreach(['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, North', 'Korea, South', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'] as $country)
-                                    <option value="{{ $country }}" {{ old('country_concerned', $user->country_concerned) == $country ? 'selected' : '' }}>{{ $country }}</option>
-                                @endforeach
+                                @include('partials.countries', ['selected' => old('country_concerned', $user->country_concerned)])
                             </select>
                             @error('country_concerned') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
                         </div>
@@ -361,10 +357,7 @@
                                         Country <span class="text-[#ff014f]">*</span>
                                     </label>
                                     <select name="billing_country" id="billing_country" class="bg-[#131215] border @error('billing_country') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
-                                        <option value="">Select Country</option>
-                                        @foreach(['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, North', 'Korea, South', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'] as $country)
-                                            <option value="{{ $country }}" {{ old('billing_country', $application->billing_country) == $country ? 'selected' : '' }}>{{ $country }}</option>
-                                        @endforeach
+                                        @include('partials.countries', ['selected' => old('billing_country', $application->billing_country)])
                                     </select>
                                     @error('billing_country') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
                                 </div>
@@ -373,10 +366,7 @@
                                         Shipping Country <span class="text-[#ff014f]">*</span>
                                     </label>
                                     <select name="shipping_country" id="shipping_country" class="bg-[#131215] border @error('shipping_country') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
-                                        <option value="">Select Shipping Country</option>
-                                        @foreach(['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, North', 'Korea, South', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'] as $country)
-                                            <option value="{{ $country }}" {{ old('shipping_country', $application->shipping_country) == $country ? 'selected' : '' }}>{{ $country }}</option>
-                                        @endforeach
+                                        @include('partials.countries', ['selected' => old('shipping_country', $application->shipping_country)])
                                     </select>
                                     @error('shipping_country') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
                                 </div>
@@ -526,7 +516,7 @@
                             </div>
 
                             <div class="p-8 bg-zinc-950/20 border border-white/5 rounded-3xl space-y-10">
-                                <label class="text-sm font-bold text-gray-300 leading-relaxed block max-w-5xl">
+                                <label class="text-sm font-bold text-gray-300 leading-relaxed block max-w-5xl text-justify">
                                     <span class="text-[#ff014f] font-black mr-3 uppercase text-[10px] tracking-widest leading-none bg-[#ff014f]/10 px-2 py-1 rounded">Important disclosure</span>
                                     Have you, or any person who is a director of, or who holds a material financial interest or a position of management in the Applicant currently or previously been involved in any fiduciary breach or crime, or subject to bankruptcy proceedings, or been a director of or had a financial interest or held a position of management in an Agent which has been removed from the Agency List or is currently subject to review or default action by Turivanta for non-compliance with the conditions of its Accreditation?
                                 </label>
@@ -537,7 +527,7 @@
                                         <div class="w-6 h-6 rounded-full border-2 border-white/10 flex items-center justify-center peer-checked:border-[#ff014f] peer-checked:bg-[#ff014f] transition-all group-hover:border-white/20">
                                             <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-all"></div>
                                         </div>
-                                        <span class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">Yes, I have been involved</span>
+                                        <span class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">Yes</span>
                                     </label>
 
                                     <label class="flex items-center gap-4 cursor-pointer group">
@@ -545,17 +535,44 @@
                                         <div class="w-6 h-6 rounded-full border-2 border-white/10 flex items-center justify-center peer-checked:border-[#ff014f] peer-checked:bg-[#ff014f] transition-all group-hover:border-white/20">
                                             <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-all"></div>
                                         </div>
-                                        <span class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">No, never involved</span>
+                                        <span class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">No</span>
                                     </label>
                                 </div>
 
-                                <div id="breach_details_container" class="space-y-4 animate-fadeIn transition-all {{ old('fiduciary_breach', $application->fiduciary_breach) == 'yes' ? '' : 'hidden' }}">
+                                <div id="breach_details_container" class="space-y-6 animate-fadeIn transition-all {{ old('fiduciary_breach', $application->fiduciary_breach) == 'yes' ? '' : 'hidden' }}">
                                     <label class="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
                                         <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
-                                        Please provide full details below (including agency name, location, relationship, dates, and TAX ID)
+                                        Please provide full details below
                                     </label>
-                                    <textarea name="breach_details" class="w-full bg-[#0f0f15] border border-white/5 rounded-3xl p-6 text-sm text-white focus:outline-none focus:border-[#ff014f] min-h-[180px] placeholder-gray-700 transition-all" placeholder="Enter all pertinent details here...">{{ old('breach_details', $application->breach_details) }}</textarea>
-                                    @error('breach_details') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="flex flex-col gap-2">
+                                            <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full Name</label>
+                                            <input type="text" name="breach_full_name" value="{{ old('breach_full_name', $application->breach_full_name) }}" class="bg-[#131215] border @error('breach_full_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            @error('breach_full_name') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Concerned Company</label>
+                                            <input type="text" name="breach_concerned_company" value="{{ old('breach_concerned_company', $application->breach_concerned_company) }}" class="bg-[#131215] border @error('breach_concerned_company') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            @error('breach_concerned_company') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Relationship</label>
+                                            <input type="text" name="breach_relationship" value="{{ old('breach_relationship', $application->breach_relationship) }}" class="bg-[#131215] border @error('breach_relationship') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            @error('breach_relationship') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">TAX ID</label>
+                                            <input type="text" name="breach_tax_id" value="{{ old('breach_tax_id', $application->breach_tax_id) }}" class="bg-[#131215] border @error('breach_tax_id') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            @error('breach_tax_id') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-col gap-2 mt-4">
+                                        <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Additional Pertinent Details</label>
+                                        <textarea name="breach_details" class="w-full bg-[#0f0f15] border border-white/5 rounded-3xl p-6 text-sm text-white focus:outline-none focus:border-[#ff014f] min-h-[120px] placeholder-gray-700 transition-all" placeholder="Enter all other details here...">{{ old('breach_details', $application->breach_details) }}</textarea>
+                                        @error('breach_details') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -625,10 +642,18 @@
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                        Trade registration Number of the business <span class="text-[#ff014f]">*</span>
+                                        Trade registration Number <span class="text-[#ff014f]">*</span>
                                     </label>
                                     <input type="text" name="trade_registration_no" value="{{ old('trade_registration_no', $application->trade_registration_no) }}" class="bg-[#131215] border @error('trade_registration_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
                                     @error('trade_registration_no') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                        Registrant <span class="text-[#ff014f]">*</span>
+                                    </label>
+                                    <input type="text" name="registrant" value="{{ old('registrant', $application->registrant) }}" class="bg-[#131215] border @error('registrant') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]" placeholder="Name of registrant">
+                                    @error('registrant') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
@@ -655,6 +680,51 @@
                                     <input type="text" name="iata_no" id="iata_no" value="{{ old('iata_no', $application->iata_no) }}" class="bg-[#131215] border @error('iata_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
                                     @error('iata_no') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
                                 </div>
+
+                                    <!-- Tourism Board Registration Block -->
+                                    <div class="flex flex-col gap-6 p-8 bg-[#ff014f]/5 rounded-[2.5rem] border border-[#ff014f]/10 mt-6 md:col-span-2">
+                                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                            <div class="space-y-1">
+                                                <h4 class="text-white font-bold tracking-tight">Tourism Board Registration</h4>
+                                                <p class="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Is your business registered with any Tourism Board?</p>
+                                            </div>
+                                            <div class="flex items-center gap-2 bg-[#131215] p-1.5 rounded-2xl border border-white/5">
+                                                <label class="relative flex-1 group">
+                                                    <input type="radio" name="tourism_board_registered" value="yes" 
+                                                           {{ old('tourism_board_registered', $application->tourism_board_registered) ? 'checked' : '' }}
+                                                           onclick="toggleTourismFields(true)"
+                                                           class="peer sr-only">
+                                                    <div class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-500 cursor-pointer transition-all
+                                                                peer-checked:bg-[#ff014f] peer-checked:text-white group-hover:text-gray-300">
+                                                        Yes
+                                                    </div>
+                                                </label>
+                                                <label class="relative flex-1 group">
+                                                    <input type="radio" name="tourism_board_registered" value="no" 
+                                                           {{ !old('tourism_board_registered', $application->tourism_board_registered) ? 'checked' : '' }}
+                                                           onclick="toggleTourismFields(false)"
+                                                           class="peer sr-only">
+                                                    <div class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-500 cursor-pointer transition-all
+                                                                peer-checked:bg-[#ff014f] peer-checked:text-white group-hover:text-gray-300">
+                                                        No
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div id="tourism_board_fields" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/5 mt-2 {{ old('tourism_board_registered', $application->tourism_board_registered) ? '' : 'hidden' }}">
+                                            <div class="flex flex-col gap-2">
+                                                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Name of Tourism Board <span class="text-[#ff014f]">*</span></label>
+                                                <input type="text" name="tourism_board_name" value="{{ old('tourism_board_name', $application->tourism_board_name) }}" class="bg-[#131215] border @error('tourism_board_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]" placeholder="Board name">
+                                                @error('tourism_board_name') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                            </div>
+                                            <div class="flex flex-col gap-2">
+                                                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Registration Number <span class="text-[#ff014f]">*</span></label>
+                                                <input type="text" name="tourism_board_reg_no" value="{{ old('tourism_board_reg_no', $application->tourism_board_reg_no) }}" class="bg-[#131215] border @error('tourism_board_reg_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]" placeholder="Reg no.">
+                                                @error('tourism_board_reg_no') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
 
                             <script>
@@ -949,6 +1019,15 @@
             });
         }
     });
+
+    function toggleTourismFields(show) {
+        const container = document.getElementById('tourism_board_fields');
+        if (show) {
+            container.classList.remove('hidden');
+        } else {
+            container.classList.add('hidden');
+        }
+    }
 </script>
 @endpush
 @endsection

@@ -44,13 +44,17 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/settings', [UserProfileController::class, 'edit'])->name('settings');
-    Route::post('/settings/profile', [UserProfileController::class, 'update'])->name('settings.update');
-    Route::post('/settings/password', [UserProfileController::class, 'updatePassword'])->name('settings.password');
+    // Redirect old routes to new URLs
+    Route::redirect('/settings', '/my-profile');
+    Route::redirect('/profile', '/my-application');
 
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::post('/profile/next', [ProfileController::class, 'nextStep'])->name('profile.next');
-    Route::post('/profile/back', [ProfileController::class, 'backStep'])->name('profile.back');
+    Route::get('/my-profile', [UserProfileController::class, 'edit'])->name('settings');
+    Route::post('/my-profile/update', [UserProfileController::class, 'update'])->name('settings.update');
+    Route::post('/my-profile/password', [UserProfileController::class, 'updatePassword'])->name('settings.password');
+
+    Route::get('/my-application', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/my-application/next', [ProfileController::class, 'nextStep'])->name('profile.next');
+    Route::post('/my-application/back', [ProfileController::class, 'backStep'])->name('profile.back');
 
     // Admin Panel Routes (Restricted)
     Route::middleware('admin')->group(function () {
