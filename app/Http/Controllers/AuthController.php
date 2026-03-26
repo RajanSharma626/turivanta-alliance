@@ -255,10 +255,10 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials, $request->has('remember'))) {
+        if (Auth::guard('web')->attempt($credentials, $request->has('remember'))) {
             $request->session()->regenerate();
             
-            $user = Auth::user();
+            $user = Auth::guard('web')->user();
             if (!$user->email_verified_at) {
                 return redirect()->route('verification.notice');
             }
@@ -273,7 +273,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('home');

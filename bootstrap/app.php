@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
+use Illuminate\Http\Request;
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -14,9 +16,18 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Http\Middleware\EnsureEmailIsVerified::class,
         ]);
-        $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        ]);
+        
+        $middleware->redirectGuestsTo(fn (Request $request) => 
+            str_contains($request->url(), 'admin') || str_contains($request->url(), 'control-panel')
+                ? route('admin.login') 
+                : route('login')
+        );
+
+        $middleware->redirectUsersTo(fn (Request $request) => 
+            str_contains($request->url(), 'admin') || str_contains($request->url(), 'control-panel')
+                ? route('admin.dashboard') 
+                : route('profile.index')
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

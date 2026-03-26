@@ -55,18 +55,38 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-application', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/my-application/next', [ProfileController::class, 'nextStep'])->name('profile.next');
     Route::post('/my-application/back', [ProfileController::class, 'backStep'])->name('profile.back');
+});
 
-    // Admin Panel Routes (Restricted)
-    Route::middleware('admin')->group(function () {
-        Route::redirect('/admin', '/admin-control-panel');
-        Route::prefix('admin-control-panel')->group(function () {
-            Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-            Route::get('/members', [AdminController::class, 'members'])->name('admin.members');
-            Route::get('/applications', [AdminController::class, 'applications'])->name('admin.applications');
-            Route::get('/admins', [AdminController::class, 'admins'])->name('admin.admins');
+// Admin Control Panel Routes
+Route::group(['prefix' => 'admin-control-panel'], function () {
+    // Guest Admin Routes
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+        Route::post('/login', [AdminController::class, 'login'])->name('admin.login.submit');
+    });
+
+    // Authenticated Admin Routes
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/members', [AdminController::class, 'members'])->name('admin.members');
+        Route::get('/applications', [AdminController::class, 'applications'])->name('admin.applications');
+        Route::get('/applications/{application}', [AdminController::class, 'showApplication'])->name('admin.applications.show');
+        Route::post('/applications/{application}/status', [AdminController::class, 'updateApplicationStatus'])->name('admin.applications.status');
+        
+        Route::group(['prefix' => 'admins'], function () {
+            Route::get('/', [AdminController::class, 'admins'])->name('admin.admins');
+            Route::get('/create', [AdminController::class, 'create'])->name('admin.admins.create');
+            Route::post('/store', [AdminController::class, 'store'])->name('admin.admins.store');
+            Route::get('/{admin}/edit', [AdminController::class, 'edit'])->name('admin.admins.edit');
+            Route::patch('/{admin}', [AdminController::class, 'update'])->name('admin.admins.update');
+            Route::post('/{admin}/toggle-status', [AdminController::class, 'toggleStatus'])->name('admin.admins.toggle-status');
         });
+
+        Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
 });
+
+Route::redirect('/admin', '/admin-control-panel');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/logout', [AuthController::class, 'logout']);

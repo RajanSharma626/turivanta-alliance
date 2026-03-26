@@ -637,8 +637,8 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                                 <div class="flex flex-col gap-2">
                                     <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex flex-col gap-1">
-                                        <div class="flex items-center gap-1">Date of Commencement of business <span class="text-[#ff014f]">*</span></div>
-                                        <span class="text-[9px] lowercase italic font-bold text-gray-600 tracking-normal">(Should be minimum 4 Years Old as on date)</span>
+                                        <div class="flex items-center gap-1">Date of Commencement of business <span class="text-[#ff014f]">*</span> <span class="text-[10px] lowercase italic font-bold text-gray-600 tracking-normal">(Should be minimum 4 Years Old as on date)</span></div>
+                                        
                                     </label>
                                     <input type="date" name="commencement_date" value="{{ old('commencement_date', ($application->commencement_date ? $application->commencement_date->format('Y-m-d') : '')) }}" class="bg-[#131215] border @error('commencement_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark]">
                                     @error('commencement_date') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
@@ -847,14 +847,14 @@
                                         @error('bye_laws') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
                                     </div>
 
-                                @elseif($user->legal_status == 'Servicing Professionals')
+                                @elseif($user->legal_status == 'In Service Professional')
                                     <div class="flex flex-col gap-2 md:col-span-2">
                                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Experience Certificate (10+ Years)</label>
                                         <input type="file" name="exp_cert" class="bg-[#131215] border @error('exp_cert') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">
                                         @error('exp_cert') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
                                     </div>
 
-                                @elseif($user->legal_status == 'Students')
+                                @elseif($user->legal_status == 'Student')
                                     <div class="flex flex-col gap-2 md:col-span-2">
                                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Letter of Recommendation (HOD/Principal)</label>
                                         <input type="file" name="endorsement_letter" class="bg-[#131215] border @error('endorsement_letter') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">

@@ -17,7 +17,8 @@ class EnsureEmailIsVerified
     {
         $user = $request->user();
 
-        if ($user && !$user->email_verified_at && 
+        // Skip verification for administrators or unauthenticated Guests 
+        if ($user && $user instanceof \App\Models\User && !$user->email_verified_at && 
             !$request->routeIs('verification.notice', 'otp.send', 'otp.verify', 'otp.verify.submit', 'logout')) {
             return redirect()->route('verification.notice');
         }
