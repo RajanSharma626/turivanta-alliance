@@ -88,6 +88,9 @@
                                     <option value="Transportation" {{ old('business_type') == 'Transportation' ? 'selected' : '' }}>Transportation</option>
                                     <option value="Travel Agency" {{ old('business_type') == 'Travel Agency' ? 'selected' : '' }}>Travel Agency</option>
                                     <option value="Airline" {{ old('business_type') == 'Airline' ? 'selected' : '' }}>Airline</option>
+                                    <option value="Tourism Board" {{ old('business_type') == 'Tourism Board' ? 'selected' : '' }}>Tourism Board</option>
+                                    <option value="In Service Professional" {{ old('business_type') == 'In Service Professional' ? 'selected' : '' }}>In Service Professional</option>
+                                    <option value="Student" {{ old('business_type') == 'Student' ? 'selected' : '' }}>Student</option>
                                 </select>
                                 <svg class="w-5 h-5 absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 @error('business_type') <span class="text-rose-500 text-[11px] font-bold ml-1">{{ $message }}</span> @enderror

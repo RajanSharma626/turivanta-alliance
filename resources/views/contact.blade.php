@@ -63,7 +63,7 @@
                     <textarea placeholder="Your Message" rows="5" class="w-full bg-[#18181c] border border-white/5 rounded-xl px-6 py-[18px] text-white placeholder-gray-500 focus:outline-none focus:border-[#ff014f] focus:ring-1 focus:ring-[#ff014f] transition-all text-[15px] resize-none"></textarea>
 
                     <button type="submit" class="mt-2 w-full inline-flex items-center justify-center gap-2 px-10 py-[18px] bg-[#ff014f] text-white font-bold rounded-full transition-all duration-300 hover:bg-[#e11d48] hover:shadow-[0_0_20px_rgba(255,1,79,0.4)]">
-                        <span class="text-[16px] tracking-wide inline-flex items-center">Submit Now &nbsp;&rarr;</span>
+                        <span class="text-[16px] tracking-wide inline-flex items-center">Submit &nbsp;&rarr;</span>
                     </button>
 
 

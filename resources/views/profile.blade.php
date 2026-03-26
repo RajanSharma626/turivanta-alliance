@@ -113,7 +113,7 @@
                                     <div class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
                                         <h4 class="text-white font-bold mb-4 text-sm flex items-center gap-2">
                                             <span class="w-1.5 h-6 bg-[#ff014f] rounded-full"></span>
-                                            Servicing Professionals
+                                            In Service Professionals
                                         </h4>
                                         <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
                                              <li class="flex gap-3"><span>•</span> Valid Passport Photo ID of the applicant.</li>
@@ -204,7 +204,7 @@
                             <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Legal Status</label>
                             <select name="legal_status" class="bg-[#131215] border @error('legal_status') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none">
                                 <option value="">Select Legal Status</option>
-                                @foreach(['Association', 'Co-operative', 'Corporation', 'Joint Venture', 'Limited Company', 'Limited Partnership', 'Partnership', 'Sole Proprietorship', 'State Owned Enterprise', 'Trust Company', 'Servicing Professionals', 'Students'] as $status)
+                                @foreach(['Association', 'Co-operative', 'Corporation', 'Joint Venture', 'Limited Company', 'Limited Partnership', 'Partnership', 'Sole Proprietorship', 'State Owned Enterprise', 'Trust Company', 'In Service Professional', 'Student'] as $status)
                                     <option value="{{ $status }}" {{ old('legal_status', $user->legal_status) == $status ? 'selected' : '' }}>{{ $status }}</option>
                                 @endforeach
                             </select>
@@ -259,6 +259,9 @@
                                 <option value="Transportation" {{ old('business_type', $user->business_type) == 'Transportation' ? 'selected' : '' }}>Transportation</option>
                                 <option value="Travel Agency" {{ old('business_type', $user->business_type) == 'Travel Agency' ? 'selected' : '' }}>Travel Agency</option>
                                 <option value="Airline" {{ old('business_type', $user->business_type) == 'Airline' ? 'selected' : '' }}>Airline</option>
+                                <option value="Tourism Board" {{ old('business_type', $user->business_type) == 'Tourism Board' ? 'selected' : '' }}>Tourism Board</option>
+                                <option value="In Service Professional" {{ old('business_type', $user->business_type) == 'In Service Professional' ? 'selected' : '' }}>In Service Professional</option>
+                                <option value="Student" {{ old('business_type', $user->business_type) == 'Student' ? 'selected' : '' }}>Student</option>
                             </select>
                             @error('business_type') <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span> @enderror
                         </div>

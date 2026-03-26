@@ -117,9 +117,9 @@ class ProfileController extends Controller
             } elseif (in_array($user->legal_status, ['Co-operative', 'Association', 'State Owned Enterprise'])) {
                 $rules['registration_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
                 $rules['bye_laws'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-            } elseif ($user->legal_status == 'Servicing Professionals') {
+            } elseif ($user->legal_status == 'In Service Professional') {
                 $rules['exp_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-            } elseif ($user->legal_status == 'Students') {
+            } elseif ($user->legal_status == 'Student') {
                 $rules['endorsement_letter'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
             } else {
                 $rules['trade_license'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
