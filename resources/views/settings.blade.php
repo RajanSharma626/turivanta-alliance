@@ -93,10 +93,27 @@
                             <div class="flex flex-col gap-2">
                                 <label class="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Business Type</label>
                                 <select name="business_type" class="bg-[#131215] border border-white/5 rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none">
-                                    <option value="Accommodation" {{ old('business_type', $user->business_type) == 'Accommodation' ? 'selected' : '' }}>Accommodation</option>
-                                    <option value="Transportation" {{ old('business_type', $user->business_type) == 'Transportation' ? 'selected' : '' }}>Transportation</option>
-                                    <option value="Travel Agency" {{ old('business_type', $user->business_type) == 'Travel Agency' ? 'selected' : '' }}>Travel Agency</option>
-                                    <option value="Airline" {{ old('business_type', $user->business_type) == 'Airline' ? 'selected' : '' }}>Airline</option>
+                                    <option value="Accommodation"
+                                        {{ old('business_type', $user->business_type) == 'Accommodation' ? 'selected' : '' }}>
+                                        Accommodation</option>
+                                    <option value="Transportation"
+                                        {{ old('business_type', $user->business_type) == 'Transportation' ? 'selected' : '' }}>
+                                        Transportation</option>
+                                    <option value="Travel Agency"
+                                        {{ old('business_type', $user->business_type) == 'Travel Agency' ? 'selected' : '' }}>
+                                        Travel Agency</option>
+                                    <option value="Airline"
+                                        {{ old('business_type', $user->business_type) == 'Airline' ? 'selected' : '' }}>
+                                        Airline</option>
+                                    <option value="Tourism Board"
+                                        {{ old('business_type', $user->business_type) == 'Tourism Board' ? 'selected' : '' }}>
+                                        Tourism Board</option>
+                                    <option value="In Service Professional"
+                                        {{ old('business_type', $user->business_type) == 'In Service Professional' ? 'selected' : '' }}>
+                                        In Service Professional</option>
+                                    <option value="Student"
+                                        {{ old('business_type', $user->business_type) == 'Student' ? 'selected' : '' }}>
+                                        Student</option>
                                 </select>
                             </div>
 

@@ -94,38 +94,28 @@ class ProfileController extends Controller
         } elseif ($step == 4) {
             $application = $user->application;
             $rules = [
-                'tax_proof' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
-                'tax_receipt' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
                 'owner_ids' => 'required|array|min:1',
                 'owner_ids.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
-                'recommendation_letter' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
             ];
+
+            if (!in_array($user->legal_status, ['In Service Professional', 'Student'])) {
+                $rules['recommendation_letter'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+            }
+
+            // TAX Registration is temporarily commented out in the view
+            // $rules['tax_proof'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
+            // $rules['tax_receipt'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
 
             if ($application->iata_registered) {
                 $rules['iata_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
             }
 
-            if (in_array($user->legal_status, ['Corporation', 'Limited Company'])) {
-                $rules['cert_inc'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-                $rules['art_mem'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-                $rules['annual_return'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-                $rules['ca_letter_share'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-            } elseif (in_array($user->legal_status, ['Limited Partnership', 'Partnership', 'Joint Venture'])) {
-                $rules['partnership_deed'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-                $rules['ca_letter_part'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-                $rules['summary_form'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-            } elseif (in_array($user->legal_status, ['Co-operative', 'Association', 'State Owned Enterprise'])) {
-                $rules['registration_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-                $rules['bye_laws'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-            } elseif ($user->legal_status == 'In Service Professional') {
+            if ($user->legal_status == 'In Service Professional') {
                 $rules['exp_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
             } elseif ($user->legal_status == 'Student') {
                 $rules['endorsement_letter'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
             } else {
                 $rules['trade_license'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-                if ($user->legal_status == 'Trust Company') {
-                    $rules['trust_deed'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-                }
             }
 
             $request->validate($rules);

@@ -109,7 +109,6 @@ Route::get('/terms-and-conditions', function () {
 
 Route::get('/frequently-asked-questions', function () {
     return view('faq');
-})->name('faq');
-
-
-
+})->name('faq');Route::get('/pricing', function () {
+    return view('pricing');
+})->name('pricing');
