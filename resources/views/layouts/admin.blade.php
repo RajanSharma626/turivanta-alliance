@@ -51,8 +51,7 @@
         <aside class="w-64 glass-panel border-r border-white/5 flex flex-col z-50">
             <div class="p-8">
                 <a href="/" class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-[#ff014f] rounded-lg flex items-center justify-center font-black text-white italic">T</div>
-                    <span class="font-black heading-font tracking-tighter text-xl italic uppercase">Turivanta</span>
+                    <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Turivanta Alliance" class="h-20">
                 </a>
             </div>
 

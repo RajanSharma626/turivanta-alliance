@@ -14,7 +14,7 @@
                 <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-4">
                     Welcome, <span class="text-[#ff014f]">{{ $user->first_name }}!</span>
                 </h1>
-                <p class="text-gray-400 text-lg font-medium max-w-2xl">
+                <p class="text-gray-400 text-lg font-medium">
                     Ready to take your business to the next level? Complete your membership application below to join the
                     Turivanta Alliance.
                 </p>
@@ -145,7 +145,7 @@
                                             <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
                                                 <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the
                                                     applicant.</li>
-                                                <li class="flex gap-3"><span>•</span> * Experience Certificate</li>
+                                                <li class="flex gap-3"><span>•</span> Experience Certificate</li>
                                             </ul>
                                         </div>
 
@@ -156,7 +156,7 @@
                                                 Students
                                             </h4>
                                             <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
-                                                <li class="flex gap-3"><span>•</span> * Student ID Card / Admission Proof / Endorsement Letter by Designated Institute</li>
+                                                <li class="flex gap-3"><span>•</span> Student ID Card / Admission Proof / Endorsement Letter by Designated Institute</li>
                                                 <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the applicant.</li>
                                             </ul>
                                         </div>
@@ -1201,17 +1201,15 @@
                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-bold text-white">Document Submission</h2>
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Document Submission</h2>
                         </div>
-                        <p class="text-gray-500 mb-10 font-medium">Please upload the required documents as per your legal
-                            status: <span
-                                class="text-white font-black uppercase text-xs tracking-widest px-2 py-0.5 bg-white/5 rounded">{{ $user->legal_status }}</span>
+                        <p class="text-gray-500 mb-10 font-medium">Please upload the required documents as per your legal status: 
+                            <span class="text-white font-black uppercase text-xs tracking-widest px-2 py-0.5 bg-white/5 rounded">{{ $user->legal_status }}</span>
                         </p>
 
                         @if ($errors->any())
                             <div class="mb-10 p-6 bg-red-500/10 border border-red-500/20 rounded-2xl">
-                                <h4 class="text-red-500 font-black uppercase text-xs tracking-widest mb-2">Submission
-                                    Errors</h4>
+                                <h4 class="text-red-500 font-black uppercase text-xs tracking-widest mb-2">Submission Errors</h4>
                                 <ul class="list-disc list-inside text-red-400 text-xs font-medium space-y-1">
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -1220,160 +1218,109 @@
                             </div>
                         @endif
 
-                        @if (session('error'))
-                            <div
-                                class="mb-10 p-6 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-500 text-xs font-bold uppercase tracking-widest">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-
-                        @if (session('success'))
-                            <div
-                                class="mb-10 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-emerald-500 text-xs font-bold uppercase tracking-widest">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <form id="step4-form" action="{{ route('profile.next') }}" method="POST"
-                            enctype="multipart/form-data" class="space-y-12">
+                        <form id="step4-form" action="{{ route('profile.next') }}" method="POST" enctype="multipart/form-data" class="space-y-12">
                             @csrf
                             <input type="hidden" name="step" value="4">
 
-                            <!-- Legal Entity Documents -->
-                            <div>
-                                <h3
-                                    class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[10px] mb-6 px-4 py-2 bg-[#ff014f]/5 rounded-lg inline-block">
-                                    1. Legal Entity Documents</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    @if ($user->legal_status == 'In Service Professional')
-                                        <div class="flex flex-col gap-2 md:col-span-2">
-                                            <label
-                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* Experience Certificate</label>
-                                            <input type="file" name="exp_cert"
-                                                class="bg-[#131215] border @error('exp_cert') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">
-                                            @error('exp_cert')
-                                                <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    @elseif($user->legal_status == 'Student')
-                                        <div class="flex flex-col gap-2 md:col-span-2">
-                                            <label
-                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* Student ID Card / Admission Proof / Endorsement Letter by Designated Institute</label>
-                                            <input type="file" name="endorsement_letter"
-                                                class="bg-[#131215] border @error('endorsement_letter') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">
-                                            @error('endorsement_letter')
-                                                <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    @else
-                                        <div class="flex flex-col gap-2 md:col-span-2">
-                                            <label
-                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* Trade License / Incorporation Certificate</label>
-                                            <input type="file" name="trade_license"
-                                                class="bg-[#131215] border @error('trade_license') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">
+                            <!-- Section 1: Legal Entity Documents -->
+                            <div class="space-y-8">
+                                <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[11px] mb-6">1. LEGAL ENTITY DOCUMENTS</h3>
+                                
+                                <div class="grid grid-cols-1 gap-8">
+                                    {{-- Trade License --}}
+                                    @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
+                                        <div class="flex flex-col gap-3">
+                                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* TRADE LICENSE / INCORPORATION CERTIFICATE</label>
+                                            <div class="relative group">
+                                                <input type="file" name="trade_license" id="trade_license" class="sr-only" onchange="updateFilename(this)">
+                                                <label for="trade_license" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose file</span>
+                                                    <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                                </label>
+                                            </div>
                                             @error('trade_license')
-                                                <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        {{-- Recommendation Letter --}}
+                                        <div class="flex flex-col gap-3">
+                                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">RECOMMENDATION LETTER (FROM TURIVANTA MEMBER)</label>
+                                            <div class="relative group">
+                                                <input type="file" name="recommendation_letter" id="recommendation_letter" class="sr-only" onchange="updateFilename(this)">
+                                                <label for="recommendation_letter" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose file</span>
+                                                    <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                                </label>
+                                            </div>
+                                            @error('recommendation_letter')
+                                                <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
 
-                                    @if(!in_array($user->legal_status, ['In Service Professional', 'Student']))
-                                    <!-- Global Mandatory: Recommendation Letter -->
-                                    <div class="flex flex-col gap-2 md:col-span-2">
-                                        <label
-                                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Recommendation
-                                            Letter (from Turivanta Member)</label>
-                                        <input type="file" name="recommendation_letter"
-                                            class="bg-[#131215] border @error('recommendation_letter') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">
-                                        @error('recommendation_letter')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                    {{-- Experience Certificate (For Professionals) --}}
+                                    @if ($user->legal_status == 'In Service Professional')
+                                        <div class="flex flex-col gap-3">
+                                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* EXPERIENCE CERTIFICATE</label>
+                                            <div class="relative group">
+                                                <input type="file" name="exp_cert" id="exp_cert" class="sr-only" onchange="updateFilename(this)">
+                                                <label for="exp_cert" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose file</span>
+                                                    <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                                </label>
+                                            </div>
+                                            @error('exp_cert')
+                                                <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     @endif
 
-                                    @if ($application->iata_registered)
-                                        <div class="flex flex-col gap-2 md:col-span-2">
-                                            <label
-                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">IATA
-                                                Registration Certificate</label>
-                                            <input type="file" name="iata_cert"
-                                                class="bg-[#131215] border @error('iata_cert') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">
-                                            @error('iata_cert')
-                                                <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                    {{-- Student Documents --}}
+                                    @if ($user->legal_status == 'Student')
+                                        <div class="flex flex-col gap-3">
+                                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* STUDENT ID CARD / ADMISSION PROOF / ENDORSEMENT LETTER BY DESIGNATED INSTITUTE</label>
+                                            <div class="relative group">
+                                                <input type="file" name="endorsement_letter" id="endorsement_letter" class="sr-only" onchange="updateFilename(this)">
+                                                <label for="endorsement_letter" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose file</span>
+                                                    <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                                </label>
+                                            </div>
+                                            @error('endorsement_letter')
+                                                <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
                                 </div>
                             </div>
 
-                            <!-- TAX Documents (Commented temporarily) -->
-                            {{-- <div>
-                                <h3
-                                    class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[10px] mb-6 px-4 py-2 bg-[#ff014f]/5 rounded-lg inline-block">
-                                    2. TAX Registration</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div class="flex flex-col gap-2">
-                                        <label
-                                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Proof
-                                            of TAX Registration (VAT/GST/TIN)</label>
-                                        <input type="file" name="tax_proof"
-                                            class="bg-[#131215] border @error('tax_proof') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">
-                                        @error('tax_proof')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="flex flex-col gap-2">
-                                        <label
-                                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Acknowledgement
-                                            Receipt</label>
-                                        <input type="file" name="tax_receipt"
-                                            class="bg-[#131215] border @error('tax_receipt') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer">
-                                        @error('tax_receipt')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                            <!-- ID Documents -->
-                            <div>
-                                <h3
-                                    class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[10px] mb-6 px-4 py-2 bg-[#ff014f]/5 rounded-lg inline-block">
-                                    2. ID Verification</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div class="flex flex-col gap-2">
-                                        <label
-                                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Passport
-                                            / Photo ID (All Owners/Partners)</label>
-                                        <input type="file" name="owner_ids[]"
-                                            class="bg-[#131215] border @error('owner_ids') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl p-4 text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#ff014f] file:text-white hover:file:bg-[#e11d48] cursor-pointer"
-                                            multiple>
+                            <!-- Section 2: ID Verification -->
+                            <div class="space-y-8">
+                                <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[11px] mb-6">2. ID VERIFICATION</h3>
+                                
+                                <div class="grid grid-cols-1 gap-8">
+                                    <div class="flex flex-col gap-3">
+                                        <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">PASSPORT / PHOTO ID (ALL OWNERS/PARTNERS)</label>
+                                        <div class="relative group">
+                                            <input type="file" name="owner_ids[]" id="owner_ids" class="sr-only" multiple onchange="updateFilename(this)">
+                                            <label for="owner_ids" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all max-w-md">
+                                                <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose files</span>
+                                                <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                            </label>
+                                        </div>
+                                        <p class="text-[9px] text-gray-600 mt-1 ml-1 lowercase tracking-normal italic">* you can select multiple files at once</p>
                                         @error('owner_ids')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
-                                        @error('owner_ids.*')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}
-                                                (Ensure all files are valid)</span>
-                                        @enderror
-                                        <p class="text-[9px] text-gray-600 mt-1 ml-1 lowercase tracking-normal italic">*
-                                            You can select multiple files at once</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="mt-10 pt-10 border-t border-white/5 flex gap-4">
-                                <button type="submit" name="action" value="back"
-                                    formaction="{{ route('profile.back') }}"
-                                    class="px-8 py-5 border border-white/10 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all">
+                            <!-- Bottom Actions -->
+                            <div class="mt-16 pt-10 border-t border-white/5 flex flex-col sm:flex-row gap-4">
+                                <button type="submit" name="action" value="back" formaction="{{ route('profile.back') }}"
+                                    class="px-10 py-5 bg-[#131215] border border-white/5 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all text-sm">
                                     Previous Step
                                 </button>
                                 <button type="submit"
@@ -1383,6 +1330,26 @@
                             </div>
                         </form>
                     </div>
+
+                    <script>
+                        function updateFilename(input) {
+                            const container = input.closest('.flex-col');
+                            const display = container.querySelector('.filename-display');
+                            if (input.files.length > 0) {
+                                if (input.files.length === 1) {
+                                    display.textContent = input.files[0].name;
+                                } else {
+                                    display.textContent = input.files.length + ' files selected';
+                                }
+                                display.classList.remove('text-gray-500');
+                                display.classList.add('text-white');
+                            } else {
+                                display.textContent = 'No file chosen';
+                                display.classList.remove('text-white');
+                                display.classList.add('text-gray-500');
+                            }
+                        }
+                    </script>
                 @else
                     <!-- Step 5: Success -->
                     <div class="p-12 text-center py-24">

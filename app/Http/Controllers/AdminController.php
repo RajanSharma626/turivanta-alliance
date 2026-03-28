@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Application;
 use App\Models\Admin;
+use App\Models\Subscription;
+use App\Models\SubscriptionHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -208,5 +210,54 @@ class AdminController extends Controller
 
         $verb = ($admin->status === 'active' ? 'Reactivated' : 'Suspended');
         return back()->with('success', "Administrator {$admin->name} has been {$verb} successfully.");
+    }
+
+    public function showMemberSubscription(User $member)
+    {
+        $member->load(['subscriptions' => function($q) {
+            $q->orderBy('created_at', 'desc');
+        }, 'subscriptionHistories' => function($q) {
+            $q->orderBy('created_at', 'desc');
+        }]);
+        return view('admin.members.subscription', compact('member'));
+    }
+
+    public function updateMemberSubscription(Request $request, User $member)
+    {
+        $request->validate([
+            'plan_name' => 'required|string',
+            'starts_at' => 'required|date',
+            'expires_at' => 'required|date|after:starts_at',
+            'price' => 'required|numeric',
+            'status' => 'required|in:active,expired,cancelled,pending',
+            'notes' => 'nullable|string'
+        ]);
+
+        // Optional: Deactivate current active subscriptions
+        if ($request->status === 'active') {
+            Subscription::where('user_id', $member->id)->where('status', 'active')->update(['status' => 'expired']);
+        }
+
+        $subscription = Subscription::create([
+            'user_id' => $member->id,
+            'plan_name' => $request->plan_name,
+            'price' => $request->price,
+            'starts_at' => $request->starts_at,
+            'expires_at' => $request->expires_at,
+            'status' => $request->status,
+            'assigned_by_role' => Auth::guard('admin')->user()->role,
+            'assigned_by_id' => Auth::guard('admin')->id(),
+        ]);
+
+        SubscriptionHistory::create([
+            'user_id' => $member->id,
+            'subscription_id' => $subscription->id,
+            'plan_name' => $request->plan_name,
+            'action' => 'assigned',
+            'admin_id' => Auth::guard('admin')->id(),
+            'notes' => $request->notes
+        ]);
+
+        return redirect()->route('admin.members')->with('success', "Subscription for {$member->name} updated successfully.");
     }
 }

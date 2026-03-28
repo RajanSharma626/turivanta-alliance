@@ -96,19 +96,8 @@ class ProfileController extends Controller
             $rules = [
                 'owner_ids' => 'required|array|min:1',
                 'owner_ids.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
+                'recommendation_letter' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
             ];
-
-            if (!in_array($user->legal_status, ['In Service Professional', 'Student'])) {
-                $rules['recommendation_letter'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-            }
-
-            // TAX Registration is temporarily commented out in the view
-            // $rules['tax_proof'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-            // $rules['tax_receipt'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-
-            if ($application->iata_registered) {
-                $rules['iata_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
-            }
 
             if ($user->legal_status == 'In Service Professional') {
                 $rules['exp_cert'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:5120';
@@ -127,7 +116,7 @@ class ProfileController extends Controller
 
             // Generate Application Number if not exists
             if (!$application->application_no) {
-                $application->application_no = 'TA-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(4));
+                $application->application_no = 'TA-' . date('Ymd') . rand(1000, 9999);
             }
 
             $application->status = 'pending';
@@ -135,11 +124,8 @@ class ProfileController extends Controller
             $allUploadedFilesPaths = [];
 
             $fileInputs = [
-                'cert_inc', 'art_mem', 'annual_return', 'ca_letter_share',
-                'partnership_deed', 'ca_letter_part', 'summary_form', 'trade_license', 'trust_deed',
-                'registration_cert', 'bye_laws',
-                'exp_cert', 'endorsement_letter', 'recommendation_letter', 'iata_cert',
-                'tax_proof', 'tax_receipt', 'owner_ids'
+                'trade_license', 'exp_cert', 'endorsement_letter', 
+                'recommendation_letter', 'owner_ids'
             ];
 
             foreach ($fileInputs as $inputName) {

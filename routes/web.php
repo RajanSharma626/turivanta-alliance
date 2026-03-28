@@ -73,6 +73,9 @@ Route::group(['prefix' => 'admin-control-panel'], function () {
         Route::get('/applications/{application}', [AdminController::class, 'showApplication'])->name('admin.applications.show');
         Route::post('/applications/{application}/status', [AdminController::class, 'updateApplicationStatus'])->name('admin.applications.status');
         
+        Route::get('/members/{member}/subscription', [AdminController::class, 'showMemberSubscription'])->name('admin.members.subscription');
+        Route::post('/members/{member}/subscription', [AdminController::class, 'updateMemberSubscription'])->name('admin.members.subscription.update');
+        
         Route::group(['prefix' => 'admins'], function () {
             Route::get('/', [AdminController::class, 'admins'])->name('admin.admins');
             Route::get('/create', [AdminController::class, 'create'])->name('admin.admins.create');
@@ -109,6 +112,9 @@ Route::get('/terms-and-conditions', function () {
 
 Route::get('/frequently-asked-questions', function () {
     return view('faq');
-})->name('faq');Route::get('/pricing', function () {
+})->name('faq');
+Route::get('/pricing', function () {
     return view('pricing');
 })->name('pricing');
+
+Route::get('/search', [\App\Http\Controllers\SearchController::class, 'index'])->name('search');

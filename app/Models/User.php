@@ -52,4 +52,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(\App\Models\Application::class);
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(\App\Models\Subscription::class);
+    }
+
+    public function currentSubscription()
+    {
+        return $this->hasOne(\App\Models\Subscription::class)->where('status', 'active')->latest('starts_at');
+    }
+
+    public function subscriptionHistories()
+    {
+        return $this->hasMany(\App\Models\SubscriptionHistory::class);
+    }
 }
