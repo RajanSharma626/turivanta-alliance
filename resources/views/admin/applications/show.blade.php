@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto space-y-10">
-    <!-- Header Summary -->
+    <!-- Section 1: Audit Form Control -->
     <div class="glass-panel p-10 rounded-[40px] border border-white/5 relative overflow-hidden group">
         <div class="absolute -right-20 -top-20 w-64 h-64 bg-[#ff014f]/5 rounded-full blur-[100px]"></div>
         
@@ -14,10 +14,10 @@
                 <div class="w-24 h-24 bg-gradient-to-tr from-[#ff014f] to-[#e11d48] rounded-[30px] flex items-center justify-center font-black text-3xl italic text-white shadow-2xl">
                     {{ substr($application->legal_name ?? $application->user->name, 0, 1) }}
                 </div>
-                <div>
+                <div class="max-w-xl">
                     <h3 class="text-white font-black heading-font text-3xl tracking-tighter uppercase italic mb-1">{{ $application->legal_name ?? 'Incomplete Application' }}</h3>
-                    <p class="text-gray-500 font-bold uppercase tracking-[0.3em] text-[10px] mb-4">Application ID: {{ $application->application_no ?? 'DRAFT' }}</p>
-                    <div class="flex items-center gap-3">
+                    <p class="text-gray-500 font-bold uppercase tracking-[0.3em] text-[10px] mb-4">Application GTIN: {{ $application->application_no ?? 'DRAFT' }}</p>
+                    <div class="flex flex-wrap items-center gap-3">
                         @php
                             $displayStatus = $application->application_no ? $application->status : 'draft';
                             $statusColors = match($displayStatus) {
@@ -30,6 +30,12 @@
                         <span class="px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border {{ $statusColors }} italic">
                            Current Status: {{ $displayStatus }}
                         </span>
+
+                        @if($application->status === 'rejected' && $application->rejection_reason)
+                             <span class="px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border border-[#ff014f]/20 bg-[#ff014f]/5 text-[#ff014f] italic">
+                                Reason logged
+                            </span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -39,14 +45,14 @@
                     <div class="w-full">
                         <button type="button" 
                                 onclick="openActionModal('approved')"
-                                class="w-full py-4 bg-emerald-500 text-black font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 active:scale-95">
+                                class="w-full py-4 bg-emerald-500 text-black font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer">
                             Approve Membership
                         </button>
                     </div>
                     <div class="w-full">
                         <button type="button" 
                                 onclick="openActionModal('rejected')"
-                                class="w-full py-4 bg-white/5 text-rose-500 border border-rose-500/20 font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-rose-500/10 transition-all active:scale-95">
+                                class="w-full py-4 bg-white/5 text-rose-500 border border-rose-500/20 font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-rose-500/10 transition-all active:scale-95 cursor-pointer">
                             Decline Application
                         </button>
                     </div>
@@ -59,6 +65,7 @@
                     <form id="reject-form" action="{{ route('admin.applications.status', $application) }}" method="POST" class="hidden">
                         @csrf
                         <input type="hidden" name="status" value="rejected">
+                        <input type="hidden" name="rejection_reason" id="rejection_reason_field">
                     </form>
                 @else
                     <div class="p-6 rounded-3xl bg-white/5 border border-white/10 text-center">
@@ -331,6 +338,15 @@
                     </div>
                  </div>
             </div>
+
+            @if($application->rejection_reason)
+                <div class="p-8 rounded-[35px] border border-rose-500/20 bg-rose-500/5">
+                     <h4 class="text-[10px] font-black text-rose-500 uppercase tracking-widest mb-4 italic">Logged Audit Feedback</h4>
+                     <p class="text-[11px] text-gray-400 font-medium leading-relaxed italic border-l border-rose-500/30 pl-4 py-1">
+                        "{{ $application->rejection_reason }}"
+                     </p>
+                </div>
+            @endif
         </div>
     </div>
 </div>
@@ -346,13 +362,21 @@
             </div>
             
             <h3 id="modalTitle" class="text-white font-black heading-font text-2xl tracking-tighter uppercase italic mb-3">Confirm Action</h3>
-            <p id="modalMessage" class="text-gray-500 text-xs font-bold uppercase tracking-widest leading-relaxed mb-10 max-w-sm mx-auto">Are you sure you want to proceed with this application action?</p>
+            <p id="modalMessage" class="text-gray-500 text-xs font-bold uppercase tracking-widest leading-relaxed mb-6 max-w-sm mx-auto">Are you sure you want to proceed with this application action?</p>
             
+            <!-- Rejection Reason Input -->
+            <div id="rejectionArea" class="hidden mb-10 text-left space-y-3">
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Reason for Rejection <span class="text-rose-500">*</span></label>
+                <textarea id="rejection_reason_input" 
+                          class="w-full bg-[#131215] border border-white/10 rounded-2xl p-5 text-white text-xs font-bold italic focus:outline-none focus:border-rose-500/50 min-h-[140px] placeholder-gray-700 shadow-inner" 
+                          placeholder="Please provide specific feedback for the applicant. This will be visible to the user."></textarea>
+            </div>
+
             <div class="flex flex-col sm:flex-row gap-4">
-                <button onclick="closeActionModal()" class="flex-1 py-4 bg-white/5 text-gray-400 font-bold uppercase text-[10px] tracking-widest rounded-2xl hover:bg-white/10 transition-all active:scale-95 border border-white/5">
+                <button onclick="closeActionModal()" class="flex-1 py-4 bg-white/5 text-gray-400 font-bold uppercase text-[10px] tracking-widest rounded-2xl hover:bg-white/10 transition-all active:scale-95 border border-white/5 cursor-pointer">
                     Cancel
                 </button>
-                <button id="confirmBtn" onclick="confirmAction()" class="flex-1 py-4 font-black uppercase text-[10px] tracking-widest rounded-2xl transition-all active:scale-95 shadow-lg">
+                <button id="confirmBtn" onclick="confirmAction()" class="flex-1 py-4 font-black uppercase text-[10px] tracking-widest rounded-2xl transition-all active:scale-95 shadow-lg cursor-pointer">
                     Confirm Action
                 </button>
             </div>
@@ -370,20 +394,23 @@
         const message = document.getElementById('modalMessage');
         const icon = document.getElementById('modalIcon');
         const confirmBtn = document.getElementById('confirmBtn');
+        const rejectionArea = document.getElementById('rejectionArea');
 
         if (mode === 'approved') {
+            rejectionArea.classList.add('hidden');
             title.innerText = 'Approve Membership?';
             message.innerText = 'This will grant full access to the Turivanta Alliance ecosystem and notify the applicant.';
             icon.className = 'w-16 h-16 rounded-[20px] mx-auto mb-6 flex items-center justify-center bg-emerald-500/10 border border-emerald-500/20 text-emerald-500';
             icon.innerHTML = '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
-            confirmBtn.className = 'flex-1 py-4 bg-emerald-500 text-black font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-emerald-400 transition-all active:scale-95 shadow-lg shadow-emerald-500/20';
+            confirmBtn.className = 'flex-1 py-4 bg-emerald-500 text-black font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-emerald-400 transition-all active:scale-95 shadow-lg shadow-emerald-500/20 cursor-pointer';
             confirmBtn.innerText = 'Approve Now';
         } else {
+            rejectionArea.classList.remove('hidden');
             title.innerText = 'Decline Application?';
-            message.innerText = 'This will reject the membership request. The applicant will be notified of the decision status.';
+            message.innerText = 'Membership rejection requires a logged reason for the applicant\'s correction reference.';
             icon.className = 'w-16 h-16 rounded-[20px] mx-auto mb-6 flex items-center justify-center bg-rose-500/10 border border-rose-500/20 text-rose-500';
             icon.innerHTML = '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
-            confirmBtn.className = 'flex-1 py-4 bg-rose-500 text-white font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-rose-600 transition-all active:scale-95 shadow-lg shadow-rose-500/20';
+            confirmBtn.className = 'flex-1 py-4 bg-rose-500 text-white font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-rose-600 transition-all active:scale-95 shadow-lg shadow-rose-500/20 cursor-pointer';
             confirmBtn.innerText = 'Confirm Decline';
         }
 
@@ -403,6 +430,12 @@
         if (currentMode === 'approved') {
             document.getElementById('approve-form').submit();
         } else {
+            const reason = document.getElementById('rejection_reason_input').value;
+            if (!reason || reason.trim() === '') {
+                alert('Audit protocol requires a logged reason for application rejection.');
+                return;
+            }
+            document.getElementById('rejection_reason_field').value = reason;
             document.getElementById('reject-form').submit();
         }
     }

@@ -43,7 +43,7 @@
                                 </div>
                                 <div>
                                     <p class="text-white text-sm font-bold tracking-tight">{{ $member->name }}</p>
-                                    <p class="text-[9px] text-gray-500 font-extrabold uppercase tracking-widest mt-0.5">UID: {{ $member->membership_id }}</p>
+                                    <p class="text-[9px] text-gray-500 font-extrabold uppercase tracking-widest mt-0.5">GTIN: {{ $member->membership_id }}</p>
                                 </div>
                             </div>
                         </td>

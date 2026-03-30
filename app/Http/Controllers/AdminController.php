@@ -145,9 +145,13 @@ class AdminController extends Controller
     {
         $request->validate([
             'status' => 'required|in:approved,rejected,pending',
+            'rejection_reason' => 'required_if:status,rejected|nullable|string|max:1000',
         ]);
 
-        $application->update(['status' => $request->status]);
+        $application->update([
+            'status' => $request->status,
+            'rejection_reason' => $request->status === 'rejected' ? $request->rejection_reason : null,
+        ]);
 
         return redirect()->route('admin.applications')->with('success', "Application #{$application->application_no} status updated to {$request->status} successfully.");
     }

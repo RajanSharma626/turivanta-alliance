@@ -44,7 +44,7 @@
             <table class="w-full text-left border-separate border-spacing-y-4 px-4">
                 <thead class="text-gray-500 text-[10px] font-black uppercase tracking-widest">
                     <tr>
-                        <th class="pb-2 pl-6">Application ID</th>
+                        <th class="pb-2 pl-6">Application GTIN</th>
                         <th class="pb-2">Legal Entity Name</th>
                         <th class="pb-2">Legal Status</th>
                         <th class="pb-2">Submitted By</th>
@@ -92,6 +92,12 @@
                                     class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border {{ $statusColors }}">
                                     {{ strtoupper($displayStatus) }}
                                 </span>
+                                @if($displayStatus === 'rejected' && $app->rejection_reason)
+                                    <div class="mt-2 flex items-center gap-1.5 px-3 py-1 bg-rose-500/5 border border-rose-500/10 rounded-lg w-fit">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></div>
+                                        <span class="text-[8px] font-black text-rose-500/70 uppercase tracking-widest">Reason Logged</span>
+                                    </div>
+                                @endif
                             </td>
                             <td class="py-5 border-y border-white/5">
                                 @php

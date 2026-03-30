@@ -181,4 +181,18 @@ class ProfileController extends Controller
         }
         return redirect()->route('profile.index');
     }
+
+    public function revoke()
+    {
+        $user = Auth::user();
+        $application = $user->application;
+
+        if ($application && ($application->status == 'pending' || $user->current_step == 5)) {
+            $application->update(['status' => null]);
+            $user->update(['current_step' => 3]); // Move back to form for editing
+            return redirect()->route('profile.index')->with('success', 'Application revoked. You can now edit your details.');
+        }
+
+        return redirect()->route('profile.index')->with('error', 'Unable to revoke application.');
+    }
 }

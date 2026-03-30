@@ -49,6 +49,19 @@
                 </div>
             </div>
 
+            <!-- Session Messages -->
+            @if(session('success'))
+            <div class="mb-10 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-[2rem] flex items-center gap-5 text-emerald-400 font-bold animate-fadeIn">
+                <div class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/30 shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                  <h4 class="text-white text-sm font-black uppercase tracking-widest mb-0.5">Success Confirm</h4>
+                  <p class="text-[13px] font-medium text-emerald-400/80 leading-snug tracking-tight">{{ session('success') }}</p>
+                </div>
+            </div>
+            @endif
+
             <!-- Step Content -->
             <div class="bg-[#0a0a0f] border border-white/5 rounded-3xl overflow-hidden shadow-2xl animate-fadeIn">
                 @if ($user->current_step == 1)
@@ -1406,15 +1419,52 @@
                         </div>
 
                         <p class="text-gray-400 max-w-lg mx-auto mb-10 text-lg font-medium leading-relaxed">
-                            Fantastic! Your documents have been received. Our compliance team will audit your application
-                            and send a confirmation to <span class="text-white">{{ $user->email }}</span> within 2
-                            working days.
+                            @if($status == 'approved')
+                                Congratulations! Your membership has been approved. You are now a verified member of the Turivanta Alliance.
+                            @elseif($status == 'rejected')
+                                Your application has been declined following our internal audit. Please review the feedback below for necessary corrections.
+                            @else
+                                Fantastic! Your documents have been received. Our compliance team will audit your application and send a confirmation to your registered e-mail id: <span class="text-white">{{ $user->email }}</span>
+                            @endif
                         </p>
 
-                        <a href="/"
-                            class="inline-block px-12 py-5 bg-white text-black font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-gray-200 transition-all shadow-xl hover:-translate-y-1">
-                            Return to Dashboard
-                        </a>
+                        @if($status == 'rejected' && $application->rejection_reason)
+                            <div class="max-w-2xl mx-auto mb-12 p-8 bg-rose-500/5 border border-rose-500/20 rounded-[2.5rem] text-left relative overflow-hidden group">
+                                <div class="absolute -right-10 -top-10 w-32 h-32 bg-rose-500/5 rounded-full blur-3xl"></div>
+                                <div class="relative z-10">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div class="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center border border-rose-500/30">
+                                            <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        </div>
+                                        <h4 class="text-rose-500 font-black uppercase text-[10px] tracking-widest italic">Audit Feedback / Reason for Rejection</h4>
+                                    </div>
+                                    <div class="border-l-2 border-rose-500/30 pl-6 py-2">
+                                        <p class="text-gray-300 text-[13px] font-bold leading-relaxed italic">
+                                            "{{ $application->rejection_reason }}"
+                                        </p>
+                                    </div>
+                                    <p class="mt-8 text-[10px] text-gray-500 font-black uppercase tracking-[0.15em] flex items-center gap-2">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500/50"></span>
+                                        Action Recommended: Click 'Revoke & Edit Details' below to rectify and resubmit.
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
+
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <a href="/"
+                                class="inline-block px-12 py-5 bg-white text-black font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-gray-200 transition-all shadow-xl hover:-translate-y-1">
+                                Return to Dashboard
+                            </a>
+                            @if($status == 'pending' || $status == 'rejected')
+                                <form action="{{ route('profile.revoke') }}" method="POST" onsubmit="return confirm('Are you sure you want to revoke your application? You will be able to edit your details and resubmit.')">
+                                    @csrf
+                                    <button type="submit" class="inline-block px-12 py-5 bg-[#131215] border border-white/10 text-zinc-400 font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl hover:bg-white/5 hover:text-white transition-all shadow-xl hover:-translate-y-1 cursor-pointer">
+                                        Revoke & Edit Details
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
                     </div>
                 @endif
             </div>

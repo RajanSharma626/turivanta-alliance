@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-application', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/my-application/next', [ProfileController::class, 'nextStep'])->name('profile.next');
     Route::post('/my-application/back', [ProfileController::class, 'backStep'])->name('profile.back');
+    Route::post('/my-application/revoke', [ProfileController::class, 'revoke'])->name('profile.revoke');
 });
 
 // Admin Control Panel Routes
@@ -113,8 +114,8 @@ Route::get('/terms-and-conditions', function () {
 Route::get('/frequently-asked-questions', function () {
     return view('faq');
 })->name('faq');
-Route::get('/pricing', function () {
-    return view('pricing');
-})->name('pricing');
+Route::get('/membership', function () {
+    return view('membership');
+})->name('membership');
 
 Route::get('/search', [\App\Http\Controllers\SearchController::class, 'index'])->name('search');

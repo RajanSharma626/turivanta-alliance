@@ -31,7 +31,7 @@
                     <div>
                         <h2 class="text-3xl font-black text-white tracking-tight leading-none mb-2">{{ $member->name }}</h2>
                         <div class="flex items-center gap-3">
-                            <span class="text-[10px] font-black text-[#ff014f] uppercase tracking-widest bg-[#ff014f]/10 px-3 py-1 rounded-lg border border-[#ff014f]/20">MID: {{ $member->membership_id }}</span>
+                            <span class="text-[10px] font-black text-[#ff014f] uppercase tracking-widest bg-[#ff014f]/10 px-3 py-1 rounded-lg border border-[#ff014f]/20">GTIN: {{ $member->membership_id }}</span>
                             <span class="text-[10px] font-black text-gray-500 uppercase tracking-widest">{{ $member->business_type ?? 'Individual' }}</span>
                         </div>
                     </div>

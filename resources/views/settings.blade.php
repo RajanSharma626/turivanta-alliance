@@ -25,13 +25,17 @@
             <!-- Sidebar Navigation -->
             <div class="lg:col-span-3">
                 <div class="bg-[#0a0a0f] border border-white/5 rounded-3xl p-3 flex flex-col gap-1">
-                    <button onclick="switchTab('profile')" id="btn-profile" class="tab-btn active w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-sm font-bold transition-all duration-300">
+                    <button onclick="switchTab('profile')" id="btn-profile" class="tab-btn active w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         Profile Details
                     </button>
-                    <button onclick="switchTab('security')" id="btn-security" class="tab-btn w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-sm font-bold text-gray-500 hover:text-white hover:bg-white/5 transition-all duration-300">
+                    <button onclick="switchTab('security')" id="btn-security" class="tab-btn w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-sm font-bold text-gray-500 hover:text-white hover:bg-white/5 transition-all duration-300 cursor-pointer">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                         Security
+                    </button>
+                    <button onclick="switchTab('subscription')" id="btn-subscription" class="tab-btn w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-sm font-bold text-gray-500 hover:text-white hover:bg-white/5 transition-all duration-300 cursor-pointer">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+                        Subscription
                     </button>
                 </div>
             </div>
@@ -157,6 +161,68 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+
+                <!-- Subscription Section -->
+                <div id="section-subscription" class="tab-content hidden animate-fadeIn">
+                    <div class="bg-[#0a0a0f] border border-white/5 rounded-3xl overflow-hidden">
+                        <div class="p-8 border-b border-white/5">
+                            <h3 class="text-xl font-bold text-white">Subscription Plan</h3>
+                            <p class="text-sm text-gray-500">Manage your membership plan and billing details.</p>
+                        </div>
+                        <div class="p-8">
+                            @php $sub = $user->currentSubscription; @endphp
+                            @if($sub)
+                                <div class="bg-white/5 border border-[#ff014f]/20 rounded-3xl p-8 relative overflow-hidden group">
+                                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-[#ff014f]/5 rounded-full blur-3xl group-hover:bg-[#ff014f]/10 transition-colors"></div>
+                                    <div class="relative z-10">
+                                        <div class="flex justify-between items-start mb-8">
+                                            <div>
+                                                <span class="text-[10px] font-black text-[#ff014f] uppercase tracking-[0.2em] mb-2 block">Current Plan</span>
+                                                <h4 class="text-3xl font-black text-white italic tracking-tight uppercase">{{ $sub->plan_name }}</h4>
+                                            </div>
+                                            <div class="px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                                                <span class="text-[10px] font-black text-emerald-500 uppercase tracking-widest">{{ strtoupper($sub->status) }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+                                            <div>
+                                                <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest mb-1">Pricing Plan</p>
+                                                <p class="text-white font-bold text-sm">{{ $sub->currency }} {{ number_format($sub->price, 2) }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest mb-1">Start Date</p>
+                                                <p class="text-white font-bold text-sm">{{ $sub->starts_at->format('M d, Y') }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest mb-1">Expiry Date</p>
+                                                <p class="text-white font-bold text-sm italic underline decoration-[#ff014f] underline-offset-4">{{ $sub->expires_at->format('M d, Y') }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="pt-6 border-t border-white/5 flex flex-col sm:flex-row gap-4 items-center justify-between">
+                                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest italic leading-normal">Renewal will be processed manually via invoice</p>
+                                            <a href="{{ route('membership') }}" class="px-8 py-3 bg-[#ff014f] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#e11d48] transition-all shadow-lg shadow-[#ff014f]/20">
+                                                View Other Plans
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="bg-white/5 border border-white/10 rounded-3xl p-10 text-center">
+                                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-6 text-gray-600">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+                                    </div>
+                                    <h4 class="text-white font-bold text-lg mb-2">No Active Membership</h4>
+                                    <p class="text-gray-500 text-sm mb-8 mx-auto max-w-sm">Unlock the full potential of Turivanta Alliance by choosing one of our professional membership plans.</p>
+                                    <a href="{{ route('membership') }}" class="inline-block px-10 py-4 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all shadow-[0_0_20px_rgba(255,1,79,0.3)]">
+                                        Explore Membership Plans
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

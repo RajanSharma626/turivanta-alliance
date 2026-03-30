@@ -64,7 +64,7 @@
                             <!-- Membership ID Badge -->
                             <div class="relative z-10 flex justify-between items-start mb-8">
                                 <div class="px-3 py-1 bg-[#ff014f]/10 border border-[#ff014f]/20 rounded-lg">
-                                    <span class="text-[10px] font-black text-[#ff014f] uppercase tracking-widest">MID:
+                                    <span class="text-[10px] font-black text-[#ff014f] uppercase tracking-widest">GTIN:
                                         {{ $user->membership_id }}</span>
                                 </div>
                                 <div
@@ -118,7 +118,7 @@
                                         <div class="mt-6 pt-6 border-t border-white/5">
                                             <div class="p-4 bg-[#ff014f]/5 border border-[#ff014f]/10 rounded-2xl text-center group/sub">
                                                 <p class="text-[9px] text-gray-400 font-black uppercase tracking-widest mb-3">Subscription Required</p>
-                                                <a href="{{ route('pricing') }}" class="inline-block text-[10px] text-white font-black uppercase tracking-widest hover:text-[#ff014f] transition-colors">
+                                                <a href="{{ route('membership') }}" class="inline-block text-[10px] text-white font-black uppercase tracking-widest hover:text-[#ff014f] transition-colors">
                                                     Upgrade to view contact
                                                 </a>
                                             </div>
@@ -148,7 +148,7 @@
                                 <h3 class="text-2xl font-black text-white mb-2 italic uppercase tracking-tight">Unlock Professional <span class="text-[#ff014f]">Access</span></h3>
                                 <p class="text-gray-400 text-sm max-w-xl">You are currently viewing a limited data preview. Subscribe to the Turivanta Alliance to unlock full contact details, ownership information, and verified addresses of all registered members.</p>
                             </div>
-                            <a href="{{ route('pricing') }}" class="px-10 py-4 bg-[#ff014f] text-white font-black text-xs uppercase tracking-[0.2em] rounded-2xl shadow-[0_10px_30px_rgba(255,1,79,0.3)] hover:-translate-y-1 transition-all whitespace-nowrap">
+                            <a href="{{ route('membership') }}" class="px-10 py-4 bg-[#ff014f] text-white font-black text-xs uppercase tracking-[0.2em] rounded-2xl shadow-[0_10px_30px_rgba(255,1,79,0.3)] hover:-translate-y-1 transition-all whitespace-nowrap">
                                 View Membership Plans
                             </a>
                         </div>

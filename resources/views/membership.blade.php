@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pricing - Turivanta Alliance')
+@section('title', 'Membership - Turivanta Alliance')
 
 @section('content')
 <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-[#050505] relative overflow-hidden">
@@ -13,14 +13,14 @@
         <div class="text-center mb-20 animate-fadeInUp">
             <h2 class="text-[#ff014f] font-black uppercase tracking-[0.3em] text-xs mb-4">Membership Plans</h2>
             <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight mb-6">
-                Simple, <span class="gradient-text">Transparent</span> Pricing
+                Simple, <span class="gradient-text">Transparent</span> Membership
             </h1>
             <p class="text-gray-400 text-lg font-medium max-w-2xl mx-auto">
                 Join the global network of tourism professionals and businesses. Choose the plan that best fits your role in the industry.
             </p>
         </div>
 
-        <!-- Pricing Grid -->
+        <!-- Membership Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <!-- Students Plan -->
             <div class="group relative bg-[#0a0a0f] border border-white/5 rounded-[2.5rem] p-10 transition-all duration-500 hover:border-[#ff014f]/30 hover:shadow-[0_20px_50px_rgba(255,1,79,0.1)] hover:-translate-y-2">
@@ -74,7 +74,7 @@
                 </div>
                 
                 <h3 class="text-2xl font-bold text-white mb-2">Business & Professionals</h3>
-                <p class="text-gray-500 text-sm mb-8 font-medium">For entities and scaling professionals.</p>
+                <p class="text-gray-500 text-sm mb-8 font-medium">For entities and service professionals.</p>
                 
                 <div class="flex items-baseline gap-2 mb-10">
                     <span class="text-4xl font-black text-white">INR 500</span>

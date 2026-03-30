@@ -108,7 +108,7 @@
                 <ul class="list-disc pl-6 space-y-2">
                     <li>Clearly communicated</li>
                     <li>Non-refundable unless stated otherwise</li>
-                    <li>Turivanta may revise pricing at any time</li>
+                    <li>Turivanta may revise membership at any time</li>
                 </ul>
             </section>
 
