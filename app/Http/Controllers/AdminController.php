@@ -233,6 +233,7 @@ class AdminController extends Controller
             'starts_at' => 'required|date',
             'expires_at' => 'required|date|after:starts_at',
             'price' => 'required|numeric',
+            'currency' => 'required|string|in:INR,USD',
             'status' => 'required|in:active,expired,cancelled,pending',
             'notes' => 'nullable|string'
         ]);
@@ -246,6 +247,7 @@ class AdminController extends Controller
             'user_id' => $member->id,
             'plan_name' => $request->plan_name,
             'price' => $request->price,
+            'currency' => $request->currency,
             'starts_at' => $request->starts_at,
             'expires_at' => $request->expires_at,
             'status' => $request->status,

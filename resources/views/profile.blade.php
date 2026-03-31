@@ -1377,12 +1377,19 @@
                         <h2 class="text-4xl font-black text-white mb-2 tracking-tight">Application Submitted!</h2>
 
                         <div class="flex flex-col items-center gap-2 mb-8 mt-6">
-                            <span
-                                class="text-gray-500 font-black uppercase text-[10px] tracking-widest leading-none">Application
-                                ID</span>
-                            <div
-                                class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white font-bold tracking-widest uppercase">
-                                {{ $application->application_no }}
+                            <div class="flex gap-4">
+                                <div class="flex flex-col items-center gap-2">
+                                    <span class="text-gray-500 font-black uppercase text-[10px] tracking-widest leading-none">Application ID</span>
+                                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white font-bold tracking-widest uppercase">
+                                        {{ $application->application_no }}
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center gap-2">
+                                    <span class="text-[#ff014f] font-black uppercase text-[10px] tracking-widest leading-none">Member ID (GTIN)</span>
+                                    <div class="px-4 py-2 bg-[#ff014f]/5 border border-[#ff014f]/20 rounded-xl text-[#ff014f] font-black tracking-widest uppercase">
+                                        {{ $user->membership_id }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -1451,7 +1458,178 @@
                             </div>
                         @endif
 
-                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        @if($status == 'approved')
+                            <!-- Full Approved Application Record -->
+                            <div class="max-w-5xl mx-auto mt-16 text-left animate-fadeInUp" style="animation-delay: 0.2s">
+                                <div class="flex items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                                    <div class="flex items-center gap-4">
+                                        <h3 class="text-xl font-bold text-white tracking-tight">Full Verified Membership Record</h3>
+                                        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase tracking-widest rounded-full border border-emerald-500/20">Official Data</span>
+                                    </div>
+                                    <span class="text-gray-600 text-[10px] font-black uppercase tracking-widest italic">Last Audit: Verified Accurate</span>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                                    
+                                    <!-- Personal & Basic Profile -->
+                                    <div class="space-y-8">
+                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            Personal Profile
+                                        </h4>
+                                        <div class="space-y-5">
+                                            <div>
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Full Name & Gender</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->first_name }} {{ $user->last_name }} <span class="text-gray-600">({{ ucfirst($user->gender) }})</span></p>
+                                            </div>
+                                            <div>
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Date of Birth</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->dob ? \Carbon\Carbon::parse($user->dob)->format('M d, Y') : 'N/A' }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Primary Email & Phone</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->email }}</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->contact_no }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Country Concerned</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->country_concerned }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Business Identity & Contact -->
+                                    <div class="space-y-8">
+                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            Business Identity
+                                        </h4>
+                                        <div class="space-y-5">
+                                            <div>
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Legal & Trade Name</p>
+                                                <p class="text-white text-sm font-bold uppercase tracking-tight text-[#ff014f]">{{ $application->legal_name }}</p>
+                                                @if($application->trade_name)
+                                                    <p class="text-gray-400 text-xs mt-0.5">T/A: {{ $application->trade_name }}</p>
+                                                @endif
+                                            </div>
+                                            <div>
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Legal Status & Type</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->legal_status }} — {{ $user->business_type }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Tax / GST Identification</p>
+                                                <p class="text-white text-sm font-medium">{{ $application->service_tax }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Website</p>
+                                                <p class="text-white text-sm font-medium underline underline-offset-4 decoration-white/10">{{ $application->website ?: 'None' }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Registered Address -->
+                                    <div class="space-y-8">
+                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            Official Address
+                                        </h4>
+                                        <div class="space-y-6">
+                                            <div class="bg-white/5 border border-white/5 p-4 rounded-2xl">
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-2">Billing Address</p>
+                                                <p class="text-white text-sm font-medium leading-relaxed">
+                                                    {{ $application->billing_street }}<br>
+                                                    {{ $application->billing_city }}, {{ $application->billing_state }}<br>
+                                                    {{ $application->billing_country }} - {{ $application->billing_postal_code }}
+                                                </p>
+                                            </div>
+                                            @if(!$application->same_as_billing)
+                                            <div class="bg-white/5 border border-white/5 p-4 rounded-2xl">
+                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-2">Shipping Address</p>
+                                                <p class="text-white text-sm font-medium leading-relaxed">
+                                                    {{ $application->shipping_street }}<br>
+                                                    {{ $application->shipping_city }}, {{ $application->shipping_state }}<br>
+                                                    {{ $application->shipping_country }} - {{ $application->shipping_postal_code }}
+                                                </p>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <!-- Operation & Registration -->
+                                    <div class="space-y-8 md:col-span-2">
+                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            Operations & Regulatory
+                                        </h4>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                            <div class="space-y-5">
+                                                <div>
+                                                    <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Commencement of Business</p>
+                                                    <p class="text-white text-sm font-medium">{{ $application->commencement_date ? $application->commencement_date->format('M d, Y') : 'N/A' }}</p>
+                                                </div>
+                                                <div>
+                                                    <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Trade Registration Details</p>
+                                                    <p class="text-white text-sm font-medium">No: {{ $application->trade_registration_no }}</p>
+                                                    <p class="text-gray-400 text-xs">Granted: {{ $application->registration_granted_date ? $application->registration_granted_date->format('M d, Y') : 'N/A' }}</p>
+                                                    <p class="text-gray-400 text-xs">Registrant: {{ $application->registrant }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-5">
+                                                <div>
+                                                    <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Accreditations</p>
+                                                    <div class="flex flex-wrap gap-2 mt-2">
+                                                        <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white text-[10px] font-bold">IATA: {{ $application->iata_registered ? $application->iata_no : 'NO' }}</span>
+                                                        @if($application->tourism_board_registered)
+                                                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white text-[10px] font-bold">TOURISM BOARD: {{ $application->tourism_board_name }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Disclosures</p>
+                                                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest {{ $application->fiduciary_breach ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' }}">
+                                                        Fiduciary Breach: {{ $application->fiduciary_breach ? 'YES' : 'NONE' }}
+                                                    </span>
+                                                    @if($application->fiduciary_breach)
+                                                        <p class="text-gray-400 text-[11px] mt-2 italic">"{{ $application->breach_details }}"</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Company Management -->
+                                    <div class="space-y-8">
+                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            Verified Contacts
+                                        </h4>
+                                        <div class="space-y-3">
+                                            @foreach($application->contacts ?? [] as $contact)
+                                                <div class="flex flex-col gap-2 bg-white/5 p-4 rounded-2xl border border-white/5 group hover:border-[#ff014f]/30 transition-all">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-10 h-10 bg-[#ff014f]/10 rounded-xl flex items-center justify-center border border-[#ff014f]/20">
+                                                            <span class="text-[#ff014f] text-xs font-black">{{ substr($contact['first_name'], 0, 1) }}{{ substr($contact['last_name'], 0, 1) }}</span>
+                                                        </div>
+                                                        <div>
+                                                            <p class="text-white font-bold text-xs uppercase">{{ $contact['first_name'] }} {{ $contact['last_name'] }}</p>
+                                                            <p class="text-[10px] text-gray-500 font-medium lowercase">{{ $contact['email'] }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex flex-wrap gap-1.5 mt-2">
+                                                        @if($contact['owner'] ?? false) <span class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Owner</span> @endif
+                                                        @if($contact['manager'] ?? false) <span class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Manager</span> @endif
+                                                        @if($contact['signatory'] ?? false) <span class="text-[9px] font-black bg-[#ff014f]/10 px-2 py-0.5 rounded text-[#ff014f] uppercase">Signatory</span> @endif
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
+
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-20">
                             <a href="/"
                                 class="inline-block px-12 py-5 bg-white text-black font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-gray-200 transition-all shadow-xl hover:-translate-y-1">
                                 Return to Dashboard

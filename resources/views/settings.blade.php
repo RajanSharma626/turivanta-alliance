@@ -204,9 +204,14 @@
 
                                         <div class="pt-6 border-t border-white/5 flex flex-col sm:flex-row gap-4 items-center justify-between">
                                             <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest italic leading-normal">Renewal will be processed manually via invoice</p>
-                                            <a href="{{ route('membership') }}" class="px-8 py-3 bg-[#ff014f] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#e11d48] transition-all shadow-lg shadow-[#ff014f]/20">
-                                                View Other Plans
-                                            </a>
+                                            <div class="flex items-center gap-3">
+                                                <a href="{{ route('settings.invoice') }}" class="px-8 py-3 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-all">
+                                                    Download Invoice
+                                                </a>
+                                                <a href="{{ route('membership') }}" class="px-8 py-3 bg-[#ff014f] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#e11d48] transition-all shadow-lg shadow-[#ff014f]/20">
+                                                    View Other Plans
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

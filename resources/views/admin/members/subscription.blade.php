@@ -37,26 +37,28 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
                     <div class="space-y-1">
-                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest">Active Plan</p>
+                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest">ACTIVE PLAN</p>
                         <p class="text-white font-bold text-lg">
                             @php $current = $member->currentSubscription; @endphp
                             {{ $current ? $current->plan_name : 'No Active Plan' }}
                         </p>
                     </div>
                     <div class="space-y-1">
-                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest">Expiration</p>
-                        <p class="text-white font-bold text-lg">
-                            {{ $current ? $current->expires_at->format('M d, Y') : 'N/A' }}
+                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest">START DATE</p>
+                        <p class="text-white font-bold text-lg italic">
+                            {{ $current ? $current->starts_at->format('M d, Y') : '-' }}
                         </p>
                     </div>
                     <div class="space-y-1">
-                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest">Joined On</p>
-                        <p class="text-white font-bold text-lg">{{ $member->created_at->format('M d, Y') }}</p>
+                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest">EXPIRY DATE</p>
+                        <p class="text-white font-bold text-lg italic underline decoration-[#ff014f] decoration-2 underline-offset-4">
+                            {{ $current ? $current->expires_at->format('M d, Y') : 'N/A' }}
+                        </p>
                     </div>
                     <div class="space-y-1 text-right">
-                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest text-[#ff014f]">Status</p>
+                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest text-[#ff014f]">STATUS</p>
                         <span class="inline-block mt-1 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest {{ $current && $current->status === 'active' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-gray-500/10 text-gray-500 border border-white/5' }}">
                             {{ $current ? ucfirst($current->status) : 'Inactive' }}
                         </span>
@@ -111,50 +113,45 @@
                 <form action="{{ route('admin.members.subscription.update', $member) }}" method="POST" class="space-y-6">
                     @csrf
                     
-                    <!-- Quick Plans -->
-                    <div class="space-y-3">
-                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Quick Select Plan</label>
-                        <div class="grid grid-cols-1 gap-2">
-                            <button type="button" onclick="setPlan('Students', 300)" class="w-full text-left p-4 bg-white/5 border border-white/10 rounded-2xl hover:border-[#ff014f]/50 transition-all group">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-white text-xs font-bold transition-colors group-hover:text-[#ff014f]">Students</span>
-                                    <span class="text-[10px] text-gray-500 font-black">₹300</span>
-                                </div>
-                            </button>
-                            <button type="button" onclick="setPlan('Business & Professionals', 500)" class="w-full text-left p-4 bg-white/5 border border-white/10 rounded-2xl hover:border-[#ff014f]/50 transition-all group">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-white text-xs font-bold transition-colors group-hover:text-[#ff014f]">Business & Prof.</span>
-                                    <span class="text-[10px] text-gray-500 font-black">₹500</span>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-
-                    <hr class="border-white/5 my-6">
-
-                    <!-- Manual Fields -->
+                    <!-- Plan Selection -->
                     <div class="space-y-4">
                         <div>
-                            <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">Plan Name</label>
-                            <input type="text" name="plan_name" id="plan_name" required value="{{ old('plan_name', $current->plan_name ?? '') }}" 
-                                class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-[#ff014f] transition-all">
+                            <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">Choose Plan Name</label>
+                            <select name="plan_name" id="plan_select" required onchange="handlePlanChange(this.value)"
+                                class="w-full bg-[#0a0a0f] border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-[#ff014f] transition-all appearance-none">
+                                <option value="" disabled selected>Select a membership plan...</option>
+                                <option value="Students" data-price="300" {{ old('plan_name', $current->plan_name ?? '') === 'Students' ? 'selected' : '' }}>Students</option>
+                                <option value="Business & Professionals" data-price="500" {{ old('plan_name', $current->plan_name ?? '') === 'Business & Professionals' ? 'selected' : '' }}>Business & Professionals</option>
+                            </select>
                         </div>
 
-                        <div>
-                            <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">Price (INR)</label>
-                            <input type="number" name="price" id="plan_price" required value="{{ old('price', $current->price ?? '') }}" 
-                                class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-[#ff014f] transition-all">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">Price</label>
+                                <input type="number" name="price" id="plan_price" required value="{{ old('price', $current->price ?? '') }}" 
+                                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-[#ff014f] transition-all">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">Currency</label>
+                                <select name="currency" id="plan_currency" class="w-full bg-[#0a0a0f] border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-[#ff014f] transition-all appearance-none">
+                                    <option value="INR" {{ old('currency', $current->currency ?? 'INR') === 'INR' ? 'selected' : '' }}>INR (₹)</option>
+                                    <option value="USD" {{ old('currency', $current->currency ?? '') === 'USD' ? 'selected' : '' }}>USD ($)</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">Start Date</label>
-                                <input type="date" name="starts_at" id="starts_at" required value="{{ old('starts_at', now()->format('Y-m-d')) }}" 
-                                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-[#ff014f] transition-all">
+                                <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">START DATE</label>
+                                <input type="date" name="starts_at" id="starts_at" required 
+                                    value="{{ old('starts_at', $current ? $current->starts_at->format('Y-m-d') : now()->format('Y-m-d')) }}" 
+                                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-[#ff014f] transition-all"
+                                    onchange="updateExpiryDate(this.value)">
                             </div>
                             <div>
-                                <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">Expy Date</label>
-                                <input type="date" name="expires_at" id="expires_at" required value="{{ old('expires_at', now()->addYear()->format('Y-m-d')) }}" 
+                                <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">EXPY DATE</label>
+                                <input type="date" name="expires_at" id="expires_at" required 
+                                    value="{{ old('expires_at', $current ? $current->expires_at->format('Y-m-d') : now()->addYear()->subDay()->format('Y-m-d')) }}" 
                                     class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-[#ff014f] transition-all">
                             </div>
                         </div>
@@ -186,17 +183,42 @@
 </div>
 
 <script>
-    function setPlan(name, price) {
-        document.getElementById('plan_name').value = name;
-        document.getElementById('plan_price').value = price;
+    function handlePlanChange(val) {
+        const select = document.getElementById('plan_select');
+        const priceInput = document.getElementById('plan_price');
         
-        // Auto set dates
-        const start = new Date();
-        const end = new Date();
+        // Auto-fill price from data attribute
+        const selectedOption = select.options[select.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+        if(price) {
+            priceInput.value = price;
+        }
+
+        // Auto set dates if not already set
+        const startInput = document.getElementById('starts_at');
+        if(!startInput.value) {
+            const now = new Date().toISOString().split('T')[0];
+            startInput.value = now;
+            updateExpiryDate(now);
+        }
+    }
+
+    function updateExpiryDate(startDateString) {
+        if (!startDateString) return;
+        
+        const start = new Date(startDateString);
+        const end = new Date(start);
+        
+        // Add 1 year and subtract 1 day
         end.setFullYear(start.getFullYear() + 1);
+        end.setDate(end.getDate() - 1);
         
-        document.getElementById('starts_at').value = start.toISOString().split('T')[0];
-        document.getElementById('expires_at').value = end.toISOString().split('T')[0];
+        // Format as YYYY-MM-DD
+        const y = end.getFullYear();
+        const m = String(end.getMonth() + 1).padStart(2, '0');
+        const d = String(end.getDate()).padStart(2, '0');
+        
+        document.getElementById('expires_at').value = `${y}-${m}-${d}`;
     }
 </script>
 @endsection

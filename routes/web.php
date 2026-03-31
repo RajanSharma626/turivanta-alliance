@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-profile', [UserProfileController::class, 'edit'])->name('settings');
     Route::post('/my-profile/update', [UserProfileController::class, 'update'])->name('settings.update');
     Route::post('/my-profile/password', [UserProfileController::class, 'updatePassword'])->name('settings.password');
+    Route::get('/my-profile/invoice', [UserProfileController::class, 'downloadInvoice'])->name('settings.invoice');
 
     Route::get('/my-application', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/my-application/next', [ProfileController::class, 'nextStep'])->name('profile.next');

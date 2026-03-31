@@ -62,4 +62,23 @@ class UserProfileController extends Controller
 
         return back()->with('success', 'Password changed successfully.');
     }
+
+    public function downloadInvoice()
+    {
+        $user = Auth::user();
+        $subscription = $user->currentSubscription;
+
+        if (!$subscription) {
+            return back()->with('error', 'No active subscription found.');
+        }
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('invoices.subscription', [
+            'user' => $user,
+            'subscription' => $subscription,
+            'invoice_no' => 'INV-' . strtoupper(substr(md5($subscription->id . $subscription->created_at), 0, 8)),
+            'date' => $subscription->created_at->format('M d, Y'),
+        ]);
+
+        return $pdf->download('invoice-' . $subscription->id . '.pdf');
+    }
 }
