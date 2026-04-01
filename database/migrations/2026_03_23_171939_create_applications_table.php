@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('billing_postal_code')->nullable();
             
             // Shipping Address
-            $table->boolean('same_as_billing')->default(true);
+            $table->boolean('same_as_billing')->default(false);
             $table->string('shipping_country')->nullable();
             $table->string('shipping_state')->nullable();
             $table->string('shipping_city')->nullable();
