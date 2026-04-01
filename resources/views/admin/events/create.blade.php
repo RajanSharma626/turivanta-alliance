@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Create Event - Turivanta Admin')
-@section('page_title', 'Create New Event')
+@section('title', 'Create Events - Turivanta Admin')
+@section('page_title', 'Create New Events')
 
 @section('content')
 <div class="max-w-4xl mx-auto">
@@ -9,7 +9,7 @@
         <div class="absolute -right-20 -top-20 w-64 h-64 bg-[#ff014f]/5 rounded-full blur-[100px] group-hover:bg-[#ff014f]/10 transition-colors"></div>
         
         <div class="mb-10 relative z-10">
-            <h3 class="text-white font-black heading-font text-2xl tracking-tighter uppercase italic mb-2">Initialize Event</h3>
+            <h3 class="text-white font-black heading-font text-2xl tracking-tighter uppercase italic mb-2">Initialize Events</h3>
             <p class="text-gray-500 text-sm font-medium">Define details for upcoming community or physical events.</p>
         </div>
 
@@ -58,28 +58,6 @@
                 @error('description') <span class="text-rose-500 text-[10px] font-black uppercase tracking-widest ml-3">{{ $message }}</span> @enderror
             </div>
 
-            <!-- Image Upload -->
-            <div class="flex flex-col gap-3">
-                <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Event Poster / Image</label>
-                <div class="relative">
-                    <input type="file" name="image" id="image" class="hidden" accept="image/*" onchange="previewImage(this)">
-                    <label for="image" class="w-full bg-white/[0.02] border border-dashed @error('image') border-rose-500 @else border-white/10 @enderror rounded-3xl p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-[#ff014f]/5 hover:border-[#ff014f]/30 transition-all group">
-                        <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-4 text-gray-500 group-hover:text-[#ff014f] transition-colors">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 group-hover:text-white transition-colors" id="file-label">Click to upload poster image</p>
-                        <p class="text-[8px] text-gray-600 uppercase font-black tracking-widest mt-2">Maximum size: 2MB (JPG, PNG, SVG)</p>
-                    </label>
-                    <div id="image-preview" class="hidden mt-6 relative w-full aspect-video rounded-3xl overflow-hidden border border-white/10">
-                        <img src="" alt="Preview" class="w-full h-full object-cover">
-                        <button type="button" onclick="removeImage()" class="absolute top-4 right-4 p-3 bg-black/60 backdrop-blur-md rounded-2xl text-white hover:bg-rose-500 transition-all">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                        </button>
-                    </div>
-                </div>
-                @error('image') <span class="text-rose-500 text-[10px] font-black uppercase tracking-widest ml-3">{{ $message }}</span> @enderror
-            </div>
-
             <div class="flex items-center justify-end gap-4 pt-6 mt-6 border-t border-white/5">
                 <a href="{{ route('admin.events') }}" class="px-8 py-4 bg-white/5 text-gray-400 font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-white/10 hover:text-white transition-all">
                     Cancel
@@ -91,34 +69,5 @@
         </form>
     </div>
 </div>
-
-@push('scripts')
-<script>
-    function previewImage(input) {
-        const preview = document.getElementById('image-preview');
-        const img = preview.querySelector('img');
-        const label = document.querySelector('label[for="image"]');
-        
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                img.src = e.target.result;
-                preview.classList.remove('hidden');
-                label.classList.add('hidden');
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    function removeImage() {
-        const input = document.getElementById('image');
-        const preview = document.getElementById('image-preview');
-        const label = document.querySelector('label[for="image"]');
-        
-        input.value = '';
-        preview.classList.add('hidden');
-        label.classList.remove('hidden');
-    }
-</script>
-@endpush
 @endsection
+

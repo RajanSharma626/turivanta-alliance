@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'About Us - Turivanta Alliance')
+@section('title', 'Global Tourism Alliance & Trusted Tourism Network | Turivanta')
+@section('meta_description', 'Trusted tourism network connecting businesses worldwide. Join a global tourism alliance shaping the future of travel industry.')
+@section('meta_keywords', 'trusted tourism network and global tourism alliance')
 
 @section('content')
     <main class="flex-grow w-full relative z-10 pt-32 pb-20 px-6">

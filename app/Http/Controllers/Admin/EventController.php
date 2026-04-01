@@ -38,14 +38,9 @@ class EventController extends Controller
             'location' => 'required|string|max:255',
             'is_online' => 'required|boolean',
             'event_date' => 'required|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $data = $request->all();
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('events', 'public');
-        }
 
         Event::create($data);
 
@@ -71,17 +66,9 @@ class EventController extends Controller
             'location' => 'required|string|max:255',
             'is_online' => 'required|boolean',
             'event_date' => 'required|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $data = $request->all();
-
-        if ($request->hasFile('image')) {
-            if ($event->image) {
-                Storage::disk('public')->delete($event->image);
-            }
-            $data['image'] = $request->file('image')->store('events', 'public');
-        }
 
         $event->update($data);
 
@@ -93,9 +80,6 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        if ($event->image) {
-            Storage::disk('public')->delete($event->image);
-        }
         $event->delete();
 
         return redirect()->route('admin.events')->with('success', 'Event deleted successfully.');

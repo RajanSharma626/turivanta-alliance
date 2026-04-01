@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Register - Turivanta Alliance')
+@section('title', 'Join Tourism Membership Platform for Service Providers | Turivanta')
+@section('meta_description', 'Empowering tourism service providers through a global tourism membership platform for trust, visibility, and business growth.')
+@section('meta_keywords', 'tourism membership platform and tourism service providers')
 
 @section('content')
 <main class="flex-grow flex items-center justify-center w-full pt-32 pb-20 z-10 relative mt-10">

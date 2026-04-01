@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Search Results - Turivanta Alliance')
+@section('title', $query ? 'Turivanta Tourism Identity Platform for Travel & Hospitality Network' : 'Certified Tourism Businesses | Global Tourism Business Network | Turivanta')
+@section('meta_description', $query ? 'Turivanta is a tourism identity platform connecting a global travel and hospitality network of trusted, verified service providers.' : 'Explore certified tourism businesses in a global tourism business network connecting trusted travel and hospitality providers worldwide.')
+@section('meta_keywords', $query ? 'tourism identity platform, travel and hospitality network' : 'certified tourism businesses and tourism business network')
 
 @section('content')
     <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-[#050505] relative overflow-hidden">

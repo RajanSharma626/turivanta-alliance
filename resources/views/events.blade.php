@@ -18,34 +18,20 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             @forelse($events as $event)
                 <div class="group relative bg-[#0a0a15] border border-white/10 rounded-[40px] overflow-hidden transition-all duration-500 hover:border-[#ff014f]/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-2">
-                    <!-- Image Container -->
-                    <div class="relative aspect-[16/10] overflow-hidden">
-                        @if($event->image)
-                            <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        @else
-                            <div class="w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1c] flex items-center justify-center p-12">
-                                <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" class="w-full opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700">
+                    <!-- Content -->
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3 text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em]">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                {{ $event->event_date->format('d M, Y • h:i A') }}
                             </div>
-                        @endif
-                        
-                        <!-- Badges -->
-                        <div class="absolute top-6 left-6 flex flex-col gap-2">
                             @if($event->is_online)
-                                <span class="px-4 py-1.5 bg-emerald-500/90 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">Online</span>
+                                <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[8px] font-black uppercase tracking-widest rounded-full border border-emerald-500/20">Online</span>
                             @else
-                                <span class="px-4 py-1.5 bg-[#ff014f]/90 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">Physical</span>
+                                <span class="px-3 py-1 bg-[#ff014f]/10 text-[#ff014f] text-[8px] font-black uppercase tracking-widest rounded-full border border-[#ff014f]/20">Physical</span>
                             @endif
                         </div>
 
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a15] via-transparent to-transparent opacity-60"></div>
-                    </div>
-
-                    <!-- Content -->
-                    <div class="p-8">
-                        <div class="flex items-center gap-3 text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            {{ $event->event_date->format('d M, Y • h:i A') }}
-                        </div>
 
                         <h3 class="text-xl font-bold text-white mb-4 group-hover:text-[#ff014f] transition-colors leading-tight italic uppercase tracking-tight">
                             {{ $event->title }}

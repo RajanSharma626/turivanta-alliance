@@ -1,2 +1,3 @@
 User-agent: *
-Disallow:
+Disallow: /admin-control-panel
+Disallow: /admin

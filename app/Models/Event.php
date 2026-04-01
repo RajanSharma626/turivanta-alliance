@@ -12,7 +12,6 @@ class Event extends Model
         'location',
         'is_online',
         'event_date',
-        'image',
     ];
 
     protected $casts = [

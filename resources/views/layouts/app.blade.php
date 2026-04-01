@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Turivanta Alliance - The Identity of Modern Tourism')</title>
+    <meta name="description" content="@yield('meta_description', 'Turivanta Alliance - The Identity of Modern Tourism')">
+    <meta name="keywords" content="@yield('meta_keywords', 'tourism, travel, hospitality, alliance')">
     <link rel="shortcut icon" href="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +49,7 @@
             <a href="{{ route('home') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Home</a>
             <a href="{{ route('about') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('about') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">About</a>
             <a href="{{ route('membership') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('membership') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Membership</a>
-            <a href="{{ route('events') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('events') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Event</a>
+            <a href="{{ route('events') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('events') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Events</a>
             <a href="{{ route('contact') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Contact</a>
         </div>
 
@@ -116,7 +118,8 @@
                         <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
                         <li><a href="{{ route('membership') }}" class="hover:text-white transition-colors">Membership</a></li>
                         <li><a href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="{{ route('events') }}" class="hover:text-white transition-colors">Event</a></li>
+                        <li><a href="{{ route('events') }}" class="hover:text-white transition-colors">Events</a></li>
+                        <li><a href="{{ route('faq') }}" class="hover:text-white transition-colors">FAQ's</a></li>
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Home - Turivanta Alliance')
+@section('title', 'Turivanta Alliance | Tourism Endorsement & Industry Platform')
+@section('meta_description', 'Turivanta Alliance is a global tourism endorsement platform and tourism industry platform connecting trusted travel and hospitality providers.')
+@section('meta_keywords', 'tourism endorsement platform and tourism industry platform')
 
 @section('content')
     <!-- Hero Section -->

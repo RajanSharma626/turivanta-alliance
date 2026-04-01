@@ -15,7 +15,7 @@
     <div class="flex flex-col sm:flex-row items-center justify-between mb-8 px-4 gap-4">
         <h3 class="text-white font-black heading-font text-lg tracking-tight uppercase italic grow">Upcoming & Past Events</h3>
         <a href="{{ route('admin.events.create') }}" class="px-8 py-3 bg-[#ff014f] text-white font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-[#e11d48] transition-all shadow-[0_10px_20px_rgba(255,1,79,0.2)] hover:-translate-y-1">
-            + Create Event
+            + Create Events
         </a>
     </div>
 
@@ -36,11 +36,7 @@
                     <td class="px-6 py-4 bg-white/[0.02] group-hover:bg-white/[0.04] rounded-l-[30px] border-y border-l border-white/5 group-hover:border-[#ff014f]/20 transition-all">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-2xl bg-[#ff014f]/10 flex items-center justify-center font-black text-[#ff014f] overflow-hidden">
-                                @if($event->image)
-                                    <img src="{{ Storage::url($event->image) }}" class="w-full h-full object-cover">
-                                @else
-                                    {{ substr($event->title, 0, 1) }}
-                                @endif
+                                {{ substr($event->title, 0, 1) }}
                             </div>
                             <div>
                                 <p class="text-white text-sm font-bold tracking-tight italic">{{ $event->title }}</p>
