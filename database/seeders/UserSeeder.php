@@ -66,7 +66,6 @@ class UserSeeder extends Seeder
                 'user_id' => $user->id,
                 'application_no' => 'APP' . rand(1000, 9999),
                 'legal_name' => $companyName,
-                'legal_status' => $user->legal_status,
                 'status' => 'approved'
             ]);
         }

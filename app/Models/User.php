@@ -4,18 +4,39 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['membership_id', 'first_name', 'last_name', 'name', 'email', 'password', 'gender', 'dob', 'contact_no', 'business_type', 'avatar', 'otp', 'otp_expires_at', 'current_step', 'country_concerned', 'legal_status'])]
-#[Hidden(['password', 'remember_token', 'otp'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+
+    protected $fillable = [
+        'membership_id',
+        'first_name',
+        'last_name',
+        'name',
+        'email',
+        'password',
+        'gender',
+        'dob',
+        'contact_no',
+        'business_type',
+        'avatar',
+        'otp',
+        'otp_expires_at',
+        'current_step',
+        'country_concerned',
+        'legal_status',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'otp',
+    ];
 
     protected static function booted()
     {

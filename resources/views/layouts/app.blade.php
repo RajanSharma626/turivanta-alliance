@@ -47,7 +47,7 @@
             <a href="{{ route('home') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Home</a>
             <a href="{{ route('about') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('about') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">About</a>
             <a href="{{ route('membership') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('membership') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Membership</a>
-            <a href="{{ route('faq') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('faq') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">FAQ's</a>
+            <a href="{{ route('events') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('events') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Event</a>
             <a href="{{ route('contact') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Contact</a>
         </div>
 
@@ -116,7 +116,7 @@
                         <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
                         <li><a href="{{ route('membership') }}" class="hover:text-white transition-colors">Membership</a></li>
                         <li><a href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="{{ route('faq') }}" class="hover:text-white transition-colors">FAQ's</a></li>
+                        <li><a href="{{ route('events') }}" class="hover:text-white transition-colors">Event</a></li>
                     </ul>
                 </div>
             </div>

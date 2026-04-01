@@ -87,6 +87,15 @@ Route::group(['prefix' => 'admin-control-panel'], function () {
             Route::post('/{admin}/toggle-status', [AdminController::class, 'toggleStatus'])->name('admin.admins.toggle-status');
         });
 
+        Route::resource('events', \App\Http\Controllers\Admin\EventController::class)->names([
+            'index' => 'admin.events',
+            'create' => 'admin.events.create',
+            'store' => 'admin.events.store',
+            'edit' => 'admin.events.edit',
+            'update' => 'admin.events.update',
+            'destroy' => 'admin.events.destroy',
+        ]);
+
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
 });
@@ -115,6 +124,12 @@ Route::get('/terms-and-conditions', function () {
 Route::get('/frequently-asked-questions', function () {
     return view('faq');
 })->name('faq');
+
+Route::get('/events', function () {
+    $events = \App\Models\Event::orderBy('event_date', 'asc')->get();
+    return view('events', compact('events'));
+})->name('events');
+
 Route::get('/membership', function () {
     return view('membership');
 })->name('membership');
