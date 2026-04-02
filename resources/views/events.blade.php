@@ -6,8 +6,8 @@
 <main class="flex-grow pt-32 pb-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="text-center mb-20">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 uppercase tracking-tight italic px-4">
-                Global <span class="gradient-text">Events</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 uppercase tracking-tight italic px-1">
+                Global <span class="gradient-text pr-2">Events</span>
             </h1>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
                 Connect with the global tourism ecosystem through our curated physical and online events.
@@ -33,7 +33,7 @@
                         </div>
 
 
-                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-[#ff014f] transition-colors leading-tight italic uppercase tracking-tight">
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-[#ff014f] transition-colors leading-tight italic uppercase tracking-tight px-1">
                             {{ $event->title }}
                         </h3>
 
@@ -56,7 +56,7 @@
                     <div class="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-8">
                         <svg class="w-12 h-12 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-wider">No Active Engagements</h2>
+                    <h2 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-wider px-1">No Active Engagements</h2>
                     <p class="text-gray-400 max-w-md mx-auto">We are currently curating new events for the community. Join our membership program to get notified instantly.</p>
                 </div>
             @endforelse

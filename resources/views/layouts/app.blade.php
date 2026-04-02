@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark overflow-x-hidden">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@
 
 
 </head>
-<body class="antialiased selection:bg-[#ff014f] selection:text-white relative min-h-screen flex flex-col bg-[#030510]">
+<body class="antialiased selection:bg-[#ff014f] selection:text-white relative min-h-screen flex flex-col bg-[#030510] overflow-x-hidden">
     <div id="tsparticles" class="absolute inset-0 z-0"></div>
     <div class="absolute inset-0 w-full h-full overflow-hidden z-[-1] pointer-events-none">
         <div class="absolute -top-[200px] -left-[100px] w-[500px] h-[500px] bg-rose-600/20 rounded-full blur-[120px]"></div>
@@ -49,8 +49,20 @@
             <a href="{{ route('home') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Home</a>
             <a href="{{ route('about') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('about') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">About</a>
             <a href="{{ route('membership') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('membership') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Membership</a>
-            <a href="{{ route('events') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('events') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Events</a>
-            <a href="{{ route('contact') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all">Contact</a>
+            
+            <!-- More Dropdown -->
+            <div class="relative group">
+                <button class="px-6 py-2 text-sm font-medium {{ (request()->routeIs('benefits') || request()->routeIs('events') || request()->routeIs('contact') || request()->routeIs('faq')) ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5' }} rounded-full transition-all flex items-center gap-2">
+                    More
+                    <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#0a0a0f] border border-white/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden backdrop-blur-xl">
+                    <a href="{{ route('benefits') }}" class="block px-6 py-3 text-sm font-medium {{ request()->routeIs('benefits') ? 'text-[#ff014f] bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all">Benefits</a>
+                    <a href="{{ route('events') }}" class="block px-6 py-3 text-sm font-medium {{ request()->routeIs('events') ? 'text-[#ff014f] bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all">Events</a>
+                    <a href="{{ route('contact') }}" class="block px-6 py-3 text-sm font-medium {{ request()->routeIs('contact') ? 'text-[#ff014f] bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all">Contact</a>
+                    <a href="{{ route('faq') }}" class="block px-6 py-3 text-sm font-medium {{ request()->routeIs('faq') ? 'text-[#ff014f] bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all">FAQ</a>
+                </div>
+            </div>
         </div>
 
         <!-- Search Box -->
@@ -62,7 +74,7 @@
         </div>
 
 
-        <div class="hidden md:flex items-center justify-end">
+        <div class="hidden md:flex items-center justify-end flex-shrink-0">
             @if(auth('web')->check())
                 <div class="relative group">
                     <button class="flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 transition-all hover:bg-white/10 cursor-pointer">
@@ -91,7 +103,55 @@
                 <a href="{{ route('register') }}" class="px-6 py-2 bg-[#ff014f] text-white text-sm font-bold rounded-full transition-all duration-300 hover:bg-[#e11d48] hover:shadow-[0_0_15px_rgba(255,1,79,0.3)] hover:-translate-y-0.5">Register</a>
             @endif
         </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="flex md:hidden w-10 h-10 items-center justify-center bg-white/5 border border-white/10 rounded-xl text-white transition-all hover:bg-white/10" onclick="toggleMobileMenu()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="hamburger-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="close-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
     </nav>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="fixed inset-0 z-40 bg-[#030510]/95 backdrop-blur-2xl transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="flex flex-col h-full pt-32 pb-12 px-8 overflow-y-auto">
+            <div class="flex flex-col gap-6 text-2xl font-bold">
+                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-[#ff014f]' : 'text-white' }}" onclick="toggleMobileMenu()">Home</a>
+                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#ff014f]' : 'text-white' }}" onclick="toggleMobileMenu()">About</a>
+                <a href="{{ route('membership') }}" class="{{ request()->routeIs('membership') ? 'text-[#ff014f]' : 'text-white' }}" onclick="toggleMobileMenu()">Membership</a>
+                <a href="{{ route('benefits') }}" class="{{ request()->routeIs('benefits') ? 'text-[#ff014f]' : 'text-white' }}" onclick="toggleMobileMenu()">Benefits</a>
+                <a href="{{ route('events') }}" class="{{ request()->routeIs('events') ? 'text-[#ff014f]' : 'text-white' }}" onclick="toggleMobileMenu()">Events</a>
+                <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-[#ff014f]' : 'text-white' }}" onclick="toggleMobileMenu()">Contact</a>
+                <a href="{{ route('faq') }}" class="{{ request()->routeIs('faq') ? 'text-[#ff014f]' : 'text-white' }}" onclick="toggleMobileMenu()">FAQ</a>
+            </div>
+
+            <div class="mt-auto pt-12 border-t border-white/10">
+                @if(auth('web')->check())
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#ff014f] to-rose-400 flex items-center justify-center text-white font-black text-lg">
+                            {{ substr(auth('web')->user()->first_name, 0, 1) }}
+                        </div>
+                        <div>
+                            <p class="text-white font-bold leading-tight">{{ auth('web')->user()->first_name }} {{ auth('web')->user()->last_name }}</p>
+                            <p class="text-gray-500 text-sm">{{ auth('web')->user()->email }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <a href="{{ route('profile.index') }}" class="text-gray-400 font-bold hover:text-white" onclick="toggleMobileMenu()">My Application</a>
+                        <a href="{{ route('settings') }}" class="text-gray-400 font-bold hover:text-white" onclick="toggleMobileMenu()">My Profile</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-rose-500 font-bold">Logout</button>
+                        </form>
+                    </div>
+                @else
+                    <div class="flex flex-col gap-4">
+                        <a href="{{ route('login') }}" class="w-full py-4 text-center text-white font-bold border border-white/10 rounded-2xl" onclick="toggleMobileMenu()">Login</a>
+                        <a href="{{ route('register') }}" class="w-full py-4 text-center text-white font-bold bg-[#ff014f] rounded-2xl" onclick="toggleMobileMenu()">Register</a>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
 
     @yield('content')
 
@@ -116,6 +176,7 @@
                     <ul class="flex flex-col gap-4 text-gray-400 text-sm font-medium">
                         <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a></li>
                         <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="{{ route('benefits') }}" class="hover:text-white transition-colors">Benefits</a></li>
                         <li><a href="{{ route('membership') }}" class="hover:text-white transition-colors">Membership</a></li>
                         <li><a href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact Us</a></li>
                         <li><a href="{{ route('events') }}" class="hover:text-white transition-colors">Events</a></li>
@@ -157,6 +218,27 @@
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.5.0/tsparticles.bundle.min.js"></script>
     <script>
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-drawer');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const isOpening = drawer.classList.contains('translate-x-full');
+
+            if (isOpening) {
+                drawer.classList.remove('translate-x-full');
+                drawer.classList.add('translate-x-0');
+                hamburgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                drawer.classList.remove('translate-x-0');
+                drawer.classList.add('translate-x-full');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
         tsParticles.load({
             id: "tsparticles",
             options: {

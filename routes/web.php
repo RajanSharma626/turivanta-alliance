@@ -134,4 +134,8 @@ Route::get('/membership', function () {
     return view('membership');
 })->name('membership');
 
+Route::get('/benefits', function () {
+    return view('benefits');
+})->name('benefits');
+
 Route::get('/search', [\App\Http\Controllers\SearchController::class, 'index'])->name('search');

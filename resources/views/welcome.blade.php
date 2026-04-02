@@ -6,8 +6,8 @@
 
 @section('content')
     <!-- Hero Section -->
-    <main class="flex-grow flex items-center justify-center w-full px-6 pt-32 pb-20 z-10 relative">
-        <div class="max-w-4xl w-full flex flex-col items-center justify-center gap-10 lg:gap-14 mt-6">
+    <main class="flex-grow flex items-center justify-center w-full px-6 pt-24 sm:pt-32 pb-16 z-10 relative">
+        <div class="max-w-4xl w-full flex flex-col items-center justify-center gap-8 lg:gap-14 mt-4">
 
             <!-- Top Image with Wave -->
             <div class="flex justify-center items-center h-[320px] sm:h-[420px] lg:h-[500px]">
@@ -30,8 +30,8 @@
 
             <!-- Bottom Content (Text) -->
             <div class="flex flex-col items-center text-center space-y-4 lg:space-y-6">
-                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
-                    <span class="gradient-text">Turivanta</span> <span class="text-white">Alliance</span>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                    <span class="gradient-text pr-2">Turivanta</span> <span class="text-white">Alliance</span>
                 </h1>
                 <h2
                     class="text-xl sm:text-2xl lg:text-3xl font-semibold italic tracking-wide min-h-[32px] sm:min-h-[40px] flex items-center justify-center">
@@ -47,7 +47,7 @@
 
             <!-- Left Side: Experience Badges -->
             <div
-                class="relative w-full h-[450px] sm:h-[550px] flex flex-col items-center lg:items-center justify-center pt-10">
+                class="relative w-full h-[380px] sm:h-[550px] flex flex-col items-center lg:items-center justify-center pt-6 sm:pt-10">
                 <div
                     class="absolute lg:left-0 top-1/2 transform -translate-y-1/2 w-[300px] lg:w-[350px] h-[300px] lg:h-[350px] bg-[#ff014f] rounded-full blur-[90px] opacity-70 pointer-events-none z-0">
                 </div>
@@ -60,7 +60,7 @@
                 </div>
 
                 <div
-                    class="absolute z-20 bottom-8 lg:-bottom-2 right-4 lg:-right-4 w-[85%] max-w-[340px] bg-[#0f0f11]/80 backdrop-blur-3xl border border-[#ffffff0a] rounded-2xl p-6 flex items-center gap-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                    class="absolute z-20 bottom-4 sm:bottom-8 lg:-bottom-2 left-1/2 -translate-x-1/2 lg:left-auto lg:right-[-10px] lg:translate-x-0 w-[90%] sm:w-[85%] max-w-[340px] bg-[#0f0f11]/80 backdrop-blur-3xl border border-[#ffffff0a] rounded-2xl p-5 sm:p-6 flex items-center gap-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                     <div
                         class="w-14 h-14 rounded-full border border-[#ff014f]/30 flex items-center justify-center flex-shrink-0 bg-transparent">
                         <svg class="w-6 h-6 text-[#ff014f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@
             <div class="flex flex-col space-y-7 z-10 relative">
                 <div>
                     <h5 class="text-[#ff014f] font-bold text-[13px] tracking-[0.25em] uppercase mb-4">Introduction</h5>
-                    <h2 class="text-[36px] sm:text-[42px] lg:text-[46px] font-extrabold leading-[1.2] tracking-tight text-white">
+                    <h2 class="text-3xl sm:text-[42px] lg:text-[46px] font-extrabold leading-[1.2] tracking-tight text-white text-center lg:text-left">
                         Uniting Global Tourism <br class="hidden sm:block" /> Under One Mark
                     </h2>
                     <p class="text-gray-400 mt-5 text-[15px] leading-[1.8] max-w-[95%] text-justify">
@@ -155,10 +155,10 @@
         <div class="max-w-7xl mx-auto">
             <div class="mb-16 text-center">
                 <h5 class="text-[#ff014f] font-bold text-[13px] tracking-[0.25em] uppercase mb-4">Ecosystem</h5>
-                <h2 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
                     Our Global <span class="text-gray-400 font-light">Tourism Focus</span>
                 </h2>
-                <div class="w-20 h-1 bg-[#ff014f] mx-auto mt-6 rounded-full"></div>
+                <div class="w-16 h-1 bg-[#ff014f] mx-auto mt-6 rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

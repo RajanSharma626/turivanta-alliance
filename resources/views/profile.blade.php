@@ -21,20 +21,20 @@
             </div>
 
             <!-- Progress Stepper -->
-            <div class="mb-12">
-                <div class="flex items-center justify-between relative max-w-4xl mx-auto">
+            <div class="mb-12 w-full">
+                <div class="flex items-center justify-between relative max-w-4xl mx-auto px-2 sm:px-4">
                     <!-- Progress Line -->
-                    <div class="absolute top-1/2 left-0 w-full h-1 bg-white/5 -translate-y-1/2 -z-10"></div>
-                    <div class="absolute top-1/2 left-0 h-1 bg-[#ff014f] -translate-y-1/2 -z-10 transition-all duration-700"
+                    <div class="absolute top-4 sm:top-6 left-0 w-full h-[1px] sm:h-[2px] bg-white/5 -z-10"></div>
+                    <div class="absolute top-4 sm:top-6 left-0 h-[1px] sm:h-[2px] bg-[#ff014f] -z-10 transition-all duration-700"
                         style="width: {{ (($user->current_step - 1) / 3) * 100 }}%"></div>
 
                     @foreach (['Requirements', 'Basic Info', 'Application Form', 'Documents'] as $index => $stepName)
                         @php $s = $index + 1; @endphp
-                        <div class="flex flex-col items-center gap-3">
+                        <div class="flex flex-col items-center gap-2 sm:gap-3 flex-1 px-1">
                             <div
-                                class="w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all duration-500 {{ $user->current_step >= $s ? 'bg-[#ff014f] text-white shadow-[0_0_20px_rgba(255,1,79,0.4)]' : 'bg-[#131215] text-gray-500 border border-white/10' }}">
+                                class="w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-500 shrink-0 {{ $user->current_step >= $s ? 'bg-[#ff014f] text-white shadow-[0_0_20px_rgba(255,1,79,0.4)]' : 'bg-[#131215] text-gray-500 border border-white/10' }}">
                                 @if ($user->current_step > $s)
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                             d="M5 13l4 4L19 7"></path>
                                     </svg>
@@ -43,7 +43,7 @@
                                 @endif
                             </div>
                             <span
-                                class="text-[11px] font-black uppercase tracking-widest {{ $user->current_step >= $s ? 'text-white' : 'text-gray-600' }}">{{ $stepName }}</span>
+                                class="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-widest text-center leading-tight {{ $user->current_step >= $s ? 'text-white' : 'text-gray-600' }}">{{ $stepName }}</span>
                         </div>
                     @endforeach
                 </div>
@@ -210,7 +210,7 @@
                                 @csrf
                                 <input type="hidden" name="step" value="1">
                                 <button type="submit"
-                                    class="inline-flex items-center gap-3 px-10 py-4 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all hover:shadow-[0_0_30px_rgba(255,1,79,0.3)] hover:-translate-y-1">
+                                    class="inline-flex items-center gap-3 px-10 py-3.5 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all hover:shadow-[0_0_30px_rgba(255,1,79,0.3)] hover:-translate-y-1">
                                     Proceed to Basic Details
                                     <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -237,19 +237,19 @@
                                 </svg>
                                 Important Note
                             </h4>
-                            <ul class="space-y-3 text-gray-400 text-[13px] leading-relaxed">
-                                <li class="flex gap-3"><span>•</span> <span>Date of Commencement of business must be 4
+                            <ul class="space-y-4 text-gray-400 text-[13px] leading-relaxed">
+                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Date of Commencement of business must be 4
                                         Years Old from the date of application OR You must have minimum <span
                                             class="text-white font-bold">10 years</span> of Experience of the
                                         industry</span></li>
                                 @if(!in_array($user->legal_status, ['In Service Professional', 'Student']))
-                                <li class="flex gap-3"><span>•</span> Letter of recommendation from Turivanta Member on
-                                    their letter head with date, sign and stamp.</li>
+                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Letter of recommendation from Turivanta Member on
+                                    their letter head with date, sign and stamp.</span></li>
                                 @endif
-                                <li class="flex gap-3"><span>•</span> A separate online application is required for each
-                                    agency location for which approval is sought.</li>
-                                <li class="flex gap-3"><span>•</span> Draft Applications must be submitted within 7 days,
-                                    otherwise you will need to restart the process.</li>
+                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>A separate online application is required for each
+                                    agency location for which approval is sought.</span></li>
+                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Draft Applications must be submitted within 7 days,
+                                    otherwise you will need to restart the process.</span></li>
                             </ul>
                         </div>
 
@@ -262,7 +262,7 @@
                                 <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Country
                                     Concerned</label>
                                 <select name="country_concerned"
-                                    class="bg-[#131215] border @error('country_concerned') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none">
+                                    class="w-full bg-[#131215] border @error('country_concerned') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none text-sm">
                                     @include('partials.countries', [
                                         'selected' => old('country_concerned', $user->country_concerned),
                                     ])
@@ -277,7 +277,7 @@
                                 <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Legal
                                     Status</label>
                                 <select name="legal_status"
-                                    class="bg-[#131215] border @error('legal_status') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none">
+                                    class="w-full bg-[#131215] border @error('legal_status') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none text-sm">
                                     <option value="">Select Legal Status</option>
                                     @foreach (['Association', 'Co-operative', 'Corporation', 'Joint Venture', 'Limited Company', 'Limited Partnership', 'Partnership', 'Sole Proprietorship', 'State Owned Enterprise', 'Trust Company', 'In Service Professional', 'Student'] as $status)
                                         <option value="{{ $status }}"
@@ -296,7 +296,7 @@
                                     Name</label>
                                 <input type="text" name="first_name"
                                     value="{{ old('first_name', $user->first_name) }}"
-                                    class="bg-[#131215] border @error('first_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                    class="w-full bg-[#131215] border @error('first_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
                                 @error('first_name')
                                     <span
                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -306,8 +306,9 @@
                             <div class="flex flex-col gap-2">
                                 <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Last
                                     Name</label>
-                                <input type="text" name="last_name" value="{{ old('last_name', $user->last_name) }}"
-                                    class="bg-[#131215] border @error('last_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                <input type="text" name="last_name"
+                                    value="{{ old('last_name', $user->last_name) }}"
+                                    class="w-full bg-[#131215] border @error('last_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
                                 @error('last_name')
                                     <span
                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -318,7 +319,7 @@
                                 <label
                                     class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Gender</label>
                                 <select name="gender"
-                                    class="bg-[#131215] border @error('gender') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none">
+                                    class="w-full bg-[#131215] border @error('gender') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none text-sm">
                                     <option value="">Select Gender</option>
                                     <option value="male" {{ old('gender', $user->gender) == 'male' ? 'selected' : '' }}>
                                         Male</option>
@@ -335,7 +336,7 @@
                                 <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Date of
                                     Birth</label>
                                 <input type="date" name="dob" value="{{ old('dob', $user->dob) }}"
-                                    class="bg-[#131215] border @error('dob') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all [color-scheme:dark]">
+                                    class="w-full bg-[#131215] border @error('dob') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all [color-scheme:dark] text-sm">
                                 @error('dob')
                                     <span
                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -345,9 +346,9 @@
                             <div class="flex flex-col gap-2">
                                 <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Contact
                                     No.</label>
-                                <input type="tel" name="contact_no"
+                                <input type="text" name="contact_no"
                                     value="{{ old('contact_no', $user->contact_no) }}"
-                                    class="bg-[#131215] border @error('contact_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                    class="w-full bg-[#131215] border @error('contact_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
                                 @error('contact_no')
                                     <span
                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -358,7 +359,7 @@
                                 <label
                                     class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Email</label>
                                 <input type="email" name="email" value="{{ old('email', $user->email) }}"
-                                    class="bg-[#131215] border @error('email') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                    class="w-full bg-[#131215] border @error('email') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
                                 @error('email')
                                     <span
                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -370,7 +371,7 @@
                                     class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Business
                                     Type</label>
                                 <select name="business_type"
-                                    class="bg-[#131215] border @error('business_type') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none">
+                                    class="w-full bg-[#131215] border @error('business_type') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none text-sm">
                                     <option value="">Select Business Type</option>
                                     <option value="Accommodation"
                                         {{ old('business_type', $user->business_type) == 'Accommodation' ? 'selected' : '' }}>
@@ -402,11 +403,11 @@
                             <div class="md:col-span-2 mt-10 pt-6 border-t border-white/5 flex gap-4">
                                 <button type="submit" name="action" value="back"
                                     formaction="{{ route('profile.back') }}"
-                                    class="px-8 py-4 border border-white/10 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all">
+                                    class="px-6 py-3 sm:px-8 sm:py-3.5 border border-white/10 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all text-xs sm:text-sm">
                                     Previous Step
                                 </button>
                                 <button type="submit"
-                                    class="flex-1 sm:flex-none px-12 py-4 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all shadow-xl">
+                                    class="flex-1 sm:flex-none px-8 py-3 sm:px-12 sm:py-3.5 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all shadow-xl text-xs sm:text-sm">
                                     Save & Continue
                                 </button>
                             </div>
@@ -439,7 +440,7 @@
                                         </label>
                                         <input type="text" name="legal_name"
                                             value="{{ old('legal_name', $application->legal_name) }}"
-                                            class="bg-[#131215] border @error('legal_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('legal_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('legal_name')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -451,7 +452,7 @@
                                             Name</label>
                                         <input type="text" name="trade_name"
                                             value="{{ old('trade_name', $application->trade_name) }}"
-                                            class="bg-[#131215] border @error('trade_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('trade_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('trade_name')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -466,7 +467,7 @@
                                         </label>
                                         <input type="tel" name="office_phone"
                                             value="{{ old('office_phone', $application->office_phone) }}"
-                                            class="bg-[#131215] border @error('office_phone') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('office_phone') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('office_phone')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -479,7 +480,7 @@
                                         </label>
                                         <input type="email" name="office_email"
                                             value="{{ old('office_email', $application->office_email) }}"
-                                            class="bg-[#131215] border @error('office_email') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('office_email') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('office_email')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -492,7 +493,7 @@
                                             class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Mobile</label>
                                         <input type="tel" name="mobile"
                                             value="{{ old('mobile', $application->mobile) }}"
-                                            class="bg-[#131215] border border-white/5 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('mobile')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -501,9 +502,10 @@
                                     <div class="flex flex-col gap-2">
                                         <label
                                             class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Website</label>
-                                        <input type="text" name="website"
+                                        <input type="url" name="website"
                                             value="{{ old('website', $application->website) }}"
-                                            class="bg-[#131215] border border-white/5 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm"
+                                            placeholder="https://">
                                         @error('website')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -515,7 +517,7 @@
                                         <label
                                             class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Fax</label>
                                         <input type="text" name="fax" value="{{ old('fax', $application->fax) }}"
-                                            class="bg-[#131215] border border-white/5 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('fax')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -528,7 +530,8 @@
                                         </label>
                                         <input type="text" name="service_tax"
                                             value="{{ old('service_tax', $application->service_tax) }}"
-                                            class="bg-[#131215] border @error('service_tax') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('service_tax') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm"
+                                            placeholder="Gst/Pan/Other No.">
                                         @error('service_tax')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -549,7 +552,7 @@
                                             Country <span class="text-[#ff014f]">*</span>
                                         </label>
                                         <select name="billing_country" id="billing_country"
-                                            class="bg-[#131215] border @error('billing_country') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('billing_country') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                             @include('partials.countries', [
                                                 'selected' => old(
                                                     'billing_country',
@@ -567,7 +570,7 @@
                                             Shipping Country <span class="text-[#ff014f]">*</span>
                                         </label>
                                         <select name="shipping_country" id="shipping_country"
-                                            class="bg-[#131215] border @error('shipping_country') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('shipping_country') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                             @include('partials.countries', [
                                                 'selected' => old(
                                                     'shipping_country',
@@ -588,7 +591,7 @@
                                         </label>
                                         <input type="text" name="billing_state" id="billing_state"
                                             value="{{ old('billing_state', $application->billing_state) }}"
-                                            class="bg-[#131215] border @error('billing_state') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('billing_state') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('billing_state')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -600,7 +603,7 @@
                                             State</label>
                                         <input type="text" name="shipping_state" id="shipping_state"
                                             value="{{ old('shipping_state', $application->shipping_state) }}"
-                                            class="bg-[#131215] border border-white/5 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('shipping_state')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -615,7 +618,7 @@
                                         </label>
                                         <input type="text" name="billing_city" id="billing_city"
                                             value="{{ old('billing_city', $application->billing_city) }}"
-                                            class="bg-[#131215] border @error('billing_city') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('billing_city') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('billing_city')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -628,7 +631,7 @@
                                         </label>
                                         <input type="text" name="shipping_city" id="shipping_city"
                                             value="{{ old('shipping_city', $application->shipping_city) }}"
-                                            class="bg-[#131215] border @error('shipping_city') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('shipping_city') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('shipping_city')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -643,7 +646,7 @@
                                         </label>
                                         <input type="text" name="billing_street" id="billing_street"
                                             value="{{ old('billing_street', $application->billing_street) }}"
-                                            class="bg-[#131215] border @error('billing_street') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('billing_street') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('billing_street')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -656,7 +659,7 @@
                                         </label>
                                         <input type="text" name="shipping_street" id="shipping_street"
                                             value="{{ old('shipping_street', $application->shipping_street) }}"
-                                            class="bg-[#131215] border @error('shipping_street') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('shipping_street') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('shipping_street')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -670,7 +673,7 @@
                                             code</label>
                                         <input type="text" name="billing_postal_code" id="billing_postal_code"
                                             value="{{ old('billing_postal_code', $application->billing_postal_code) }}"
-                                            class="bg-[#131215] border border-white/5 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('billing_postal_code')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -682,7 +685,7 @@
                                             Postal Code</label>
                                         <input type="text" name="shipping_postal_code" id="shipping_postal_code"
                                             value="{{ old('shipping_postal_code', $application->shipping_postal_code) }}"
-                                            class="bg-[#131215] border border-white/5 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('shipping_postal_code')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -722,104 +725,115 @@
                                     class="bg-[#ff014f]/10 text-[#ff014f] font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
                                     SECTION 2 - Company Contacts</h3>
 
-                                <div class="p-8 bg-white/[0.02] border border-white/5 rounded-3xl">
-                                    <p class="text-sm text-gray-400 font-medium leading-relaxed mb-10">
+                                <div class="p-6 sm:p-8 bg-white/[0.02] border border-white/5 rounded-3xl">
+                                    <p class="text-xs sm:text-sm text-gray-400 font-medium leading-relaxed mb-10 px-4 sm:px-0">
                                         If your agency is fully- or partially-owned by one or more people, please enter
-                                        their details here as owners, partners or shareholders (except where your
-                                        organization is a legal entity whose shares are listed on a security exchange or are
-                                        regularly traded in an 'over-the-counter' market).<br /><br />
-                                        Enter the names and titles for the directors or officers of a corporation, and the
-                                        details of the managers of the agency.<br /><br />
-                                        Select at least one authorised signatory, and choose the Financial Assessment
-                                        contact and Portal Administrator.
+                                        their details here as owners, partners or shareholders. Select at least one authorised signatory.
                                     </p>
 
-                                    <div class="overflow-x-auto -mx-4 sm:mx-0">
-                                        <table class="w-full text-left border-collapse min-w-[800px]" id="contacts-table">
-                                            <thead>
+                                    <style>
+                                        @media (max-width: 639px) {
+                                            #contacts-table, #contacts-table thead, #contacts-table tbody, #contacts-table th, #contacts-table td:not(.hidden):not(.checkbox-td):not(.action-td), #contacts-table tr {
+                                                display: block !important;
+                                                width: 100% !important;
+                                            }
+                                            #contacts-table thead { display: none !important; }
+                                            .contact-row {
+                                                margin-bottom: 2rem !important;
+                                                padding: 1.5rem !important;
+                                                background: rgba(255, 255, 255, 0.02) !important;
+                                                border: 1px border rgba(255, 255, 255, 0.05) !important;
+                                                border-radius: 1.5rem !important;
+                                            }
+                                            #contacts-table td {
+                                                padding: 0 !important;
+                                                margin-bottom: 1.25rem !important;
+                                                border: none !important;
+                                            }
+                                            #contacts-table td::before {
+                                                content: attr(data-label);
+                                                display: block;
+                                                font-size: 10px;
+                                                font-weight: 900;
+                                                color: #ff014f;
+                                                text-transform: uppercase;
+                                                letter-spacing: 0.1em;
+                                                margin-bottom: 0.5rem;
+                                            }
+                                            
+                                            /* Checkbox grouping on mobile */
+                                            #contacts-table td.checkbox-td {
+                                                display: block !important;
+                                                float: left !important;
+                                                width: 33.33% !important;
+                                                text-align: center !important;
+                                                margin-bottom: 1.5rem !important;
+                                                padding: 0 !important;
+                                            }
+                                            #contacts-table td.checkbox-td::before {
+                                                font-size: 8px !important;
+                                                margin-bottom: 0.75rem !important;
+                                            }
+                                            
+                                            #contacts-table .action-td {
+                                                display: block !important;
+                                                clear: both !important;
+                                                width: 100% !important;
+                                                margin-top: 1rem !important;
+                                                padding-top: 1.5rem !important;
+                                                border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+                                                text-align: center !important;
+                                                margin-bottom: 0 !important;
+                                            }
+                                            #contacts-table .action-td::before { display: none !important; }
+                                        }
+                                    </style>
+
+                                    <div class="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
+                                        <table class="w-full text-left border-collapse sm:min-w-[900px]" id="contacts-table">
+                                            <thead class="hidden sm:table-header-group">
                                                 <tr class="border-b border-white/10 text-[#ff014f]">
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest">
-                                                        First Name</th>
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest">
-                                                        Last Name</th>
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest">
-                                                        Business E-mail</th>
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-20">
-                                                        Owner</th>
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-20">
-                                                        Manager</th>
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-28">
-                                                        Auth. Signatory</th>
-                                                    <th class="py-4 px-4 w-12"></th>
+                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">First Name</th>
+                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">Last Name</th>
+                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[200px]">Email Address</th>
+                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">Owner</th>
+                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">Manager</th>
+                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-32">Signatory</th>
+                                                    <th class="py-4 px-4 w-16"></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="contacts-body">
-                                                @php
-                                                    $contacts = old(
-                                                        'contacts',
-                                                        $application->contacts ?? [
-                                                            [
-                                                                'first_name' => '',
-                                                                'last_name' => '',
-                                                                'email' => '',
-                                                                'owner' => false,
-                                                                'manager' => false,
-                                                                'signatory' => false,
-                                                            ],
-                                                        ],
-                                                    );
-                                                @endphp
-                                                @foreach ($contacts as $index => $contact)
-                                                    <tr
-                                                        class="contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]">
-                                                        <td class="py-4 px-4">
-                                                            <input type="text"
-                                                                name="contacts[{{ $index }}][first_name]"
+                                                @foreach (old('contacts', $application->contacts ?? [['first_name' => '', 'last_name' => '', 'email' => '', 'owner' => false, 'manager' => false, 'signatory' => false]]) as $index => $contact)
+                                                    <tr class="contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]">
+                                                        <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="First Name">
+                                                            <input type="text" name="contacts[{{ $index }}][first_name]"
                                                                 value="{{ $contact['first_name'] ?? '' }}"
-                                                                class="bg-[#0f0f15] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#ff014f] w-full transition-all">
+                                                                class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
                                                         </td>
-                                                        <td class="py-4 px-4">
-                                                            <input type="text"
-                                                                name="contacts[{{ $index }}][last_name]"
+                                                        <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="Last Name">
+                                                            <input type="text" name="contacts[{{ $index }}][last_name]"
                                                                 value="{{ $contact['last_name'] ?? '' }}"
-                                                                class="bg-[#0f0f15] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#ff014f] w-full transition-all">
+                                                                class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
                                                         </td>
-                                                        <td class="py-4 px-4">
-                                                            <input type="email"
-                                                                name="contacts[{{ $index }}][email]"
+                                                        <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="Email Address">
+                                                            <input type="email" name="contacts[{{ $index }}][email]"
                                                                 value="{{ $contact['email'] ?? '' }}"
-                                                                class="bg-[#0f0f15] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#ff014f] w-full transition-all">
+                                                                class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
                                                         </td>
-                                                        <td class="py-4 px-4 text-center">
-                                                            <input type="checkbox"
-                                                                name="contacts[{{ $index }}][owner]"
-                                                                {{ $contact['owner'] ?? false ? 'checked' : '' }}
-                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Owner">
+                                                            <input type="checkbox" name="contacts[{{ $index }}][owner]" {{ ($contact['owner'] ?? false) ? 'checked' : '' }} class="accent-[#ff014f] w-5 h-5 cursor-pointer">
                                                         </td>
-                                                        <td class="py-4 px-4 text-center">
-                                                            <input type="checkbox"
-                                                                name="contacts[{{ $index }}][manager]"
-                                                                {{ $contact['manager'] ?? false ? 'checked' : '' }}
-                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Manager">
+                                                            <input type="checkbox" name="contacts[{{ $index }}][manager]" {{ ($contact['manager'] ?? false) ? 'checked' : '' }} class="accent-[#ff014f] w-5 h-5 cursor-pointer">
                                                         </td>
-                                                        <td class="py-4 px-4 text-center">
-                                                            <input type="checkbox"
-                                                                name="contacts[{{ $index }}][signatory]"
-                                                                {{ $contact['signatory'] ?? false ? 'checked' : '' }}
-                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Signatory">
+                                                            <input type="checkbox" name="contacts[{{ $index }}][signatory]" {{ ($contact['signatory'] ?? false) ? 'checked' : '' }} class="accent-[#ff014f] w-5 h-5 cursor-pointer">
                                                         </td>
-                                                        <td class="py-4 px-4">
+                                                        <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
                                                             <button type="button" onclick="removeRow(this)"
-                                                                class="text-gray-600 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
-                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                                    viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2.5"
-                                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                                    </path>
+                                                                class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                                 </svg>
                                                             </button>
                                                         </td>
@@ -828,10 +842,51 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <script>
+                                        function addRow() {
+                                            const body = document.getElementById('contacts-body');
+                                            const index = body.children.length;
+                                            const row = document.createElement('tr');
+                                            row.className = 'contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]';
+                                            row.innerHTML = `
+                                                <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="First Name">
+                                                    <input type="text" name="contacts[${index}][first_name]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                </td>
+                                                <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="Last Name">
+                                                    <input type="text" name="contacts[${index}][last_name]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                </td>
+                                                <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="Email Address">
+                                                    <input type="email" name="contacts[${index}][email]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                </td>
+                                                <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Owner">
+                                                    <input type="checkbox" name="contacts[${index}][owner]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                </td>
+                                                <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Manager">
+                                                    <input type="checkbox" name="contacts[${index}][manager]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                </td>
+                                                <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Signatory">
+                                                    <input type="checkbox" name="contacts[${index}][signatory]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                </td>
+                                                <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
+                                                    <button type="button" onclick="removeRow(this)" class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                    </button>
+                                                </td>
+                                            `;
+                                            body.appendChild(row);
+                                        }
+                                        function removeRow(btn) {
+                                            if (document.querySelectorAll('.contact-row').length > 1) {
+                                                btn.closest('tr').remove();
+                                            } else {
+                                                alert('At least one contact is required.');
+                                            }
+                                        }
+                                    </script>
 
                                     <button type="button" onclick="addRow()"
-                                        class="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-2xl text-[10px] font-black text-white uppercase tracking-[0.2em] hover:bg-[#ff014f] hover:border-[#ff014f] transition-all group shadow-xl">
-                                        <svg class="w-4 h-4 text-[#ff014f] group-hover:text-white transition-colors"
+                                        class="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl text-[9px] sm:text-[10px] font-black text-white uppercase tracking-[0.2em] hover:bg-[#ff014f] hover:border-[#ff014f] transition-all group shadow-xl">
+                                        <svg class="w-3.5 h-3.5 sm:w-4 h-4 text-[#ff014f] group-hover:text-white transition-colors"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                                 d="M12 4v16m8-8H4"></path>
@@ -840,11 +895,11 @@
                                     </button>
                                 </div>
 
-                                <div class="p-8 bg-zinc-950/20 border border-white/5 rounded-3xl space-y-10">
+                                <div class="p-4 sm:p-8 bg-zinc-950/20 border border-white/5 rounded-3xl space-y-10">
                                     <label
-                                        class="text-sm font-bold text-gray-300 leading-relaxed block max-w-5xl text-justify">
+                                        class="text-xs sm:text-sm font-bold text-gray-300 leading-relaxed block max-w-5xl">
                                         <span
-                                            class="text-[#ff014f] font-black mr-3 uppercase text-[10px] tracking-widest leading-none bg-[#ff014f]/10 px-2 py-1 rounded">Important
+                                            class="text-[#ff014f] font-black mr-3 uppercase text-[9px] sm:text-[10px] tracking-widest leading-none bg-[#ff014f]/10 px-2 py-1 rounded inline-block mb-2 sm:mb-0">Important
                                             disclosure</span>
                                         Have you, or any person who is a director of, or who holds a material financial
                                         interest or a position of management in the Applicant currently or previously been
@@ -900,7 +955,7 @@
                                                     Name</label>
                                                 <input type="text" name="breach_full_name"
                                                     value="{{ old('breach_full_name', $application->breach_full_name) }}"
-                                                    class="bg-[#131215] border @error('breach_full_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                                    class="bg-[#131215] border @error('breach_full_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                                 @error('breach_full_name')
                                                     <span
                                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -912,7 +967,7 @@
                                                     Company</label>
                                                 <input type="text" name="breach_concerned_company"
                                                     value="{{ old('breach_concerned_company', $application->breach_concerned_company) }}"
-                                                    class="bg-[#131215] border @error('breach_concerned_company') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                                    class="w-full bg-[#131215] border @error('breach_concerned_company') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                                 @error('breach_concerned_company')
                                                     <span
                                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -923,7 +978,7 @@
                                                     class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Relationship</label>
                                                 <input type="text" name="breach_relationship"
                                                     value="{{ old('breach_relationship', $application->breach_relationship) }}"
-                                                    class="bg-[#131215] border @error('breach_relationship') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                                    class="w-full bg-[#131215] border @error('breach_relationship') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                                 @error('breach_relationship')
                                                     <span
                                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -935,7 +990,7 @@
                                                     ID</label>
                                                 <input type="text" name="breach_tax_id"
                                                     value="{{ old('breach_tax_id', $application->breach_tax_id) }}"
-                                                    class="bg-[#131215] border @error('breach_tax_id') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                                    class="w-full bg-[#131215] border @error('breach_tax_id') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                                 @error('breach_tax_id')
                                                     <span
                                                         class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -960,47 +1015,6 @@
                             </div>
 
                             <script>
-                                function addRow() {
-                                    const body = document.getElementById('contacts-body');
-                                    const index = body.children.length;
-                                    const row = document.createElement('tr');
-                                    row.className = 'contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]';
-                                    row.innerHTML = `
-                                    <td class="py-4 px-4">
-                                        <input type="text" name="contacts[${index}][first_name]" class="bg-[#0f0f15] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#ff014f] w-full transition-all">
-                                    </td>
-                                    <td class="py-4 px-4">
-                                        <input type="text" name="contacts[${index}][last_name]" class="bg-[#0f0f15] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#ff014f] w-full transition-all">
-                                    </td>
-                                    <td class="py-4 px-4">
-                                        <input type="email" name="contacts[${index}][email]" class="bg-[#0f0f15] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#ff014f] w-full transition-all">
-                                    </td>
-                                    <td class="py-4 px-4 text-center">
-                                        <input type="checkbox" name="contacts[${index}][owner]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                    </td>
-                                    <td class="py-4 px-4 text-center">
-                                        <input type="checkbox" name="contacts[${index}][manager]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                    </td>
-                                    <td class="py-4 px-4 text-center">
-                                        <input type="checkbox" name="contacts[${index}][signatory]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                    </td>
-                                    <td class="py-4 px-4">
-                                        <button type="button" onclick="removeRow(this)" class="text-gray-600 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                        </button>
-                                    </td>
-                                `;
-                                    body.appendChild(row);
-                                }
-
-                                function removeRow(btn) {
-                                    if (document.querySelectorAll('.contact-row').length > 1) {
-                                        btn.closest('tr').remove();
-                                    } else {
-                                        alert('At least one contact is required.');
-                                    }
-                                }
-
                                 document.getElementById('breach_yes').addEventListener('change', function() {
                                     document.getElementById('breach_details_container').classList.remove('hidden');
                                 });
@@ -1027,7 +1041,7 @@
                                         </label>
                                         <input type="date" name="commencement_date"
                                             value="{{ old('commencement_date', $application->commencement_date ? $application->commencement_date->format('Y-m-d') : '') }}"
-                                            class="bg-[#131215] border @error('commencement_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark]">
+                                            class="w-full bg-[#131215] border @error('commencement_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark] text-sm">
                                         @error('commencement_date')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -1040,7 +1054,7 @@
                                         </label>
                                         <input type="text" name="trade_registration_no"
                                             value="{{ old('trade_registration_no', $application->trade_registration_no) }}"
-                                            class="bg-[#131215] border @error('trade_registration_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="w-full bg-[#131215] border @error('trade_registration_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
                                         @error('trade_registration_no')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -1054,7 +1068,7 @@
                                         </label>
                                         <input type="text" name="registrant"
                                             value="{{ old('registrant', $application->registrant) }}"
-                                            class="bg-[#131215] border @error('registrant') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]"
+                                            class="bg-[#131215] border @error('registrant') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
                                             placeholder="Name of registrant">
                                         @error('registrant')
                                             <span
@@ -1068,7 +1082,7 @@
                                         </label>
                                         <input type="date" name="registration_granted_date"
                                             value="{{ old('registration_granted_date', $application->registration_granted_date ? $application->registration_granted_date->format('Y-m-d') : '') }}"
-                                            class="bg-[#131215] border @error('registration_granted_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark]">
+                                            class="bg-[#131215] border @error('registration_granted_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark]">
                                         @error('registration_granted_date')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -1080,7 +1094,7 @@
                                             Is your business an IATA Registered? <span class="text-[#ff014f]">*</span>
                                         </label>
                                         <select name="iata_registered" id="iata_registered"
-                                            class="bg-[#131215] border @error('iata_registered') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="bg-[#131215] border @error('iata_registered') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]">
                                             <option value="">Select Option</option>
                                             <option value="yes"
                                                 {{ old('iata_registered', $application->iata_registered ? 'yes' : 'no') == 'yes' ? 'selected' : '' }}>
@@ -1102,7 +1116,7 @@
                                         </label>
                                         <input type="text" name="iata_no" id="iata_no"
                                             value="{{ old('iata_no', $application->iata_no) }}"
-                                            class="bg-[#131215] border @error('iata_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="bg-[#131215] border @error('iata_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]">
                                         @error('iata_no')
                                             <span
                                                 class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
@@ -1152,7 +1166,7 @@
                                                     of Tourism Board <span class="text-[#ff014f]">*</span></label>
                                                 <input type="text" name="tourism_board_name"
                                                     value="{{ old('tourism_board_name', $application->tourism_board_name) }}"
-                                                    class="bg-[#131215] border @error('tourism_board_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]"
+                                                    class="bg-[#131215] border @error('tourism_board_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
                                                     placeholder="Board name">
                                                 @error('tourism_board_name')
                                                     <span
@@ -1165,7 +1179,7 @@
                                                     Number <span class="text-[#ff014f]">*</span></label>
                                                 <input type="text" name="tourism_board_reg_no"
                                                     value="{{ old('tourism_board_reg_no', $application->tourism_board_reg_no) }}"
-                                                    class="bg-[#131215] border @error('tourism_board_reg_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#ff014f]"
+                                                    class="bg-[#131215] border @error('tourism_board_reg_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
                                                     placeholder="Reg no.">
                                                 @error('tourism_board_reg_no')
                                                     <span
@@ -1189,14 +1203,14 @@
                                 </script>
                             </div>
 
-                            <div class="mt-10 pt-10 border-t border-white/5 flex gap-4">
+                            <div class="mt-10 pt-10 border-t border-white/5 flex flex-col sm:flex-row gap-4">
                                 <button type="submit" name="action" value="back"
                                     formaction="{{ route('profile.back') }}"
-                                    class="px-8 py-4 border border-white/10 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all">
+                                    class="px-8 py-3.5 sm:px-8 sm:py-3.5 border border-white/10 text-gray-400 font-bold rounded-xl sm:rounded-2xl hover:bg-white/5 transition-all text-xs sm:text-sm">
                                     Previous Step
                                 </button>
                                 <button type="submit"
-                                    class="flex-1 sm:flex-none px-12 py-4 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all shadow-xl">
+                                    class="flex-1 sm:flex-none px-12 py-3.5 sm:px-12 sm:py-3.5 bg-[#ff014f] text-white font-bold rounded-xl sm:rounded-2xl hover:bg-[#e11d48] transition-all shadow-xl text-xs sm:text-sm">
                                     Final Step: Upload Documents
                                 </button>
                             </div>
@@ -1333,11 +1347,11 @@
                             <!-- Bottom Actions -->
                             <div class="mt-16 pt-10 border-t border-white/5 flex flex-col sm:flex-row gap-4">
                                 <button type="submit" name="action" value="back" formaction="{{ route('profile.back') }}"
-                                    class="px-10 py-5 bg-[#131215] border border-white/5 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all text-sm">
+                                    class="px-6 py-3 sm:px-10 sm:py-5 bg-[#131215] border border-white/5 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all text-xs sm:text-sm">
                                     Previous Step
                                 </button>
                                 <button type="submit"
-                                    class="flex-1 sm:flex-none px-12 py-5 bg-emerald-500 text-white font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-emerald-600 transition-all shadow-xl hover:shadow-emerald-500/20 hover:-translate-y-1">
+                                    class="flex-1 sm:flex-none px-8 py-3 sm:px-12 sm:py-5 bg-emerald-500 text-white font-black uppercase text-[10px] sm:text-xs tracking-[0.2em] rounded-2xl hover:bg-emerald-600 transition-all shadow-xl hover:shadow-emerald-500/20 hover:-translate-y-1">
                                     Complete Membership Application
                                 </button>
                             </div>
@@ -1418,11 +1432,11 @@
                         @endphp
 
                         <div
-                            class="inline-flex items-center gap-3 px-6 py-3 {{ $classes['bg'] }} border {{ $classes['border'] }} rounded-full mb-10">
-                            <span
-                                class="w-2 h-2 {{ $classes['dot'] }} rounded-full {{ $status == 'pending' ? 'animate-pulse' : '' }}"></span>
-                            <span class="{{ $classes['text'] }} font-black uppercase text-[10px] tracking-widest">Status:
-                                {{ strtoupper($status) }}</span>
+                            class="inline-flex flex-col sm:flex-row items-center gap-3 px-6 py-3 {{ $classes['bg'] }} border {{ $classes['border'] }} rounded-3xl sm:rounded-full mb-10">
+                            <div class="flex items-center gap-3">
+                                <span class="w-2.5 h-2.5 {{ $classes['dot'] }} rounded-full {{ $status == 'pending' ? 'animate-pulse' : '' }}"></span>
+                                <span class="{{ $classes['text'] }} font-black uppercase text-xs tracking-widest">Status: {{ strtoupper($status) }}</span>
+                            </div>
                         </div>
 
                         <p class="text-gray-400 max-w-lg mx-auto mb-10 text-lg font-medium leading-relaxed">
