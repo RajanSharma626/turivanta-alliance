@@ -16,10 +16,14 @@ class SearchController extends Controller
             return view('search', ['results' => collect(), 'query' => '']);
         }
 
-        // Search in Users (membership_id) and Applications (legal_name)
-        $results = User::where('membership_id', 'LIKE', "%{$query}%")
-            ->orWhereHas('application', function($q) use ($query) {
-                $q->where('legal_name', 'LIKE', "%{$query}%");
+        $results = User::whereHas('application', function($q) {
+                $q->where('status', 'approved');
+            })
+            ->where(function($q) use ($query) {
+                $q->where('membership_id', 'LIKE', "%{$query}%")
+                    ->orWhereHas('application', function($sq) use ($query) {
+                        $sq->where('legal_name', 'LIKE', "%{$query}%");
+                    });
             })
             ->with('application')
             ->paginate(12)

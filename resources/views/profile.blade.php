@@ -34,7 +34,8 @@
                             <div
                                 class="w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-500 shrink-0 {{ $user->current_step >= $s ? 'bg-[#ff014f] text-white shadow-[0_0_20px_rgba(255,1,79,0.4)]' : 'bg-[#131215] text-gray-500 border border-white/10' }}">
                                 @if ($user->current_step > $s)
-                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                             d="M5 13l4 4L19 7"></path>
                                     </svg>
@@ -50,16 +51,21 @@
             </div>
 
             <!-- Session Messages -->
-            @if(session('success'))
-            <div class="mb-10 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-[2rem] flex items-center gap-5 text-emerald-400 font-bold animate-fadeIn">
-                <div class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/30 shrink-0">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            @if (session('success'))
+                <div
+                    class="mb-10 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-[2rem] flex items-center gap-5 text-emerald-400 font-bold animate-fadeIn">
+                    <div
+                        class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/30 shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-white text-sm font-black uppercase tracking-widest mb-0.5">Success Confirm</h4>
+                        <p class="text-[13px] font-medium text-emerald-400/80 leading-snug tracking-tight">
+                            {{ session('success') }}</p>
+                    </div>
                 </div>
-                <div>
-                  <h4 class="text-white text-sm font-black uppercase tracking-widest mb-0.5">Success Confirm</h4>
-                  <p class="text-[13px] font-medium text-emerald-400/80 leading-snug tracking-tight">{{ session('success') }}</p>
-                </div>
-            </div>
             @endif
 
             <!-- Step Content -->
@@ -169,8 +175,10 @@
                                                 Students
                                             </h4>
                                             <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
-                                                <li class="flex gap-3"><span>•</span> Student ID Card / Admission Proof / Endorsement Letter by Designated Institute</li>
-                                                <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the applicant.</li>
+                                                <li class="flex gap-3"><span>•</span> Student ID Card / Admission Proof /
+                                                    Endorsement Letter by Designated Institute</li>
+                                                <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the
+                                                    applicant.</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -212,7 +220,8 @@
                                 <button type="submit"
                                     class="inline-flex items-center gap-3 px-10 py-3.5 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all hover:shadow-[0_0_30px_rgba(255,1,79,0.3)] hover:-translate-y-1">
                                     Proceed to Basic Details
-                                    <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                             d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                     </svg>
@@ -238,18 +247,22 @@
                                 Important Note
                             </h4>
                             <ul class="space-y-4 text-gray-400 text-[13px] leading-relaxed">
-                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Date of Commencement of business must be 4
+                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Date of Commencement of
+                                        business must be 4
                                         Years Old from the date of application OR You must have minimum <span
                                             class="text-white font-bold">10 years</span> of Experience of the
                                         industry</span></li>
-                                @if(!in_array($user->legal_status, ['In Service Professional', 'Student']))
-                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Letter of recommendation from Turivanta Member on
-                                    their letter head with date, sign and stamp.</span></li>
+                                @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
+                                    <li class="flex gap-3"><span class="shrink-0">•</span> <span>Letter of recommendation
+                                            from Turivanta Member on
+                                            their letter head with date, sign and stamp.</span></li>
                                 @endif
-                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>A separate online application is required for each
-                                    agency location for which approval is sought.</span></li>
-                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Draft Applications must be submitted within 7 days,
-                                    otherwise you will need to restart the process.</span></li>
+                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>A separate online application
+                                        is required for each
+                                        agency location for which approval is sought.</span></li>
+                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Draft Applications must be
+                                        submitted within 7 days,
+                                        otherwise you will need to restart the process.</span></li>
                             </ul>
                         </div>
 
@@ -306,8 +319,7 @@
                             <div class="flex flex-col gap-2">
                                 <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Last
                                     Name</label>
-                                <input type="text" name="last_name"
-                                    value="{{ old('last_name', $user->last_name) }}"
+                                <input type="text" name="last_name" value="{{ old('last_name', $user->last_name) }}"
                                     class="w-full bg-[#131215] border @error('last_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
                                 @error('last_name')
                                     <span
@@ -726,18 +738,30 @@
                                     SECTION 2 - Company Contacts</h3>
 
                                 <div class="p-6 sm:p-8 bg-white/[0.02] border border-white/5 rounded-3xl">
-                                    <p class="text-xs sm:text-sm text-gray-400 font-medium leading-relaxed mb-10 px-4 sm:px-0">
+                                    <p
+                                        class="text-xs sm:text-sm text-gray-400 font-medium leading-relaxed mb-10 px-4 sm:px-0">
                                         If your agency is fully- or partially-owned by one or more people, please enter
-                                        their details here as owners, partners or shareholders. Select at least one authorised signatory.
+                                        their details here as owners, partners or shareholders. Select at least one
+                                        authorised signatory.
                                     </p>
 
                                     <style>
                                         @media (max-width: 639px) {
-                                            #contacts-table, #contacts-table thead, #contacts-table tbody, #contacts-table th, #contacts-table td:not(.hidden):not(.checkbox-td):not(.action-td), #contacts-table tr {
+
+                                            #contacts-table,
+                                            #contacts-table thead,
+                                            #contacts-table tbody,
+                                            #contacts-table th,
+                                            #contacts-table td:not(.hidden):not(.checkbox-td):not(.action-td),
+                                            #contacts-table tr {
                                                 display: block !important;
                                                 width: 100% !important;
                                             }
-                                            #contacts-table thead { display: none !important; }
+
+                                            #contacts-table thead {
+                                                display: none !important;
+                                            }
+
                                             .contact-row {
                                                 margin-bottom: 2rem !important;
                                                 padding: 1.5rem !important;
@@ -745,11 +769,13 @@
                                                 border: 1px border rgba(255, 255, 255, 0.05) !important;
                                                 border-radius: 1.5rem !important;
                                             }
+
                                             #contacts-table td {
                                                 padding: 0 !important;
                                                 margin-bottom: 1.25rem !important;
                                                 border: none !important;
                                             }
+
                                             #contacts-table td::before {
                                                 content: attr(data-label);
                                                 display: block;
@@ -760,7 +786,7 @@
                                                 letter-spacing: 0.1em;
                                                 margin-bottom: 0.5rem;
                                             }
-                                            
+
                                             /* Checkbox grouping on mobile */
                                             #contacts-table td.checkbox-td {
                                                 display: block !important;
@@ -770,11 +796,12 @@
                                                 margin-bottom: 1.5rem !important;
                                                 padding: 0 !important;
                                             }
+
                                             #contacts-table td.checkbox-td::before {
                                                 font-size: 8px !important;
                                                 margin-bottom: 0.75rem !important;
                                             }
-                                            
+
                                             #contacts-table .action-td {
                                                 display: block !important;
                                                 clear: both !important;
@@ -785,55 +812,92 @@
                                                 text-align: center !important;
                                                 margin-bottom: 0 !important;
                                             }
-                                            #contacts-table .action-td::before { display: none !important; }
+
+                                            #contacts-table .action-td::before {
+                                                display: none !important;
+                                            }
                                         }
                                     </style>
 
                                     <div class="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-                                        <table class="w-full text-left border-collapse sm:min-w-[900px]" id="contacts-table">
+                                        <table class="w-full text-left border-collapse sm:min-w-[900px]"
+                                            id="contacts-table">
                                             <thead class="hidden sm:table-header-group">
                                                 <tr class="border-b border-white/10 text-[#ff014f]">
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">First Name</th>
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">Last Name</th>
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[200px]">Email Address</th>
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">Owner</th>
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">Manager</th>
-                                                    <th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-32">Signatory</th>
+                                                    <th
+                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">
+                                                        First Name</th>
+                                                    <th
+                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">
+                                                        Last Name</th>
+                                                    <th
+                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[200px]">
+                                                        Email Address</th>
+                                                    <th
+                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">
+                                                        Owner</th>
+                                                    <th
+                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">
+                                                        Manager</th>
+                                                    <th
+                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-32">
+                                                        Signatory</th>
                                                     <th class="py-4 px-4 w-16"></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="contacts-body">
                                                 @foreach (old('contacts', $application->contacts ?? [['first_name' => '', 'last_name' => '', 'email' => '', 'owner' => false, 'manager' => false, 'signatory' => false]]) as $index => $contact)
-                                                    <tr class="contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]">
+                                                    <tr
+                                                        class="contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]">
                                                         <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="First Name">
-                                                            <input type="text" name="contacts[{{ $index }}][first_name]"
+                                                            <input type="text"
+                                                                name="contacts[{{ $index }}][first_name]"
                                                                 value="{{ $contact['first_name'] ?? '' }}"
                                                                 class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
                                                         </td>
                                                         <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="Last Name">
-                                                            <input type="text" name="contacts[{{ $index }}][last_name]"
+                                                            <input type="text"
+                                                                name="contacts[{{ $index }}][last_name]"
                                                                 value="{{ $contact['last_name'] ?? '' }}"
                                                                 class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
                                                         </td>
-                                                        <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="Email Address">
-                                                            <input type="email" name="contacts[{{ $index }}][email]"
+                                                        <td class="py-2 sm:py-3.5 px-0 sm:px-4"
+                                                            data-label="Email Address">
+                                                            <input type="email"
+                                                                name="contacts[{{ $index }}][email]"
                                                                 value="{{ $contact['email'] ?? '' }}"
                                                                 class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
                                                         </td>
-                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Owner">
-                                                            <input type="checkbox" name="contacts[{{ $index }}][owner]" {{ ($contact['owner'] ?? false) ? 'checked' : '' }} class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
+                                                            data-label="Owner">
+                                                            <input type="checkbox"
+                                                                name="contacts[{{ $index }}][owner]"
+                                                                {{ $contact['owner'] ?? false ? 'checked' : '' }}
+                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
                                                         </td>
-                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Manager">
-                                                            <input type="checkbox" name="contacts[{{ $index }}][manager]" {{ ($contact['manager'] ?? false) ? 'checked' : '' }} class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
+                                                            data-label="Manager">
+                                                            <input type="checkbox"
+                                                                name="contacts[{{ $index }}][manager]"
+                                                                {{ $contact['manager'] ?? false ? 'checked' : '' }}
+                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
                                                         </td>
-                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Signatory">
-                                                            <input type="checkbox" name="contacts[{{ $index }}][signatory]" {{ ($contact['signatory'] ?? false) ? 'checked' : '' }} class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
+                                                            data-label="Signatory">
+                                                            <input type="checkbox"
+                                                                name="contacts[{{ $index }}][signatory]"
+                                                                {{ $contact['signatory'] ?? false ? 'checked' : '' }}
+                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
                                                         </td>
                                                         <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
                                                             <button type="button" onclick="removeRow(this)"
                                                                 class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
-                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2.5"
+                                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                                    </path>
                                                                 </svg>
                                                             </button>
                                                         </td>
@@ -875,6 +939,7 @@
                                             `;
                                             body.appendChild(row);
                                         }
+
                                         function removeRow(btn) {
                                             if (document.querySelectorAll('.contact-row').length > 1) {
                                                 btn.closest('tr').remove();
@@ -1078,7 +1143,7 @@
                                     <div class="flex flex-col gap-2">
                                         <label
                                             class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Date Registration was Granted <span class="text-[#ff014f]">*</span>
+                                            Date When Registration was Granted <span class="text-[#ff014f]">*</span>
                                         </label>
                                         <input type="date" name="registration_granted_date"
                                             value="{{ old('registration_granted_date', $application->registration_granted_date ? $application->registration_granted_date->format('Y-m-d') : '') }}"
@@ -1230,13 +1295,16 @@
                             </div>
                             <h2 class="text-2xl font-bold text-white tracking-tight">Document Submission</h2>
                         </div>
-                        <p class="text-gray-500 mb-10 font-medium">Please upload the required documents as per your legal status: 
-                            <span class="text-white font-black uppercase text-xs tracking-widest px-2 py-0.5 bg-white/5 rounded">{{ $user->legal_status }}</span>
+                        <p class="text-gray-500 mb-10 font-medium">Please upload the required documents as per your legal
+                            status:
+                            <span
+                                class="text-white font-black uppercase text-xs tracking-widest px-2 py-0.5 bg-white/5 rounded">{{ $user->legal_status }}</span>
                         </p>
 
                         @if ($errors->any())
                             <div class="mb-10 p-6 bg-red-500/10 border border-red-500/20 rounded-2xl">
-                                <h4 class="text-red-500 font-black uppercase text-xs tracking-widest mb-2">Submission Errors</h4>
+                                <h4 class="text-red-500 font-black uppercase text-xs tracking-widest mb-2">Submission
+                                    Errors</h4>
                                 <ul class="list-disc list-inside text-red-400 text-xs font-medium space-y-1">
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -1245,43 +1313,62 @@
                             </div>
                         @endif
 
-                        <form id="step4-form" action="{{ route('profile.next') }}" method="POST" enctype="multipart/form-data" class="space-y-12">
+                        <form id="step4-form" action="{{ route('profile.next') }}" method="POST"
+                            enctype="multipart/form-data" class="space-y-12">
                             @csrf
                             <input type="hidden" name="step" value="4">
 
                             <!-- Section 1: Legal Entity Documents -->
                             <div class="space-y-8">
-                                <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[11px] mb-6">1. LEGAL ENTITY DOCUMENTS</h3>
-                                
+                                <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[11px] mb-6">1. LEGAL
+                                    ENTITY DOCUMENTS</h3>
+
                                 <div class="grid grid-cols-1 gap-8">
                                     {{-- Trade License --}}
                                     @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
                                         <div class="flex flex-col gap-3">
-                                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* TRADE LICENSE / INCORPORATION CERTIFICATE</label>
+                                            <label
+                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">*
+                                                TRADE LICENSE / INCORPORATION CERTIFICATE</label>
                                             <div class="relative group">
-                                                <input type="file" name="trade_license" id="trade_license" class="sr-only" onchange="updateFilename(this)">
-                                                <label for="trade_license" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
-                                                    <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose file</span>
-                                                    <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                                <input type="file" name="trade_license" id="trade_license"
+                                                    class="sr-only" onchange="updateFilename(this)">
+                                                <label for="trade_license"
+                                                    class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    <span
+                                                        class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                        file</span>
+                                                    <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                        file chosen</span>
                                                 </label>
                                             </div>
                                             @error('trade_license')
-                                                <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
 
                                         {{-- Recommendation Letter --}}
                                         <div class="flex flex-col gap-3">
-                                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">RECOMMENDATION LETTER (FROM TURIVANTA MEMBER)</label>
+                                            <label
+                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">RECOMMENDATION
+                                                LETTER (FROM TURIVANTA MEMBER)</label>
                                             <div class="relative group">
-                                                <input type="file" name="recommendation_letter" id="recommendation_letter" class="sr-only" onchange="updateFilename(this)">
-                                                <label for="recommendation_letter" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
-                                                    <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose file</span>
-                                                    <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                                <input type="file" name="recommendation_letter"
+                                                    id="recommendation_letter" class="sr-only"
+                                                    onchange="updateFilename(this)">
+                                                <label for="recommendation_letter"
+                                                    class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    <span
+                                                        class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                        file</span>
+                                                    <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                        file chosen</span>
                                                 </label>
                                             </div>
                                             @error('recommendation_letter')
-                                                <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
@@ -1289,16 +1376,24 @@
                                     {{-- Experience Certificate (For Professionals) --}}
                                     @if ($user->legal_status == 'In Service Professional')
                                         <div class="flex flex-col gap-3">
-                                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* EXPERIENCE CERTIFICATE</label>
+                                            <label
+                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">*
+                                                EXPERIENCE CERTIFICATE</label>
                                             <div class="relative group">
-                                                <input type="file" name="exp_cert" id="exp_cert" class="sr-only" onchange="updateFilename(this)">
-                                                <label for="exp_cert" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
-                                                    <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose file</span>
-                                                    <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                                <input type="file" name="exp_cert" id="exp_cert" class="sr-only"
+                                                    onchange="updateFilename(this)">
+                                                <label for="exp_cert"
+                                                    class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    <span
+                                                        class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                        file</span>
+                                                    <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                        file chosen</span>
                                                 </label>
                                             </div>
                                             @error('exp_cert')
-                                                <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
@@ -1306,16 +1401,25 @@
                                     {{-- Student Documents --}}
                                     @if ($user->legal_status == 'Student')
                                         <div class="flex flex-col gap-3">
-                                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* STUDENT ID CARD / ADMISSION PROOF / ENDORSEMENT LETTER BY DESIGNATED INSTITUTE</label>
+                                            <label
+                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">*
+                                                STUDENT ID CARD / ADMISSION PROOF / ENDORSEMENT LETTER BY DESIGNATED
+                                                INSTITUTE</label>
                                             <div class="relative group">
-                                                <input type="file" name="endorsement_letter" id="endorsement_letter" class="sr-only" onchange="updateFilename(this)">
-                                                <label for="endorsement_letter" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
-                                                    <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose file</span>
-                                                    <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                                <input type="file" name="endorsement_letter" id="endorsement_letter"
+                                                    class="sr-only" onchange="updateFilename(this)">
+                                                <label for="endorsement_letter"
+                                                    class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    <span
+                                                        class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                        file</span>
+                                                    <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                        file chosen</span>
                                                 </label>
                                             </div>
                                             @error('endorsement_letter')
-                                                <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
@@ -1324,21 +1428,31 @@
 
                             <!-- Section 2: ID Verification -->
                             <div class="space-y-8">
-                                <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[11px] mb-6">2. ID VERIFICATION</h3>
-                                
+                                <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[11px] mb-6">2. ID
+                                    VERIFICATION</h3>
+
                                 <div class="grid grid-cols-1 gap-8">
                                     <div class="flex flex-col gap-3">
-                                        <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">PASSPORT / PHOTO ID (ALL OWNERS/PARTNERS)</label>
+                                        <label
+                                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">PASSPORT
+                                            / PHOTO ID (ALL OWNERS/PARTNERS)</label>
                                         <div class="relative group">
-                                            <input type="file" name="owner_ids[]" id="owner_ids" class="sr-only" multiple onchange="updateFilename(this)">
-                                            <label for="owner_ids" class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all max-w-md">
-                                                <span class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose files</span>
-                                                <span class="text-gray-500 text-xs font-medium filename-display">No file chosen</span>
+                                            <input type="file" name="owner_ids[]" id="owner_ids" class="sr-only"
+                                                multiple onchange="updateFilename(this)">
+                                            <label for="owner_ids"
+                                                class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all max-w-md">
+                                                <span
+                                                    class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                    files</span>
+                                                <span class="text-gray-500 text-xs font-medium filename-display">No file
+                                                    chosen</span>
                                             </label>
                                         </div>
-                                        <p class="text-[9px] text-gray-600 mt-1 ml-1 lowercase tracking-normal italic">* you can select multiple files at once</p>
+                                        <p class="text-[9px] text-gray-600 mt-1 ml-1 lowercase tracking-normal italic">*
+                                            you can select multiple files at once</p>
                                         @error('owner_ids')
-                                            <span class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            <span
+                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -1346,7 +1460,8 @@
 
                             <!-- Bottom Actions -->
                             <div class="mt-16 pt-10 border-t border-white/5 flex flex-col sm:flex-row gap-4">
-                                <button type="submit" name="action" value="back" formaction="{{ route('profile.back') }}"
+                                <button type="submit" name="action" value="back"
+                                    formaction="{{ route('profile.back') }}"
                                     class="px-6 py-3 sm:px-10 sm:py-5 bg-[#131215] border border-white/5 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all text-xs sm:text-sm">
                                     Previous Step
                                 </button>
@@ -1393,17 +1508,25 @@
                         <div class="flex flex-col items-center gap-2 mb-8 mt-6">
                             <div class="flex gap-4">
                                 <div class="flex flex-col items-center gap-2">
-                                    <span class="text-gray-500 font-black uppercase text-[10px] tracking-widest leading-none">Application ID</span>
-                                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white font-bold tracking-widest uppercase">
+                                    <span
+                                        class="text-gray-500 font-black uppercase text-[10px] tracking-widest leading-none">Application
+                                        ID</span>
+                                    <div
+                                        class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white font-bold tracking-widest uppercase">
                                         {{ $application->application_no }}
                                     </div>
                                 </div>
-                                <div class="flex flex-col items-center gap-2">
-                                    <span class="text-[#ff014f] font-black uppercase text-[10px] tracking-widest leading-none">Member ID (GTIN)</span>
-                                    <div class="px-4 py-2 bg-[#ff014f]/5 border border-[#ff014f]/20 rounded-xl text-[#ff014f] font-black tracking-widest uppercase">
-                                        {{ $user->membership_id }}
+                                @if ($application->status == 'approved')
+                                    <div class="flex flex-col items-center gap-2">
+                                        <span
+                                            class="text-[#ff014f] font-black uppercase text-[10px] tracking-widest leading-none">Member
+                                            ID (GTIN)</span>
+                                        <div
+                                            class="px-4 py-2 bg-[#ff014f]/5 border border-[#ff014f]/20 rounded-xl text-[#ff014f] font-black tracking-widest uppercase">
+                                            {{ $user->membership_id }}
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
 
@@ -1434,37 +1557,53 @@
                         <div
                             class="inline-flex flex-col sm:flex-row items-center gap-3 px-6 py-3 {{ $classes['bg'] }} border {{ $classes['border'] }} rounded-3xl sm:rounded-full mb-10">
                             <div class="flex items-center gap-3">
-                                <span class="w-2.5 h-2.5 {{ $classes['dot'] }} rounded-full {{ $status == 'pending' ? 'animate-pulse' : '' }}"></span>
-                                <span class="{{ $classes['text'] }} font-black uppercase text-xs tracking-widest">Status: {{ strtoupper($status) }}</span>
+                                <span
+                                    class="w-2.5 h-2.5 {{ $classes['dot'] }} rounded-full {{ $status == 'pending' ? 'animate-pulse' : '' }}"></span>
+                                <span class="{{ $classes['text'] }} font-black uppercase text-xs tracking-widest">Status:
+                                    {{ strtoupper($status) }}</span>
                             </div>
                         </div>
 
                         <p class="text-gray-400 max-w-lg mx-auto mb-10 text-lg font-medium leading-relaxed">
-                            @if($status == 'approved')
-                                Congratulations! Your membership has been approved. You are now a verified member of the Turivanta Alliance.
+                            @if ($status == 'approved')
+                                Congratulations! Your membership has been approved. You are now a verified member of the
+                                Turivanta Alliance.
                             @elseif($status == 'rejected')
-                                Your application has been declined following our internal audit. Please review the feedback below for necessary corrections.
+                                Your application has been declined following our internal audit. Please review the feedback
+                                below for necessary corrections.
                             @else
-                                Fantastic! Your documents have been received. Our compliance team will audit your application and send a confirmation to your registered e-mail id: <span class="text-white">{{ $user->email }}</span>
+                                Fantastic! Your documents have been received. Our compliance team will audit your
+                                application and send a confirmation to your registered e-mail id: <span
+                                    class="text-white">{{ $user->email }}</span>
                             @endif
                         </p>
 
-                        @if($status == 'rejected' && $application->rejection_reason)
-                            <div class="max-w-2xl mx-auto mb-12 p-8 bg-rose-500/5 border border-rose-500/20 rounded-[2.5rem] text-left relative overflow-hidden group">
-                                <div class="absolute -right-10 -top-10 w-32 h-32 bg-rose-500/5 rounded-full blur-3xl"></div>
+                        @if ($status == 'rejected' && $application->rejection_reason)
+                            <div
+                                class="max-w-2xl mx-auto mb-12 p-8 bg-rose-500/5 border border-rose-500/20 rounded-[2.5rem] text-left relative overflow-hidden group">
+                                <div class="absolute -right-10 -top-10 w-32 h-32 bg-rose-500/5 rounded-full blur-3xl">
+                                </div>
                                 <div class="relative z-10">
                                     <div class="flex items-center gap-3 mb-4">
-                                        <div class="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center border border-rose-500/30">
-                                            <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        <div
+                                            class="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center border border-rose-500/30">
+                                            <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                                </path>
+                                            </svg>
                                         </div>
-                                        <h4 class="text-rose-500 font-black uppercase text-[10px] tracking-widest italic">Audit Feedback / Reason for Rejection</h4>
+                                        <h4 class="text-rose-500 font-black uppercase text-[10px] tracking-widest italic">
+                                            Audit Feedback / Reason for Rejection</h4>
                                     </div>
                                     <div class="border-l-2 border-rose-500/30 pl-6 py-2">
                                         <p class="text-gray-300 text-[13px] font-bold leading-relaxed italic">
                                             "{{ $application->rejection_reason }}"
                                         </p>
                                     </div>
-                                    <p class="mt-8 text-[10px] text-gray-500 font-black uppercase tracking-[0.15em] flex items-center gap-2">
+                                    <p
+                                        class="mt-8 text-[10px] text-gray-500 font-black uppercase tracking-[0.15em] flex items-center gap-2">
                                         <span class="w-1.5 h-1.5 rounded-full bg-rose-500/50"></span>
                                         Action Recommended: Click 'Revoke & Edit Details' below to rectify and resubmit.
                                     </p>
@@ -1472,139 +1611,205 @@
                             </div>
                         @endif
 
-                        @if($status == 'approved')
+                        @if ($status == 'approved')
                             <!-- Full Approved Application Record -->
                             <div class="max-w-5xl mx-auto mt-16 text-left animate-fadeInUp" style="animation-delay: 0.2s">
                                 <div class="flex items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
                                     <div class="flex items-center gap-4">
-                                        <h3 class="text-xl font-bold text-white tracking-tight">Full Verified Membership Record</h3>
-                                        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase tracking-widest rounded-full border border-emerald-500/20">Official Data</span>
+                                        <h3 class="text-xl font-bold text-white tracking-tight">Full Verified Membership
+                                            Record</h3>
+                                        <span
+                                            class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase tracking-widest rounded-full border border-emerald-500/20">Official
+                                            Data</span>
                                     </div>
-                                    <span class="text-gray-600 text-[10px] font-black uppercase tracking-widest italic">Last Audit: Verified Accurate</span>
+                                    <span
+                                        class="text-gray-600 text-[10px] font-black uppercase tracking-widest italic">Last
+                                        Audit: Verified Accurate</span>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                                    
+
                                     <!-- Personal & Basic Profile -->
                                     <div class="space-y-8">
-                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                        <h4
+                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
                                             Personal Profile
                                         </h4>
                                         <div class="space-y-5">
                                             <div>
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Full Name & Gender</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->first_name }} {{ $user->last_name }} <span class="text-gray-600">({{ ucfirst($user->gender) }})</span></p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    Full Name & Gender</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->first_name }}
+                                                    {{ $user->last_name }} <span
+                                                        class="text-gray-600">({{ ucfirst($user->gender) }})</span></p>
                                             </div>
                                             <div>
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Date of Birth</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->dob ? \Carbon\Carbon::parse($user->dob)->format('M d, Y') : 'N/A' }}</p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    Date of Birth</p>
+                                                <p class="text-white text-sm font-medium">
+                                                    {{ $user->dob ? \Carbon\Carbon::parse($user->dob)->format('M d, Y') : 'N/A' }}
+                                                </p>
                                             </div>
                                             <div>
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Primary Email & Phone</p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    Primary Email & Phone</p>
                                                 <p class="text-white text-sm font-medium">{{ $user->email }}</p>
                                                 <p class="text-white text-sm font-medium">{{ $user->contact_no }}</p>
                                             </div>
                                             <div>
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Country Concerned</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->country_concerned }}</p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    Country Concerned</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->country_concerned }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Business Identity & Contact -->
                                     <div class="space-y-8">
-                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                        <h4
+                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
                                             Business Identity
                                         </h4>
                                         <div class="space-y-5">
                                             <div>
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Legal & Trade Name</p>
-                                                <p class="text-white text-sm font-bold uppercase tracking-tight text-[#ff014f]">{{ $application->legal_name }}</p>
-                                                @if($application->trade_name)
-                                                    <p class="text-gray-400 text-xs mt-0.5">T/A: {{ $application->trade_name }}</p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    Legal & Trade Name</p>
+                                                <p
+                                                    class="text-white text-sm font-bold uppercase tracking-tight text-[#ff014f]">
+                                                    {{ $application->legal_name }}</p>
+                                                @if ($application->trade_name)
+                                                    <p class="text-gray-400 text-xs mt-0.5">T/A:
+                                                        {{ $application->trade_name }}</p>
                                                 @endif
                                             </div>
                                             <div>
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Legal Status & Type</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->legal_status }} — {{ $user->business_type }}</p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    Legal Status & Type</p>
+                                                <p class="text-white text-sm font-medium">{{ $user->legal_status }} —
+                                                    {{ $user->business_type }}</p>
                                             </div>
                                             <div>
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Tax / GST Identification</p>
-                                                <p class="text-white text-sm font-medium">{{ $application->service_tax }}</p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    Tax / GST Identification</p>
+                                                <p class="text-white text-sm font-medium">{{ $application->service_tax }}
+                                                </p>
                                             </div>
                                             <div>
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Website</p>
-                                                <p class="text-white text-sm font-medium underline underline-offset-4 decoration-white/10">{{ $application->website ?: 'None' }}</p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    Website</p>
+                                                <p
+                                                    class="text-white text-sm font-medium underline underline-offset-4 decoration-white/10">
+                                                    {{ $application->website ?: 'None' }}</p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Registered Address -->
                                     <div class="space-y-8">
-                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                        <h4
+                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
                                             Official Address
                                         </h4>
                                         <div class="space-y-6">
                                             <div class="bg-white/5 border border-white/5 p-4 rounded-2xl">
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-2">Billing Address</p>
+                                                <p
+                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-2">
+                                                    Billing Address</p>
                                                 <p class="text-white text-sm font-medium leading-relaxed">
                                                     {{ $application->billing_street }}<br>
-                                                    {{ $application->billing_city }}, {{ $application->billing_state }}<br>
-                                                    {{ $application->billing_country }} - {{ $application->billing_postal_code }}
+                                                    {{ $application->billing_city }},
+                                                    {{ $application->billing_state }}<br>
+                                                    {{ $application->billing_country }} -
+                                                    {{ $application->billing_postal_code }}
                                                 </p>
                                             </div>
-                                            @if(!$application->same_as_billing)
-                                            <div class="bg-white/5 border border-white/5 p-4 rounded-2xl">
-                                                <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-2">Shipping Address</p>
-                                                <p class="text-white text-sm font-medium leading-relaxed">
-                                                    {{ $application->shipping_street }}<br>
-                                                    {{ $application->shipping_city }}, {{ $application->shipping_state }}<br>
-                                                    {{ $application->shipping_country }} - {{ $application->shipping_postal_code }}
-                                                </p>
-                                            </div>
+                                            @if (!$application->same_as_billing)
+                                                <div class="bg-white/5 border border-white/5 p-4 rounded-2xl">
+                                                    <p
+                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-2">
+                                                        Shipping Address</p>
+                                                    <p class="text-white text-sm font-medium leading-relaxed">
+                                                        {{ $application->shipping_street }}<br>
+                                                        {{ $application->shipping_city }},
+                                                        {{ $application->shipping_state }}<br>
+                                                        {{ $application->shipping_country }} -
+                                                        {{ $application->shipping_postal_code }}
+                                                    </p>
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
 
                                     <!-- Operation & Registration -->
                                     <div class="space-y-8 md:col-span-2">
-                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                        <h4
+                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
                                             Operations & Regulatory
                                         </h4>
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                                             <div class="space-y-5">
                                                 <div>
-                                                    <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Commencement of Business</p>
-                                                    <p class="text-white text-sm font-medium">{{ $application->commencement_date ? $application->commencement_date->format('M d, Y') : 'N/A' }}</p>
+                                                    <p
+                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                        Commencement of Business</p>
+                                                    <p class="text-white text-sm font-medium">
+                                                        {{ $application->commencement_date ? $application->commencement_date->format('M d, Y') : 'N/A' }}
+                                                    </p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Trade Registration Details</p>
-                                                    <p class="text-white text-sm font-medium">No: {{ $application->trade_registration_no }}</p>
-                                                    <p class="text-gray-400 text-xs">Granted: {{ $application->registration_granted_date ? $application->registration_granted_date->format('M d, Y') : 'N/A' }}</p>
-                                                    <p class="text-gray-400 text-xs">Registrant: {{ $application->registrant }}</p>
+                                                    <p
+                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                        Trade Registration Details</p>
+                                                    <p class="text-white text-sm font-medium">No:
+                                                        {{ $application->trade_registration_no }}</p>
+                                                    <p class="text-gray-400 text-xs">Granted:
+                                                        {{ $application->registration_granted_date ? $application->registration_granted_date->format('M d, Y') : 'N/A' }}
+                                                    </p>
+                                                    <p class="text-gray-400 text-xs">Registrant:
+                                                        {{ $application->registrant }}</p>
                                                 </div>
                                             </div>
                                             <div class="space-y-5">
                                                 <div>
-                                                    <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Accreditations</p>
+                                                    <p
+                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                        Accreditations</p>
                                                     <div class="flex flex-wrap gap-2 mt-2">
-                                                        <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white text-[10px] font-bold">IATA: {{ $application->iata_registered ? $application->iata_no : 'NO' }}</span>
-                                                        @if($application->tourism_board_registered)
-                                                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white text-[10px] font-bold">TOURISM BOARD: {{ $application->tourism_board_name }}</span>
+                                                        <span
+                                                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white text-[10px] font-bold">IATA:
+                                                            {{ $application->iata_registered ? $application->iata_no : 'NO' }}</span>
+                                                        @if ($application->tourism_board_registered)
+                                                            <span
+                                                                class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white text-[10px] font-bold">TOURISM
+                                                                BOARD: {{ $application->tourism_board_name }}</span>
                                                         @endif
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">Disclosures</p>
-                                                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest {{ $application->fiduciary_breach ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' }}">
-                                                        Fiduciary Breach: {{ $application->fiduciary_breach ? 'YES' : 'NONE' }}
+                                                    <p
+                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                        Disclosures</p>
+                                                    <span
+                                                        class="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest {{ $application->fiduciary_breach ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' }}">
+                                                        Fiduciary Breach:
+                                                        {{ $application->fiduciary_breach ? 'YES' : 'NONE' }}
                                                     </span>
-                                                    @if($application->fiduciary_breach)
-                                                        <p class="text-gray-400 text-[11px] mt-2 italic">"{{ $application->breach_details }}"</p>
+                                                    @if ($application->fiduciary_breach)
+                                                        <p class="text-gray-400 text-[11px] mt-2 italic">
+                                                            "{{ $application->breach_details }}"</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -1613,26 +1818,42 @@
 
                                     <!-- Company Management -->
                                     <div class="space-y-8">
-                                        <h4 class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                        <h4
+                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
                                             Verified Contacts
                                         </h4>
                                         <div class="space-y-3">
-                                            @foreach($application->contacts ?? [] as $contact)
-                                                <div class="flex flex-col gap-2 bg-white/5 p-4 rounded-2xl border border-white/5 group hover:border-[#ff014f]/30 transition-all">
+                                            @foreach ($application->contacts ?? [] as $contact)
+                                                <div
+                                                    class="flex flex-col gap-2 bg-white/5 p-4 rounded-2xl border border-white/5 group hover:border-[#ff014f]/30 transition-all">
                                                     <div class="flex items-center gap-3">
-                                                        <div class="w-10 h-10 bg-[#ff014f]/10 rounded-xl flex items-center justify-center border border-[#ff014f]/20">
-                                                            <span class="text-[#ff014f] text-xs font-black">{{ substr($contact['first_name'], 0, 1) }}{{ substr($contact['last_name'], 0, 1) }}</span>
+                                                        <div
+                                                            class="w-10 h-10 bg-[#ff014f]/10 rounded-xl flex items-center justify-center border border-[#ff014f]/20">
+                                                            <span
+                                                                class="text-[#ff014f] text-xs font-black">{{ substr($contact['first_name'], 0, 1) }}{{ substr($contact['last_name'], 0, 1) }}</span>
                                                         </div>
                                                         <div>
-                                                            <p class="text-white font-bold text-xs uppercase">{{ $contact['first_name'] }} {{ $contact['last_name'] }}</p>
-                                                            <p class="text-[10px] text-gray-500 font-medium lowercase">{{ $contact['email'] }}</p>
+                                                            <p class="text-white font-bold text-xs uppercase">
+                                                                {{ $contact['first_name'] }} {{ $contact['last_name'] }}
+                                                            </p>
+                                                            <p class="text-[10px] text-gray-500 font-medium lowercase">
+                                                                {{ $contact['email'] }}</p>
                                                         </div>
                                                     </div>
                                                     <div class="flex flex-wrap gap-1.5 mt-2">
-                                                        @if($contact['owner'] ?? false) <span class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Owner</span> @endif
-                                                        @if($contact['manager'] ?? false) <span class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Manager</span> @endif
-                                                        @if($contact['signatory'] ?? false) <span class="text-[9px] font-black bg-[#ff014f]/10 px-2 py-0.5 rounded text-[#ff014f] uppercase">Signatory</span> @endif
+                                                        @if ($contact['owner'] ?? false)
+                                                            <span
+                                                                class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Owner</span>
+                                                        @endif
+                                                        @if ($contact['manager'] ?? false)
+                                                            <span
+                                                                class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Manager</span>
+                                                        @endif
+                                                        @if ($contact['signatory'] ?? false)
+                                                            <span
+                                                                class="text-[9px] font-black bg-[#ff014f]/10 px-2 py-0.5 rounded text-[#ff014f] uppercase">Signatory</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -1648,10 +1869,12 @@
                                 class="inline-block px-12 py-5 bg-white text-black font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-gray-200 transition-all shadow-xl hover:-translate-y-1">
                                 Return to Dashboard
                             </a>
-                            @if($status == 'pending' || $status == 'rejected')
-                                <form action="{{ route('profile.revoke') }}" method="POST" onsubmit="return confirm('Are you sure you want to revoke your application? You will be able to edit your details and resubmit.')">
+                            @if ($status == 'pending' || $status == 'rejected')
+                                <form action="{{ route('profile.revoke') }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to revoke your application? You will be able to edit your details and resubmit.')">
                                     @csrf
-                                    <button type="submit" class="inline-block px-12 py-5 bg-[#131215] border border-white/10 text-zinc-400 font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl hover:bg-white/5 hover:text-white transition-all shadow-xl hover:-translate-y-1 cursor-pointer">
+                                    <button type="submit"
+                                        class="inline-block px-12 py-5 bg-[#131215] border border-white/10 text-zinc-400 font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl hover:bg-white/5 hover:text-white transition-all shadow-xl hover:-translate-y-1 cursor-pointer">
                                         Revoke & Edit Details
                                     </button>
                                 </form>
