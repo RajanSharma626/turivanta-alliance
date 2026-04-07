@@ -731,368 +731,369 @@
                                 </script>
                             </div>
 
-                            <!-- Section 2 -->
-                            <div class="space-y-12">
-                                <h3
-                                    class="bg-[#ff014f]/10 text-[#ff014f] font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
-                                    SECTION 2 - Company Contacts</h3>
+                            @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
+                                <!-- Section 2 -->
+                                <div class="space-y-12">
+                                    <h3
+                                        class="bg-[#ff014f]/10 text-[#ff014f] font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
+                                        SECTION 2 - Company Contacts</h3>
 
-                                <div class="p-6 sm:p-8 bg-white/[0.02] border border-white/5 rounded-3xl">
-                                    <p
-                                        class="text-xs sm:text-sm text-gray-400 font-medium leading-relaxed mb-10 px-4 sm:px-0">
-                                        If your agency is fully- or partially-owned by one or more people, please enter
-                                        their details here as owners, partners or shareholders. Select at least one
-                                        authorised signatory.
-                                    </p>
+                                    <div class="p-6 sm:p-8 bg-white/[0.02] border border-white/5 rounded-3xl">
+                                        <p
+                                            class="text-xs sm:text-sm text-gray-400 font-medium leading-relaxed mb-10 px-4 sm:px-0">
+                                            If your agency is fully- or partially-owned by one or more people, please enter
+                                            their details here as owners, partners or shareholders. Select at least one
+                                            authorised signatory.
+                                        </p>
 
-                                    <style>
-                                        @media (max-width: 639px) {
+                                        <style>
+                                            @media (max-width: 639px) {
 
-                                            #contacts-table,
-                                            #contacts-table thead,
-                                            #contacts-table tbody,
-                                            #contacts-table th,
-                                            #contacts-table td:not(.hidden):not(.checkbox-td):not(.action-td),
-                                            #contacts-table tr {
-                                                display: block !important;
-                                                width: 100% !important;
+                                                #contacts-table,
+                                                #contacts-table thead,
+                                                #contacts-table tbody,
+                                                #contacts-table th,
+                                                #contacts-table td:not(.hidden):not(.checkbox-td):not(.action-td),
+                                                #contacts-table tr {
+                                                    display: block !important;
+                                                    width: 100% !important;
+                                                }
+
+                                                #contacts-table thead {
+                                                    display: none !important;
+                                                }
+
+                                                .contact-row {
+                                                    margin-bottom: 2rem !important;
+                                                    padding: 1.5rem !important;
+                                                    background: rgba(255, 255, 255, 0.02) !important;
+                                                    border: 1px border rgba(255, 255, 255, 0.05) !important;
+                                                    border-radius: 1.5rem !important;
+                                                }
+
+                                                #contacts-table td {
+                                                    padding: 0 !important;
+                                                    margin-bottom: 1.25rem !important;
+                                                    border: none !important;
+                                                }
+
+                                                #contacts-table td::before {
+                                                    content: attr(data-label);
+                                                    display: block;
+                                                    font-size: 10px;
+                                                    font-weight: 900;
+                                                    color: #ff014f;
+                                                    text-transform: uppercase;
+                                                    letter-spacing: 0.1em;
+                                                    margin-bottom: 0.5rem;
+                                                }
+
+                                                /* Checkbox grouping on mobile */
+                                                #contacts-table td.checkbox-td {
+                                                    display: block !important;
+                                                    float: left !important;
+                                                    width: 33.33% !important;
+                                                    text-align: center !important;
+                                                    margin-bottom: 1.5rem !important;
+                                                    padding: 0 !important;
+                                                }
+
+                                                #contacts-table td.checkbox-td::before {
+                                                    font-size: 8px !important;
+                                                    margin-bottom: 0.75rem !important;
+                                                }
+
+                                                #contacts-table .action-td {
+                                                    display: block !important;
+                                                    clear: both !important;
+                                                    width: 100% !important;
+                                                    margin-top: 1rem !important;
+                                                    padding-top: 1.5rem !important;
+                                                    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+                                                    text-align: center !important;
+                                                    margin-bottom: 0 !important;
+                                                }
+
+                                                #contacts-table .action-td::before {
+                                                    display: none !important;
+                                                }
                                             }
+                                        </style>
 
-                                            #contacts-table thead {
-                                                display: none !important;
-                                            }
-
-                                            .contact-row {
-                                                margin-bottom: 2rem !important;
-                                                padding: 1.5rem !important;
-                                                background: rgba(255, 255, 255, 0.02) !important;
-                                                border: 1px border rgba(255, 255, 255, 0.05) !important;
-                                                border-radius: 1.5rem !important;
-                                            }
-
-                                            #contacts-table td {
-                                                padding: 0 !important;
-                                                margin-bottom: 1.25rem !important;
-                                                border: none !important;
-                                            }
-
-                                            #contacts-table td::before {
-                                                content: attr(data-label);
-                                                display: block;
-                                                font-size: 10px;
-                                                font-weight: 900;
-                                                color: #ff014f;
-                                                text-transform: uppercase;
-                                                letter-spacing: 0.1em;
-                                                margin-bottom: 0.5rem;
-                                            }
-
-                                            /* Checkbox grouping on mobile */
-                                            #contacts-table td.checkbox-td {
-                                                display: block !important;
-                                                float: left !important;
-                                                width: 33.33% !important;
-                                                text-align: center !important;
-                                                margin-bottom: 1.5rem !important;
-                                                padding: 0 !important;
-                                            }
-
-                                            #contacts-table td.checkbox-td::before {
-                                                font-size: 8px !important;
-                                                margin-bottom: 0.75rem !important;
-                                            }
-
-                                            #contacts-table .action-td {
-                                                display: block !important;
-                                                clear: both !important;
-                                                width: 100% !important;
-                                                margin-top: 1rem !important;
-                                                padding-top: 1.5rem !important;
-                                                border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
-                                                text-align: center !important;
-                                                margin-bottom: 0 !important;
-                                            }
-
-                                            #contacts-table .action-td::before {
-                                                display: none !important;
-                                            }
-                                        }
-                                    </style>
-
-                                    <div class="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
-                                        <table class="w-full text-left border-collapse sm:min-w-[900px]"
-                                            id="contacts-table">
-                                            <thead class="hidden sm:table-header-group">
-                                                <tr class="border-b border-white/10 text-[#ff014f]">
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">
-                                                        First Name</th>
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">
-                                                        Last Name</th>
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[200px]">
-                                                        Email Address</th>
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">
-                                                        Owner</th>
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">
-                                                        Manager</th>
-                                                    <th
-                                                        class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-32">
-                                                        Signatory</th>
-                                                    <th class="py-4 px-4 w-16"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="contacts-body">
-                                                @foreach (old('contacts', $application->contacts ?? [['first_name' => '', 'last_name' => '', 'email' => '', 'owner' => false, 'manager' => false, 'signatory' => false]]) as $index => $contact)
-                                                    <tr
-                                                        class="contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]">
-                                                        <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="First Name">
-                                                            <input type="text"
-                                                                name="contacts[{{ $index }}][first_name]"
-                                                                value="{{ $contact['first_name'] ?? '' }}"
-                                                                class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
-                                                        </td>
-                                                        <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="Last Name">
-                                                            <input type="text"
-                                                                name="contacts[{{ $index }}][last_name]"
-                                                                value="{{ $contact['last_name'] ?? '' }}"
-                                                                class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
-                                                        </td>
-                                                        <td class="py-2 sm:py-3.5 px-0 sm:px-4"
-                                                            data-label="Email Address">
-                                                            <input type="email"
-                                                                name="contacts[{{ $index }}][email]"
-                                                                value="{{ $contact['email'] ?? '' }}"
-                                                                class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
-                                                        </td>
-                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
-                                                            data-label="Owner">
-                                                            <input type="checkbox"
-                                                                name="contacts[{{ $index }}][owner]"
-                                                                {{ $contact['owner'] ?? false ? 'checked' : '' }}
-                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                                        </td>
-                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
-                                                            data-label="Manager">
-                                                            <input type="checkbox"
-                                                                name="contacts[{{ $index }}][manager]"
-                                                                {{ $contact['manager'] ?? false ? 'checked' : '' }}
-                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                                        </td>
-                                                        <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
-                                                            data-label="Signatory">
-                                                            <input type="checkbox"
-                                                                name="contacts[{{ $index }}][signatory]"
-                                                                {{ $contact['signatory'] ?? false ? 'checked' : '' }}
-                                                                class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                                        </td>
-                                                        <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
-                                                            <button type="button" onclick="removeRow(this)"
-                                                                class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
-                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                                    viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2.5"
-                                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                                    </path>
-                                                                </svg>
-                                                            </button>
-                                                        </td>
+                                        <div class="overflow-x-auto -mx-6 sm:mx-0 px-6 sm:px-0">
+                                            <table class="w-full text-left border-collapse sm:min-w-[900px]"
+                                                id="contacts-table">
+                                                <thead class="hidden sm:table-header-group">
+                                                    <tr class="border-b border-white/10 text-[#ff014f]">
+                                                        <th
+                                                            class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">
+                                                            First Name</th>
+                                                        <th
+                                                            class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">
+                                                            Last Name</th>
+                                                        <th
+                                                            class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[200px]">
+                                                            Email Address</th>
+                                                        <th
+                                                            class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">
+                                                            Owner</th>
+                                                        <th
+                                                            class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-24">
+                                                            Manager</th>
+                                                        <th
+                                                            class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-center w-32">
+                                                            Signatory</th>
+                                                        <th class="py-4 px-4 w-16"></th>
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody id="contacts-body">
+                                                    @foreach (old('contacts', $application->contacts ?? [['first_name' => '', 'last_name' => '', 'email' => '', 'owner' => false, 'manager' => false, 'signatory' => false]]) as $index => $contact)
+                                                        <tr
+                                                            class="contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]">
+                                                            <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="First Name">
+                                                                <input type="text"
+                                                                    name="contacts[{{ $index }}][first_name]"
+                                                                    value="{{ $contact['first_name'] ?? '' }}"
+                                                                    class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                            </td>
+                                                            <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="Last Name">
+                                                                <input type="text"
+                                                                    name="contacts[{{ $index }}][last_name]"
+                                                                    value="{{ $contact['last_name'] ?? '' }}"
+                                                                    class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                            </td>
+                                                            <td class="py-2 sm:py-3.5 px-0 sm:px-4"
+                                                                data-label="Email Address">
+                                                                <input type="email"
+                                                                    name="contacts[{{ $index }}][email]"
+                                                                    value="{{ $contact['email'] ?? '' }}"
+                                                                    class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                            </td>
+                                                            <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
+                                                                data-label="Owner">
+                                                                <input type="checkbox"
+                                                                    name="contacts[{{ $index }}][owner]"
+                                                                    {{ $contact['owner'] ?? false ? 'checked' : '' }}
+                                                                    class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                            </td>
+                                                            <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
+                                                                data-label="Manager">
+                                                                <input type="checkbox"
+                                                                    name="contacts[{{ $index }}][manager]"
+                                                                    {{ $contact['manager'] ?? false ? 'checked' : '' }}
+                                                                    class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                            </td>
+                                                            <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
+                                                                data-label="Signatory">
+                                                                <input type="checkbox"
+                                                                    name="contacts[{{ $index }}][signatory]"
+                                                                    {{ $contact['signatory'] ?? false ? 'checked' : '' }}
+                                                                    class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                            </td>
+                                                            <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
+                                                                <button type="button" onclick="removeRow(this)"
+                                                                    class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
+                                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                                        viewBox="0 0 24 24">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke-width="2.5"
+                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                                        </path>
+                                                                    </svg>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            function addRow() {
+                                                const body = document.getElementById('contacts-body');
+                                                const index = body.children.length;
+                                                const row = document.createElement('tr');
+                                                row.className = 'contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]';
+                                                row.innerHTML = `
+                                                    <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="First Name">
+                                                        <input type="text" name="contacts[${index}][first_name]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                    </td>
+                                                    <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="Last Name">
+                                                        <input type="text" name="contacts[${index}][last_name]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                    </td>
+                                                    <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="Email Address">
+                                                        <input type="email" name="contacts[${index}][email]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                    </td>
+                                                    <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Owner">
+                                                        <input type="checkbox" name="contacts[${index}][owner]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                    </td>
+                                                    <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Manager">
+                                                        <input type="checkbox" name="contacts[${index}][manager]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                    </td>
+                                                    <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Signatory">
+                                                        <input type="checkbox" name="contacts[${index}][signatory]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                    </td>
+                                                    <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
+                                                        <button type="button" onclick="removeRow(this)" class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                        </button>
+                                                    </td>
+                                                `;
+                                                body.appendChild(row);
+                                            }
+
+                                            function removeRow(btn) {
+                                                if (document.querySelectorAll('.contact-row').length > 1) {
+                                                    btn.closest('tr').remove();
+                                                } else {
+                                                    alert('At least one contact is required.');
+                                                }
+                                            }
+                                        </script>
+
+                                        <button type="button" onclick="addRow()"
+                                            class="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl text-[9px] sm:text-[10px] font-black text-white uppercase tracking-[0.2em] hover:bg-[#ff014f] hover:border-[#ff014f] transition-all group shadow-xl">
+                                            <svg class="w-3.5 h-3.5 sm:w-4 h-4 text-[#ff014f] group-hover:text-white transition-colors"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M12 4v16m8-8H4"></path>
+                                            </svg>
+                                            Add New Person
+                                        </button>
+                                    </div>
+
+                                    <div class="p-4 sm:p-8 bg-zinc-950/20 border border-white/5 rounded-3xl space-y-10">
+                                        <label
+                                            class="text-xs sm:text-sm font-bold text-gray-300 leading-relaxed block max-w-5xl">
+                                            <span
+                                                class="text-[#ff014f] font-black mr-3 uppercase text-[9px] sm:text-[10px] tracking-widest leading-none bg-[#ff014f]/10 px-2 py-1 rounded inline-block mb-2 sm:mb-0">Important
+                                                disclosure</span>
+                                            Have you, or any person who is a director of, or who holds a material financial
+                                            interest or a position of management in the Applicant currently or previously been
+                                            involved in any fiduciary breach or crime, or subject to bankruptcy proceedings, or
+                                            been a director of or had a financial interest or held a position of management in
+                                            an Agent which has been removed from the Agency List or is currently subject to
+                                            review or default action by Turivanta for non-compliance with the conditions of its
+                                            Accreditation?
+                                        </label>
+
+                                        <div class="flex items-center gap-8 pl-1">
+                                            <label class="flex items-center gap-4 cursor-pointer group">
+                                                <input type="radio" name="fiduciary_breach" value="yes" id="breach_yes"
+                                                    class="sr-only peer"
+                                                    {{ old('fiduciary_breach', $application->fiduciary_breach ? 'yes' : 'no') == 'yes' ? 'checked' : '' }}>
+                                                <div
+                                                    class="w-6 h-6 rounded-full border-2 border-white/10 flex items-center justify-center peer-checked:border-[#ff014f] peer-checked:bg-[#ff014f] transition-all group-hover:border-white/20">
+                                                    <div
+                                                        class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-all">
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">Yes</span>
+                                            </label>
+
+                                            <label class="flex items-center gap-4 cursor-pointer group">
+                                                <input type="radio" name="fiduciary_breach" value="no" id="breach_no"
+                                                    class="sr-only peer"
+                                                    {{ old('fiduciary_breach', $application->fiduciary_breach ? 'yes' : 'no') == 'no' ? 'checked' : '' }}>
+                                                <div
+                                                    class="w-6 h-6 rounded-full border-2 border-white/10 flex items-center justify-center peer-checked:border-[#ff014f] peer-checked:bg-[#ff014f] transition-all group-hover:border-white/20">
+                                                    <div
+                                                        class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-all">
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">No</span>
+                                            </label>
+                                        </div>
+
+                                        <div id="breach_details_container"
+                                            class="space-y-6 animate-fadeIn transition-all {{ old('fiduciary_breach', $application->fiduciary_breach) == 'yes' ? '' : 'hidden' }}">
+                                            <label
+                                                class="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                                Please provide full details below
+                                            </label>
+
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                <div class="flex flex-col gap-2">
+                                                    <label
+                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full
+                                                        Name</label>
+                                                    <input type="text" name="breach_full_name"
+                                                        value="{{ old('breach_full_name', $application->breach_full_name) }}"
+                                                        class="bg-[#131215] border @error('breach_full_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                    @error('breach_full_name')
+                                                        <span
+                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="flex flex-col gap-2">
+                                                    <label
+                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Concerned
+                                                        Company</label>
+                                                    <input type="text" name="breach_concerned_company"
+                                                        value="{{ old('breach_concerned_company', $application->breach_concerned_company) }}"
+                                                        class="w-full bg-[#131215] border @error('breach_concerned_company') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                    @error('breach_concerned_company')
+                                                        <span
+                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="flex flex-col gap-2">
+                                                    <label
+                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Relationship</label>
+                                                    <input type="text" name="breach_relationship"
+                                                        value="{{ old('breach_relationship', $application->breach_relationship) }}"
+                                                        class="w-full bg-[#131215] border @error('breach_relationship') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                    @error('breach_relationship')
+                                                        <span
+                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="flex flex-col gap-2">
+                                                    <label
+                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">TAX
+                                                        ID</label>
+                                                    <input type="text" name="breach_tax_id"
+                                                        value="{{ old('breach_tax_id', $application->breach_tax_id) }}"
+                                                        class="w-full bg-[#131215] border @error('breach_tax_id') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                    @error('breach_tax_id')
+                                                        <span
+                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-col gap-2 mt-4">
+                                                <label
+                                                    class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Additional
+                                                    Pertinent Details</label>
+                                                <textarea name="breach_details"
+                                                    class="w-full bg-[#0f0f15] border border-white/5 rounded-3xl p-6 text-sm text-white focus:outline-none focus:border-[#ff014f] min-h-[120px] placeholder-gray-700 transition-all"
+                                                    placeholder="Enter all other details here...">{{ old('breach_details', $application->breach_details) }}</textarea>
+                                                @error('breach_details')
+                                                    <span
+                                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                     <script>
-                                        function addRow() {
-                                            const body = document.getElementById('contacts-body');
-                                            const index = body.children.length;
-                                            const row = document.createElement('tr');
-                                            row.className = 'contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]';
-                                            row.innerHTML = `
-                                                <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="First Name">
-                                                    <input type="text" name="contacts[${index}][first_name]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
-                                                </td>
-                                                <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="Last Name">
-                                                    <input type="text" name="contacts[${index}][last_name]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
-                                                </td>
-                                                <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="Email Address">
-                                                    <input type="email" name="contacts[${index}][email]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
-                                                </td>
-                                                <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Owner">
-                                                    <input type="checkbox" name="contacts[${index}][owner]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                                </td>
-                                                <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Manager">
-                                                    <input type="checkbox" name="contacts[${index}][manager]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                                </td>
-                                                <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Signatory">
-                                                    <input type="checkbox" name="contacts[${index}][signatory]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
-                                                </td>
-                                                <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
-                                                    <button type="button" onclick="removeRow(this)" class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
-                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                                    </button>
-                                                </td>
-                                            `;
-                                            body.appendChild(row);
-                                        }
-
-                                        function removeRow(btn) {
-                                            if (document.querySelectorAll('.contact-row').length > 1) {
-                                                btn.closest('tr').remove();
-                                            } else {
-                                                alert('At least one contact is required.');
-                                            }
-                                        }
+                                        document.getElementById('breach_yes').addEventListener('change', function() {
+                                            document.getElementById('breach_details_container').classList.remove('hidden');
+                                        });
+                                        document.getElementById('breach_no').addEventListener('change', function() {
+                                            document.getElementById('breach_details_container').classList.add('hidden');
+                                        });
                                     </script>
-
-                                    <button type="button" onclick="addRow()"
-                                        class="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl text-[9px] sm:text-[10px] font-black text-white uppercase tracking-[0.2em] hover:bg-[#ff014f] hover:border-[#ff014f] transition-all group shadow-xl">
-                                        <svg class="w-3.5 h-3.5 sm:w-4 h-4 text-[#ff014f] group-hover:text-white transition-colors"
-                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M12 4v16m8-8H4"></path>
-                                        </svg>
-                                        Add New Person
-                                    </button>
                                 </div>
-
-                                <div class="p-4 sm:p-8 bg-zinc-950/20 border border-white/5 rounded-3xl space-y-10">
-                                    <label
-                                        class="text-xs sm:text-sm font-bold text-gray-300 leading-relaxed block max-w-5xl">
-                                        <span
-                                            class="text-[#ff014f] font-black mr-3 uppercase text-[9px] sm:text-[10px] tracking-widest leading-none bg-[#ff014f]/10 px-2 py-1 rounded inline-block mb-2 sm:mb-0">Important
-                                            disclosure</span>
-                                        Have you, or any person who is a director of, or who holds a material financial
-                                        interest or a position of management in the Applicant currently or previously been
-                                        involved in any fiduciary breach or crime, or subject to bankruptcy proceedings, or
-                                        been a director of or had a financial interest or held a position of management in
-                                        an Agent which has been removed from the Agency List or is currently subject to
-                                        review or default action by Turivanta for non-compliance with the conditions of its
-                                        Accreditation?
-                                    </label>
-
-                                    <div class="flex items-center gap-8 pl-1">
-                                        <label class="flex items-center gap-4 cursor-pointer group">
-                                            <input type="radio" name="fiduciary_breach" value="yes" id="breach_yes"
-                                                class="sr-only peer"
-                                                {{ old('fiduciary_breach', $application->fiduciary_breach ? 'yes' : 'no') == 'yes' ? 'checked' : '' }}>
-                                            <div
-                                                class="w-6 h-6 rounded-full border-2 border-white/10 flex items-center justify-center peer-checked:border-[#ff014f] peer-checked:bg-[#ff014f] transition-all group-hover:border-white/20">
-                                                <div
-                                                    class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-all">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">Yes</span>
-                                        </label>
-
-                                        <label class="flex items-center gap-4 cursor-pointer group">
-                                            <input type="radio" name="fiduciary_breach" value="no" id="breach_no"
-                                                class="sr-only peer"
-                                                {{ old('fiduciary_breach', $application->fiduciary_breach ? 'yes' : 'no') == 'no' ? 'checked' : '' }}>
-                                            <div
-                                                class="w-6 h-6 rounded-full border-2 border-white/10 flex items-center justify-center peer-checked:border-[#ff014f] peer-checked:bg-[#ff014f] transition-all group-hover:border-white/20">
-                                                <div
-                                                    class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-all">
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">No</span>
-                                        </label>
-                                    </div>
-
-                                    <div id="breach_details_container"
-                                        class="space-y-6 animate-fadeIn transition-all {{ old('fiduciary_breach', $application->fiduciary_breach) == 'yes' ? '' : 'hidden' }}">
-                                        <label
-                                            class="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
-                                            Please provide full details below
-                                        </label>
-
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div class="flex flex-col gap-2">
-                                                <label
-                                                    class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full
-                                                    Name</label>
-                                                <input type="text" name="breach_full_name"
-                                                    value="{{ old('breach_full_name', $application->breach_full_name) }}"
-                                                    class="bg-[#131215] border @error('breach_full_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
-                                                @error('breach_full_name')
-                                                    <span
-                                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="flex flex-col gap-2">
-                                                <label
-                                                    class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Concerned
-                                                    Company</label>
-                                                <input type="text" name="breach_concerned_company"
-                                                    value="{{ old('breach_concerned_company', $application->breach_concerned_company) }}"
-                                                    class="w-full bg-[#131215] border @error('breach_concerned_company') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
-                                                @error('breach_concerned_company')
-                                                    <span
-                                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="flex flex-col gap-2">
-                                                <label
-                                                    class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Relationship</label>
-                                                <input type="text" name="breach_relationship"
-                                                    value="{{ old('breach_relationship', $application->breach_relationship) }}"
-                                                    class="w-full bg-[#131215] border @error('breach_relationship') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
-                                                @error('breach_relationship')
-                                                    <span
-                                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="flex flex-col gap-2">
-                                                <label
-                                                    class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">TAX
-                                                    ID</label>
-                                                <input type="text" name="breach_tax_id"
-                                                    value="{{ old('breach_tax_id', $application->breach_tax_id) }}"
-                                                    class="w-full bg-[#131215] border @error('breach_tax_id') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
-                                                @error('breach_tax_id')
-                                                    <span
-                                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="flex flex-col gap-2 mt-4">
-                                            <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Additional
-                                                Pertinent Details</label>
-                                            <textarea name="breach_details"
-                                                class="w-full bg-[#0f0f15] border border-white/5 rounded-3xl p-6 text-sm text-white focus:outline-none focus:border-[#ff014f] min-h-[120px] placeholder-gray-700 transition-all"
-                                                placeholder="Enter all other details here...">{{ old('breach_details', $application->breach_details) }}</textarea>
-                                            @error('breach_details')
-                                                <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <script>
-                                document.getElementById('breach_yes').addEventListener('change', function() {
-                                    document.getElementById('breach_details_container').classList.remove('hidden');
-                                });
-                                document.getElementById('breach_no').addEventListener('change', function() {
-                                    document.getElementById('breach_details_container').classList.add('hidden');
-                                });
-                            </script>
+                            @endif
 
                             <!-- Section 3 -->
                             <div class="space-y-8">
                                 <h3
                                     class="bg-[#ff014f]/10 text-[#ff014f] font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
-                                    SECTION 3 - Other Information</h3>
+                                    {{ in_array($user->legal_status, ['In Service Professional', 'Student']) ? 'SECTION 2' : 'SECTION 3' }} - Other Information</h3>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                                     @if ($user->legal_status == 'Student')
@@ -1927,67 +1928,71 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <p
-                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
-                                                        Disclosures</p>
-                                                    <span
-                                                        class="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest {{ $application->fiduciary_breach ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' }}">
-                                                        Fiduciary Breach:
-                                                        {{ $application->fiduciary_breach ? 'YES' : 'NONE' }}
-                                                    </span>
-                                                    @if ($application->fiduciary_breach)
-                                                        <p class="text-gray-400 text-[11px] mt-2 italic">
-                                                            "{{ $application->breach_details }}"</p>
-                                                    @endif
-                                                </div>
+                                                @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
+                                                    <div>
+                                                        <p
+                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            Disclosures</p>
+                                                        <span
+                                                            class="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest {{ $application->fiduciary_breach ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' }}">
+                                                            Fiduciary Breach:
+                                                            {{ $application->fiduciary_breach ? 'YES' : 'NONE' }}
+                                                        </span>
+                                                        @if ($application->fiduciary_breach)
+                                                            <p class="text-gray-400 text-[11px] mt-2 italic">
+                                                                "{{ $application->breach_details }}"</p>
+                                                        @endif
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- Company Management -->
-                                    <div class="space-y-8">
-                                        <h4
-                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
-                                            Verified Contacts
-                                        </h4>
-                                        <div class="space-y-3">
-                                            @foreach ($application->contacts ?? [] as $contact)
-                                                <div
-                                                    class="flex flex-col gap-2 bg-white/5 p-4 rounded-2xl border border-white/5 group hover:border-[#ff014f]/30 transition-all">
-                                                    <div class="flex items-center gap-3">
-                                                        <div
-                                                            class="w-10 h-10 bg-[#ff014f]/10 rounded-xl flex items-center justify-center border border-[#ff014f]/20">
-                                                            <span
-                                                                class="text-[#ff014f] text-xs font-black">{{ substr($contact['first_name'], 0, 1) }}{{ substr($contact['last_name'], 0, 1) }}</span>
+                                    @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
+                                        <!-- Company Management -->
+                                        <div class="space-y-8">
+                                            <h4
+                                                class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                                Verified Contacts
+                                            </h4>
+                                            <div class="space-y-3">
+                                                @foreach ($application->contacts ?? [] as $contact)
+                                                    <div
+                                                        class="flex flex-col gap-2 bg-white/5 p-4 rounded-2xl border border-white/5 group hover:border-[#ff014f]/30 transition-all">
+                                                        <div class="flex items-center gap-3">
+                                                            <div
+                                                                class="w-10 h-10 bg-[#ff014f]/10 rounded-xl flex items-center justify-center border border-[#ff014f]/20">
+                                                                <span
+                                                                    class="text-[#ff014f] text-xs font-black">{{ substr($contact['first_name'], 0, 1) }}{{ substr($contact['last_name'], 0, 1) }}</span>
+                                                            </div>
+                                                            <div>
+                                                                <p class="text-white font-bold text-xs uppercase">
+                                                                    {{ $contact['first_name'] }} {{ $contact['last_name'] }}
+                                                                </p>
+                                                                <p class="text-[10px] text-gray-500 font-medium lowercase">
+                                                                    {{ $contact['email'] }}</p>
+                                                            </div>
                                                         </div>
-                                                        <div>
-                                                            <p class="text-white font-bold text-xs uppercase">
-                                                                {{ $contact['first_name'] }} {{ $contact['last_name'] }}
-                                                            </p>
-                                                            <p class="text-[10px] text-gray-500 font-medium lowercase">
-                                                                {{ $contact['email'] }}</p>
+                                                        <div class="flex flex-wrap gap-1.5 mt-2">
+                                                            @if ($contact['owner'] ?? false)
+                                                                <span
+                                                                    class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Owner</span>
+                                                            @endif
+                                                            @if ($contact['manager'] ?? false)
+                                                                <span
+                                                                    class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Manager</span>
+                                                            @endif
+                                                            @if ($contact['signatory'] ?? false)
+                                                                <span
+                                                                    class="text-[9px] font-black bg-[#ff014f]/10 px-2 py-0.5 rounded text-[#ff014f] uppercase">Signatory</span>
+                                                            @endif
                                                         </div>
                                                     </div>
-                                                    <div class="flex flex-wrap gap-1.5 mt-2">
-                                                        @if ($contact['owner'] ?? false)
-                                                            <span
-                                                                class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Owner</span>
-                                                        @endif
-                                                        @if ($contact['manager'] ?? false)
-                                                            <span
-                                                                class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Manager</span>
-                                                        @endif
-                                                        @if ($contact['signatory'] ?? false)
-                                                            <span
-                                                                class="text-[9px] font-black bg-[#ff014f]/10 px-2 py-0.5 rounded text-[#ff014f] uppercase">Signatory</span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                 </div>
                             </div>
