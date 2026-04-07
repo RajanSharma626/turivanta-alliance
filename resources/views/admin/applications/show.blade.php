@@ -266,17 +266,38 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    @php $section3 = [
-                        'Date of Commencement of business' => $application->commencement_date ? $application->commencement_date->format('M d, Y') : '-',
-                        'Trade registration Number' => $application->trade_registration_no,
-                        'Registrant' => $application->registrant,
-                        'Date Registration was Granted' => $application->registration_granted_date ? $application->registration_granted_date->format('M d, Y') : '-',
-                        'Is your business an IATA Registered?' => $application->iata_registered ? 'Yes' : 'No',
-                        'IATA No.' => $application->iata_no ?? '(NOT APPLICABLE)',
-                        'Tourism Board Registration' => $application->tourism_board_registered ? 'Registered' : 'No',
-                        'Name of Tourism Board' => $application->tourism_board_name ?? '-',
-                        'Registration Number' => $application->tourism_board_reg_no ?? '-'
-                    ]; @endphp
+                    @php 
+                        $section3 = [];
+                        if ($application->user->legal_status == 'Student') {
+                            $section3 = [
+                                'Date of Admission' => $application->admission_date ? $application->admission_date->format('M d, Y') : '-',
+                                'Name of College / Institute' => $application->college_name,
+                                'Duration of Course' => $application->course_duration,
+                                'Is IATA Registered?' => $application->iata_registered ? 'Yes' : 'No',
+                                'IATA No.' => $application->iata_no ?? '(NOT APPLICABLE)',
+                            ];
+                        } elseif ($application->user->legal_status == 'In Service Professional') {
+                            $section3 = [
+                                'Date of Joining the Industry' => $application->joining_industry_date ? $application->joining_industry_date->format('M d, Y') : '-',
+                                'Name of First Company' => $application->first_company_name,
+                                'Name of Current Company' => $application->current_company_name,
+                                'Is IATA Registered?' => $application->iata_registered ? 'Yes' : 'No',
+                                'IATA No.' => $application->iata_no ?? '(NOT APPLICABLE)',
+                            ];
+                        } else {
+                            $section3 = [
+                                'Date of Commencement of business' => $application->commencement_date ? $application->commencement_date->format('M d, Y') : '-',
+                                'Trade registration Number' => $application->trade_registration_no,
+                                'Registrant' => $application->registrant,
+                                'Date Registration was Granted' => $application->registration_granted_date ? $application->registration_granted_date->format('M d, Y') : '-',
+                                'Is your business an IATA Registered?' => $application->iata_registered ? 'Yes' : 'No',
+                                'IATA No.' => $application->iata_no ?? '(NOT APPLICABLE)',
+                                'Tourism Board Registration' => $application->tourism_board_registered ? 'Registered' : 'No',
+                                'Name of Tourism Board' => $application->tourism_board_name ?? '-',
+                                'Registration Number' => $application->tourism_board_reg_no ?? '-'
+                            ];
+                        }
+                    @endphp
 
                     @foreach($section3 as $label => $value)
                     <div class="flex flex-col gap-2.5">

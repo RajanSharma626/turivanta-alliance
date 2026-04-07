@@ -12,6 +12,8 @@ class Application extends Model
         'contacts' => 'array',
         'commencement_date' => 'date',
         'registration_granted_date' => 'date',
+        'admission_date' => 'date',
+        'joining_industry_date' => 'date',
         'uploaded_documents' => 'array',
     ];
 

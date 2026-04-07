@@ -50,7 +50,7 @@ class ProfileController extends Controller
                 'current_step' => 3
             ]);
         } elseif ($step == 3) {
-            $request->validate([
+            $rules = [
                 'legal_name' => 'required',
                 'office_phone' => 'required',
                 'office_email' => 'required|email',
@@ -62,13 +62,31 @@ class ProfileController extends Controller
                 'shipping_city' => 'required',
                 'billing_street' => 'required',
                 'shipping_street' => 'required',
-                'commencement_date' => 'required|date',
-                'trade_registration_no' => 'required',
-                'registrant' => 'required',
-                'registration_granted_date' => 'required|date',
                 'iata_registered' => 'required',
-            ]);
-            
+            ];
+
+            if ($user->legal_status == 'Student') {
+                $rules['admission_date'] = 'required|date';
+                $rules['college_name'] = 'required';
+                $rules['course_duration'] = 'required';
+            } elseif ($user->legal_status == 'In Service Professional') {
+                $rules['joining_industry_date'] = 'required|date|before_or_equal:' . now()->subYears(10)->toDateString();
+                $rules['first_company_name'] = 'required';
+                $rules['current_company_name'] = 'required';
+            } else {
+                $rules['commencement_date'] = 'required|date|before_or_equal:' . now()->subYears(4)->toDateString();
+                $rules['trade_registration_no'] = 'required';
+                $rules['registrant'] = 'required';
+                $rules['registration_granted_date'] = 'required|date';
+            }
+
+            $messages = [
+                'joining_industry_date.before_or_equal' => 'Date of Joining the Industry must be minimum 10 Years Old as on date.',
+                'commencement_date.before_or_equal' => 'Date of Commencement of business must be minimum 4 Years Old as on date.',
+            ];
+
+            $request->validate($rules, $messages);
+
             // Validate and save application section
             $application = Application::where('user_id', $user->id)->first();
             $data = $request->only([
@@ -77,7 +95,9 @@ class ProfileController extends Controller
                 'shipping_country', 'shipping_state', 'shipping_city', 'shipping_street', 'shipping_postal_code',
                 'breach_details', 'breach_full_name', 'breach_concerned_company', 'breach_relationship', 'breach_tax_id',
                 'commencement_date', 'trade_registration_no', 'registrant', 'registration_granted_date', 'iata_no',
-                'tourism_board_name', 'tourism_board_reg_no'
+                'tourism_board_name', 'tourism_board_reg_no',
+                'admission_date', 'college_name', 'course_duration',
+                'joining_industry_date', 'first_company_name', 'current_company_name'
             ]);
             $data['same_as_billing'] = $request->has('same_as_billing');
             $data['fiduciary_breach'] = $request->fiduciary_breach == 'yes';

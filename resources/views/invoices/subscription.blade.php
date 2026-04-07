@@ -181,8 +181,12 @@
             <table style="width: 100%;">
                 <tr>
                     <td style="width: 60%;">
-                        <div class="info-label">Note</div>
-                        <div style="font-size: 12px; color: #666;">
+                        <div class="info-label">Notes / Reason</div>
+                        <div style="font-size: 12px; color: #333; font-weight: 500; font-style: italic;">
+                            {{ $subscription->history->count() > 0 ? $subscription->history->sortByDesc('created_at')->first()->notes : 'Official approval & verification of membership' }}
+                        </div>
+                        <br/>
+                        <div style="font-size: 11px; color: #999; margin-top: 5px;">
                             This is a computer generated invoice for your membership with Turivanta Alliance.
                             For any queries, please contact info@turivanta.com
                         </div>

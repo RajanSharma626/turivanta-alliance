@@ -19,13 +19,18 @@ class SearchController extends Controller
         $results = User::whereHas('application', function($q) {
                 $q->where('status', 'approved');
             })
+            ->whereHas('subscriptions', function($q) {
+                $q->where('status', 'active');
+            })
             ->where(function($q) use ($query) {
                 $q->where('membership_id', 'LIKE', "%{$query}%")
                     ->orWhereHas('application', function($sq) use ($query) {
                         $sq->where('legal_name', 'LIKE', "%{$query}%");
                     });
             })
-            ->with('application')
+            ->with(['application', 'subscriptions' => function($q) {
+                $q->where('status', 'active');
+            }])
             ->paginate(12)
             ->appends(['q' => $query]);
 

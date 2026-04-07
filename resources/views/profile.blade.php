@@ -440,7 +440,7 @@
                             <div class="space-y-8">
                                 <h3
                                     class="bg-[#ff014f]/10 text-[#ff014f] font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
-                                    SECTION 1 - Identification of Business for which Approval Requested</h3>
+                                    SECTION 1 - Identification for which Approval Requested</h3>
 
                                 <!-- Identification Grid -->
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -1095,68 +1095,157 @@
                                     SECTION 3 - Other Information</h3>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                                    <div class="flex flex-col gap-2">
-                                        <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex flex-col gap-1">
-                                            <div class="flex items-center gap-1">Date of Commencement of business <span
-                                                    class="text-[#ff014f]">*</span> <span
-                                                    class="text-[10px] lowercase italic font-bold text-gray-600 tracking-normal">(Should
-                                                    be minimum 4 Years Old as on date)</span></div>
+                                    @if ($user->legal_status == 'Student')
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Date of Admission <span class="text-[#ff014f]">*</span>
+                                            </label>
+                                            <input type="date" name="admission_date"
+                                                value="{{ old('admission_date', $application->admission_date ? $application->admission_date->format('Y-m-d') : '') }}"
+                                                class="w-full bg-[#131215] border @error('admission_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark] text-sm">
+                                            @error('admission_date')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Name of College / Institute <span class="text-[#ff014f]">*</span>
+                                            </label>
+                                            <input type="text" name="college_name"
+                                                value="{{ old('college_name', $application->college_name) }}"
+                                                class="w-full bg-[#131215] border @error('college_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            @error('college_name')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Duration of Course <span class="text-[#ff014f]">*</span>
+                                            </label>
+                                            <input type="text" name="course_duration"
+                                                value="{{ old('course_duration', $application->course_duration) }}"
+                                                class="w-full bg-[#131215] border @error('course_duration') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm"
+                                                placeholder="e.g. 3 Years">
+                                            @error('course_duration')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    @elseif($user->legal_status == 'In Service Professional')
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex flex-col gap-1">
+                                                <div class="flex items-center gap-1">Date of Joining the Industry <span
+                                                        class="text-[#ff014f]">*</span> <span
+                                                        class="text-[10px] lowercase italic font-bold text-gray-600 tracking-normal">(Should
+                                                        be minimum 10 Years Old as on date)</span></div>
+                                            </label>
+                                            <input type="date" name="joining_industry_date"
+                                                max="{{ now()->subYears(10)->toDateString() }}"
+                                                value="{{ old('joining_industry_date', $application->joining_industry_date ? $application->joining_industry_date->format('Y-m-d') : '') }}"
+                                                class="w-full bg-[#131215] border @error('joining_industry_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark] text-sm">
+                                            @error('joining_industry_date')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Name of First Company <span class="text-[#ff014f]">*</span>
+                                            </label>
+                                            <input type="text" name="first_company_name"
+                                                value="{{ old('first_company_name', $application->first_company_name) }}"
+                                                class="w-full bg-[#131215] border @error('first_company_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            @error('first_company_name')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Name of Current Company <span class="text-[#ff014f]">*</span>
+                                            </label>
+                                            <input type="text" name="current_company_name"
+                                                value="{{ old('current_company_name', $application->current_company_name) }}"
+                                                class="w-full bg-[#131215] border @error('current_company_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            @error('current_company_name')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    @else
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex flex-col gap-1">
+                                                <div class="flex items-center gap-1">Date of Commencement of business <span
+                                                        class="text-[#ff014f]">*</span> <span
+                                                        class="text-[10px] lowercase italic font-bold text-gray-600 tracking-normal">(Should
+                                                        be minimum 4 Years Old as on date)</span></div>
 
-                                        </label>
-                                        <input type="date" name="commencement_date"
-                                            value="{{ old('commencement_date', $application->commencement_date ? $application->commencement_date->format('Y-m-d') : '') }}"
-                                            class="w-full bg-[#131215] border @error('commencement_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark] text-sm">
-                                        @error('commencement_date')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="flex flex-col gap-2">
-                                        <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Trade registration Number <span class="text-[#ff014f]">*</span>
-                                        </label>
-                                        <input type="text" name="trade_registration_no"
-                                            value="{{ old('trade_registration_no', $application->trade_registration_no) }}"
-                                            class="w-full bg-[#131215] border @error('trade_registration_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
-                                        @error('trade_registration_no')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                            </label>
+                                            <input type="date" name="commencement_date"
+                                                max="{{ now()->subYears(4)->toDateString() }}"
+                                                value="{{ old('commencement_date', $application->commencement_date ? $application->commencement_date->format('Y-m-d') : '') }}"
+                                                class="w-full bg-[#131215] border @error('commencement_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark] text-sm">
+                                            @error('commencement_date')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Trade registration Number <span class="text-[#ff014f]">*</span>
+                                            </label>
+                                            <input type="text" name="trade_registration_no"
+                                                value="{{ old('trade_registration_no', $application->trade_registration_no) }}"
+                                                class="w-full bg-[#131215] border @error('trade_registration_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            @error('trade_registration_no')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Registrant <span class="text-[#ff014f]">*</span>
+                                            </label>
+                                            <input type="text" name="registrant"
+                                                value="{{ old('registrant', $application->registrant) }}"
+                                                class="bg-[#131215] border @error('registrant') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
+                                                placeholder="Name of registrant">
+                                            @error('registrant')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label
+                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Date When Registration was Granted <span class="text-[#ff014f]">*</span>
+                                            </label>
+                                            <input type="date" name="registration_granted_date"
+                                                value="{{ old('registration_granted_date', $application->registration_granted_date ? $application->registration_granted_date->format('Y-m-d') : '') }}"
+                                                class="bg-[#131215] border @error('registration_granted_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark]">
+                                            @error('registration_granted_date')
+                                                <span
+                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    @endif
 
                                     <div class="flex flex-col gap-2">
                                         <label
                                             class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Registrant <span class="text-[#ff014f]">*</span>
-                                        </label>
-                                        <input type="text" name="registrant"
-                                            value="{{ old('registrant', $application->registrant) }}"
-                                            class="bg-[#131215] border @error('registrant') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
-                                            placeholder="Name of registrant">
-                                        @error('registrant')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="flex flex-col gap-2">
-                                        <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Date When Registration was Granted <span class="text-[#ff014f]">*</span>
-                                        </label>
-                                        <input type="date" name="registration_granted_date"
-                                            value="{{ old('registration_granted_date', $application->registration_granted_date ? $application->registration_granted_date->format('Y-m-d') : '') }}"
-                                            class="bg-[#131215] border @error('registration_granted_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark]">
-                                        @error('registration_granted_date')
-                                            <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="flex flex-col gap-2">
-                                        <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Is your business an IATA Registered? <span class="text-[#ff014f]">*</span>
+                                            Are you an IATA? <span class="text-[#ff014f]">*</span>
                                         </label>
                                         <select name="iata_registered" id="iata_registered"
                                             class="bg-[#131215] border @error('iata_registered') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]">
@@ -1174,7 +1263,7 @@
                                         @enderror
                                     </div>
                                     <div id="iata_no_container"
-                                        class="flex flex-col gap-2 {{ old('iata_registered', $application->iata_registered) == 'yes' ? '' : 'hidden' }}">
+                                        class="flex flex-col gap-2 {{ old('iata_registered', $application->iata_registered ? 'yes' : 'no') == 'yes' ? '' : 'hidden' }}">
                                         <label
                                             class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
                                             IATA No. <span class="text-[#ff014f]">*</span>
@@ -1188,71 +1277,73 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Tourism Board Registration Block -->
-                                    <div
-                                        class="flex flex-col gap-6 p-8 bg-[#ff014f]/5 rounded-[2.5rem] border border-[#ff014f]/10 mt-6 md:col-span-2">
-                                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                                            <div class="space-y-1">
-                                                <h4 class="text-white font-bold tracking-tight">Tourism Board Registration
-                                                </h4>
-                                                <p class="text-[11px] text-gray-500 font-medium uppercase tracking-wider">
-                                                    Is your business registered with any Tourism Board?</p>
+                                    @if (!in_array($user->legal_status, ['Student', 'In Service Professional']))
+                                        <!-- Tourism Board Registration Block -->
+                                        <div
+                                            class="flex flex-col gap-6 p-8 bg-[#ff014f]/5 rounded-[2.5rem] border border-[#ff014f]/10 mt-6 md:col-span-2">
+                                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                                <div class="space-y-1">
+                                                    <h4 class="text-white font-bold tracking-tight">Tourism Board Registration
+                                                    </h4>
+                                                    <p class="text-[11px] text-gray-500 font-medium uppercase tracking-wider">
+                                                        Is your business registered with any Tourism Board?</p>
+                                                </div>
+                                                <div
+                                                    class="flex items-center gap-2 bg-[#131215] p-1.5 rounded-2xl border border-white/5">
+                                                    <label class="relative flex-1 group">
+                                                        <input type="radio" name="tourism_board_registered" value="yes"
+                                                            {{ old('tourism_board_registered', $application->tourism_board_registered) ? 'checked' : '' }}
+                                                            onclick="toggleTourismFields(true)" class="peer sr-only">
+                                                        <div
+                                                            class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-500 cursor-pointer transition-all
+                                                                    peer-checked:bg-[#ff014f] peer-checked:text-white group-hover:text-gray-300">
+                                                            Yes
+                                                        </div>
+                                                    </label>
+                                                    <label class="relative flex-1 group">
+                                                        <input type="radio" name="tourism_board_registered" value="no"
+                                                            {{ !old('tourism_board_registered', $application->tourism_board_registered) ? 'checked' : '' }}
+                                                            onclick="toggleTourismFields(false)" class="peer sr-only">
+                                                        <div
+                                                            class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-500 cursor-pointer transition-all
+                                                                    peer-checked:bg-[#ff014f] peer-checked:text-white group-hover:text-gray-300">
+                                                            No
+                                                        </div>
+                                                    </label>
+                                                </div>
                                             </div>
-                                            <div
-                                                class="flex items-center gap-2 bg-[#131215] p-1.5 rounded-2xl border border-white/5">
-                                                <label class="relative flex-1 group">
-                                                    <input type="radio" name="tourism_board_registered" value="yes"
-                                                        {{ old('tourism_board_registered', $application->tourism_board_registered) ? 'checked' : '' }}
-                                                        onclick="toggleTourismFields(true)" class="peer sr-only">
-                                                    <div
-                                                        class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-500 cursor-pointer transition-all
-                                                                peer-checked:bg-[#ff014f] peer-checked:text-white group-hover:text-gray-300">
-                                                        Yes
-                                                    </div>
-                                                </label>
-                                                <label class="relative flex-1 group">
-                                                    <input type="radio" name="tourism_board_registered" value="no"
-                                                        {{ !old('tourism_board_registered', $application->tourism_board_registered) ? 'checked' : '' }}
-                                                        onclick="toggleTourismFields(false)" class="peer sr-only">
-                                                    <div
-                                                        class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-500 cursor-pointer transition-all
-                                                                peer-checked:bg-[#ff014f] peer-checked:text-white group-hover:text-gray-300">
-                                                        No
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
 
-                                        <div id="tourism_board_fields"
-                                            class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/5 mt-2 {{ old('tourism_board_registered', $application->tourism_board_registered) ? '' : 'hidden' }}">
-                                            <div class="flex flex-col gap-2">
-                                                <label
-                                                    class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Name
-                                                    of Tourism Board <span class="text-[#ff014f]">*</span></label>
-                                                <input type="text" name="tourism_board_name"
-                                                    value="{{ old('tourism_board_name', $application->tourism_board_name) }}"
-                                                    class="bg-[#131215] border @error('tourism_board_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
-                                                    placeholder="Board name">
-                                                @error('tourism_board_name')
-                                                    <span
-                                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="flex flex-col gap-2">
-                                                <label
-                                                    class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Registration
-                                                    Number <span class="text-[#ff014f]">*</span></label>
-                                                <input type="text" name="tourism_board_reg_no"
-                                                    value="{{ old('tourism_board_reg_no', $application->tourism_board_reg_no) }}"
-                                                    class="bg-[#131215] border @error('tourism_board_reg_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
-                                                    placeholder="Reg no.">
-                                                @error('tourism_board_reg_no')
-                                                    <span
-                                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                                @enderror
+                                            <div id="tourism_board_fields"
+                                                class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/5 mt-2 {{ old('tourism_board_registered', $application->tourism_board_registered) ? '' : 'hidden' }}">
+                                                <div class="flex flex-col gap-2">
+                                                    <label
+                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Name
+                                                        of Tourism Board <span class="text-[#ff014f]">*</span></label>
+                                                    <input type="text" name="tourism_board_name"
+                                                        value="{{ old('tourism_board_name', $application->tourism_board_name) }}"
+                                                        class="bg-[#131215] border @error('tourism_board_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
+                                                        placeholder="Board name">
+                                                    @error('tourism_board_name')
+                                                        <span
+                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="flex flex-col gap-2">
+                                                    <label
+                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Registration
+                                                        Number <span class="text-[#ff014f]">*</span></label>
+                                                    <input type="text" name="tourism_board_reg_no"
+                                                        value="{{ old('tourism_board_reg_no', $application->tourism_board_reg_no) }}"
+                                                        class="bg-[#131215] border @error('tourism_board_reg_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
+                                                        placeholder="Reg no.">
+                                                    @error('tourism_board_reg_no')
+                                                        <span
+                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
 
                                 <script>
@@ -1517,21 +1608,34 @@
                                     </div>
                                 </div>
                                 @if ($application->status == 'approved')
-                                    <div class="flex flex-col items-center gap-2">
-                                        <span
-                                            class="text-[#ff014f] font-black uppercase text-[10px] tracking-widest leading-none">Member
-                                            ID (GTIN)</span>
-                                        <div
-                                            class="px-4 py-2 bg-[#ff014f]/5 border border-[#ff014f]/20 rounded-xl text-[#ff014f] font-black tracking-widest uppercase">
-                                            {{ $user->membership_id }}
+                                    @if($user->currentSubscription)
+                                        <div class="flex flex-col items-center gap-2">
+                                            <span
+                                                class="text-[#ff014f] font-black uppercase text-[10px] tracking-widest leading-none">Member
+                                                ID (GTIN)</span>
+                                            <div
+                                                class="px-4 py-2 bg-[#ff014f]/5 border border-[#ff014f]/20 rounded-xl text-[#ff014f] font-black tracking-widest uppercase">
+                                                {{ $user->membership_id }}
+                                            </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        <div class="flex flex-col items-center gap-2">
+                                            <span
+                                                class="text-yellow-600 font-black uppercase text-[10px] tracking-widest leading-none">Member
+                                                ID (GTIN)</span>
+                                            <div
+                                                class="px-4 py-2 bg-yellow-600/5 border border-yellow-600/20 rounded-xl text-yellow-600 font-black tracking-widest uppercase animate-pulse">
+                                                Subscription Pending
+                                            </div>
+                                        </div>
+                                    @endif
                                 @endif
                             </div>
                         </div>
 
                         @php
                             $status = strtolower($application->status ?? 'pending');
+                            $isSubPending = ($status == 'approved' && !$user->currentSubscription);
                             $classes = match ($status) {
                                 'approved' => [
                                     'bg' => 'bg-emerald-500/10',
@@ -1558,25 +1662,12 @@
                             class="inline-flex flex-col sm:flex-row items-center gap-3 px-6 py-3 {{ $classes['bg'] }} border {{ $classes['border'] }} rounded-3xl sm:rounded-full mb-10">
                             <div class="flex items-center gap-3">
                                 <span
-                                    class="w-2.5 h-2.5 {{ $classes['dot'] }} rounded-full {{ $status == 'pending' ? 'animate-pulse' : '' }}"></span>
+                                    class="w-2.5 h-2.5 {{ $classes['dot'] }} rounded-full {{ ($status == 'pending') ? 'animate-pulse' : '' }}"></span>
                                 <span class="{{ $classes['text'] }} font-black uppercase text-xs tracking-widest">Status:
-                                    {{ strtoupper($status) }}</span>
+                                    {{  strtoupper($status) }}</span>
                             </div>
                         </div>
 
-                        <p class="text-gray-400 max-w-lg mx-auto mb-10 text-lg font-medium leading-relaxed">
-                            @if ($status == 'approved')
-                                Congratulations! Your membership has been approved. You are now a verified member of the
-                                Turivanta Alliance.
-                            @elseif($status == 'rejected')
-                                Your application has been declined following our internal audit. Please review the feedback
-                                below for necessary corrections.
-                            @else
-                                Fantastic! Your documents have been received. Our compliance team will audit your
-                                application and send a confirmation to your registered e-mail id: <span
-                                    class="text-white">{{ $user->email }}</span>
-                            @endif
-                        </p>
 
                         @if ($status == 'rejected' && $application->rejection_reason)
                             <div
@@ -1761,26 +1852,64 @@
                                         </h4>
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                                             <div class="space-y-5">
-                                                <div>
-                                                    <p
-                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
-                                                        Commencement of Business</p>
-                                                    <p class="text-white text-sm font-medium">
-                                                        {{ $application->commencement_date ? $application->commencement_date->format('M d, Y') : 'N/A' }}
-                                                    </p>
-                                                </div>
-                                                <div>
-                                                    <p
-                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
-                                                        Trade Registration Details</p>
-                                                    <p class="text-white text-sm font-medium">No:
-                                                        {{ $application->trade_registration_no }}</p>
-                                                    <p class="text-gray-400 text-xs">Granted:
-                                                        {{ $application->registration_granted_date ? $application->registration_granted_date->format('M d, Y') : 'N/A' }}
-                                                    </p>
-                                                    <p class="text-gray-400 text-xs">Registrant:
-                                                        {{ $application->registrant }}</p>
-                                                </div>
+                                                @if ($user->legal_status == 'Student')
+                                                    <div>
+                                                        <p
+                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            Date of Admission</p>
+                                                        <p class="text-white text-sm font-medium">
+                                                            {{ $application->admission_date ? $application->admission_date->format('M d, Y') : 'N/A' }}
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <p
+                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            College / Institute</p>
+                                                        <p class="text-white text-sm font-medium">
+                                                            {{ $application->college_name }}</p>
+                                                        <p class="text-gray-400 text-xs">Duration:
+                                                            {{ $application->course_duration }}</p>
+                                                    </div>
+                                                @elseif($user->legal_status == 'In Service Professional')
+                                                    <div>
+                                                        <p
+                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            Industry Experience Since</p>
+                                                        <p class="text-white text-sm font-medium">
+                                                            {{ $application->joining_industry_date ? $application->joining_industry_date->format('M d, Y') : 'N/A' }}
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <p
+                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            Company History</p>
+                                                        <p class="text-white text-sm font-medium">Current:
+                                                            {{ $application->current_company_name }}</p>
+                                                        <p class="text-gray-400 text-xs">Started at:
+                                                            {{ $application->first_company_name }}</p>
+                                                    </div>
+                                                @else
+                                                    <div>
+                                                        <p
+                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            Commencement of Business</p>
+                                                        <p class="text-white text-sm font-medium">
+                                                            {{ $application->commencement_date ? $application->commencement_date->format('M d, Y') : 'N/A' }}
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <p
+                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            Trade Registration Details</p>
+                                                        <p class="text-white text-sm font-medium">No:
+                                                            {{ $application->trade_registration_no }}</p>
+                                                        <p class="text-gray-400 text-xs">Granted:
+                                                            {{ $application->registration_granted_date ? $application->registration_granted_date->format('M d, Y') : 'N/A' }}
+                                                        </p>
+                                                        <p class="text-gray-400 text-xs">Registrant:
+                                                            {{ $application->registrant }}</p>
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="space-y-5">
                                                 <div>

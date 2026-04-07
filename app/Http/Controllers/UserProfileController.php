@@ -66,7 +66,7 @@ class UserProfileController extends Controller
     public function downloadInvoice()
     {
         $user = Auth::user();
-        $subscription = $user->currentSubscription;
+        $subscription = $user->currentSubscription()->with('history')->first();
 
         if (!$subscription) {
             return back()->with('error', 'No active subscription found.');
