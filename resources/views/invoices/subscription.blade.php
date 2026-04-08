@@ -218,7 +218,7 @@
         <div class="footer">
             <strong>Turivanta Alliance</strong><br>
             turivanta.com | info@turivanta.com<br>
-            Global Travel Industry Network
+            Universal Identity of Tourism
         </div>
     </div>
 </body>
