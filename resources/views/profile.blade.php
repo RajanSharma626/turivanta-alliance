@@ -165,6 +165,7 @@
                                                 <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the
                                                     applicant.</li>
                                                 <li class="flex gap-3"><span>•</span> Experience Certificate</li>
+                                                <li class="flex gap-3"><span>•</span> Recommendation Letter (from Turivanta Member)</li>
                                             </ul>
                                         </div>
 
@@ -176,9 +177,10 @@
                                             </h4>
                                             <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
                                                 <li class="flex gap-3"><span>•</span> Student ID Card / Admission Proof /
-                                                    Endorsement Letter by Designated Institute</li>
+                                                     Endorsement Letter by Designated Institute</li>
                                                 <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the
-                                                    applicant.</li>
+                                                     applicant.</li>
+                                                <li class="flex gap-3"><span>•</span> Recommendation Letter (from Turivanta Member)</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -252,11 +254,9 @@
                                         Years Old from the date of application OR You must have minimum <span
                                             class="text-white font-bold">10 years</span> of Experience of the
                                         industry</span></li>
-                                @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
-                                    <li class="flex gap-3"><span class="shrink-0">•</span> <span>Letter of recommendation
-                                            from Turivanta Member on
-                                            their letter head with date, sign and stamp.</span></li>
-                                @endif
+                                <li class="flex gap-3"><span class="shrink-0">•</span> <span>Letter of recommendation
+                                        from Turivanta Member on
+                                        their letter head with date, sign and stamp.</span></li>
                                 <li class="flex gap-3"><span class="shrink-0">•</span> <span>A separate online application
                                         is required for each
                                         agency location for which approval is sought.</span></li>
@@ -1439,31 +1439,31 @@
                                                     class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
-
-                                        {{-- Recommendation Letter --}}
-                                        <div class="flex flex-col gap-3">
-                                            <label
-                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">RECOMMENDATION
-                                                LETTER (FROM TURIVANTA MEMBER)</label>
-                                            <div class="relative group">
-                                                <input type="file" name="recommendation_letter"
-                                                    id="recommendation_letter" class="sr-only"
-                                                    onchange="updateFilename(this)">
-                                                <label for="recommendation_letter"
-                                                    class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
-                                                    <span
-                                                        class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
-                                                        file</span>
-                                                    <span class="text-gray-500 text-xs font-medium filename-display">No
-                                                        file chosen</span>
-                                                </label>
-                                            </div>
-                                            @error('recommendation_letter')
-                                                <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
-                                            @enderror
-                                        </div>
                                     @endif
+
+                                    {{-- Recommendation Letter --}}
+                                    <div class="flex flex-col gap-3">
+                                        <label
+                                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* RECOMMENDATION
+                                            LETTER (FROM TURIVANTA MEMBER)</label>
+                                        <div class="relative group">
+                                            <input type="file" name="recommendation_letter"
+                                                id="recommendation_letter" class="sr-only"
+                                                onchange="updateFilename(this)">
+                                            <label for="recommendation_letter"
+                                                class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                <span
+                                                    class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                    file</span>
+                                                <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                    file chosen</span>
+                                            </label>
+                                        </div>
+                                        @error('recommendation_letter')
+                                            <span
+                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        @enderror
+                                    </div>
 
                                     {{-- Experience Certificate (For Professionals) --}}
                                     @if ($user->legal_status == 'In Service Professional')

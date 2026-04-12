@@ -116,7 +116,7 @@ class ProfileController extends Controller
             $rules = [
                 'owner_ids' => 'required|array|min:1',
                 'owner_ids.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
-                'recommendation_letter' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+                'recommendation_letter' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
             ];
 
             if ($user->legal_status == 'In Service Professional') {
