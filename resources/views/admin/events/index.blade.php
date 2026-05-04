@@ -45,7 +45,11 @@
                         </div>
                     </td>
                     <td class="px-6 py-4 bg-white/[0.02] group-hover:bg-white/[0.04] border-y border-white/5 group-hover:border-[#ff014f]/20 transition-all">
-                        <span class="text-gray-300 text-xs font-semibold">{{ $event->location }}</span>
+                        @if(filter_var($event->location, FILTER_VALIDATE_URL))
+                            <a href="{{ $event->location }}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 text-xs font-semibold transition-colors break-all">{{ $event->location }}</a>
+                        @else
+                            <span class="text-gray-300 text-xs font-semibold break-words">{{ $event->location }}</span>
+                        @endif
                     </td>
                     <td class="px-6 py-4 bg-white/[0.02] group-hover:bg-white/[0.04] border-y border-white/5 group-hover:border-[#ff014f]/20 transition-all">
                         <span class="text-gray-300 text-xs font-semibold uppercase tracking-widest">{{ $event->event_date->format('M d, Y • h:i A') }}</span>
