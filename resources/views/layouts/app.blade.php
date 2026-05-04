@@ -6,6 +6,8 @@
     <title>@yield('title', 'Turivanta Alliance - The Identity of Modern Tourism')</title>
     <meta name="description" content="@yield('meta_description', 'Turivanta Alliance - The Identity of Modern Tourism')">
     <meta name="keywords" content="@yield('meta_keywords', 'tourism, travel, hospitality, alliance')">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
     <link rel="shortcut icon" href="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
