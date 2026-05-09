@@ -5,7 +5,7 @@
 @section('meta_keywords', $query ? 'tourism identity platform, travel and hospitality network' : 'certified tourism businesses and tourism business network')
 
 @section('content')
-    <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-[#050505] relative overflow-hidden">
+    <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-background relative overflow-hidden">
         <!-- Background Accents -->
         <div
             class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#ff014f]/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2">
@@ -17,12 +17,12 @@
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
             <div class="mb-12 animate-fadeInUp">
-                <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-4">
+                <h1 class="text-4xl sm:text-5xl font-black text-foreground tracking-tight mb-4">
                     Search <span class="text-[#ff014f]">Results</span>
                 </h1>
-                <p class="text-gray-400 text-lg font-medium">
+                <p class="text-muted-foreground text-lg font-medium">
                     @if ($query)
-                        Showing results for "<span class="text-white font-bold">{{ $query }}</span>"
+                        Showing results for "<span class="text-foreground font-bold">{{ $query }}</span>"
                     @else
                         Discover company of the Turivanta Alliance.
                     @endif
@@ -30,20 +30,20 @@
             </div>
 
             @if ($results->isEmpty())
-                <div class="bg-[#0a0a0f] border border-white/5 rounded-[2.5rem] p-10 text-center animate-fadeIn">
+                <div class="bg-card border border-card-border rounded-[2.5rem] p-10 text-center animate-fadeIn shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                     <div
-                        class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-8 border border-white/10">
+                        class="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-8 border border-card-border">
                         <svg class="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">No matching identities found</h3>
-                    <p class="text-gray-500 max-w-md mx-auto">We couldn't find any company matching your search criteria.
+                    <h3 class="text-2xl font-bold text-foreground mb-2">No matching identities found</h3>
+                    <p class="text-muted-foreground max-w-md mx-auto">We couldn't find any company matching your search criteria.
                         Please double-check the ID or company name.</p>
                     <div class="mt-10">
                         <a href="{{ route('home') }}"
-                            class="inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all">
+                            class="inline-flex items-center gap-2 px-8 py-4 bg-muted border border-card-border text-foreground font-bold rounded-2xl hover:bg-muted/80 transition-all">
                             Return to Homepage
                         </a>
                     </div>
@@ -57,7 +57,7 @@
                     @foreach ($results as $user)
                         @php $app = $user->application; @endphp
                         <div
-                            class="group bg-[#0a0a0f] border border-white/5 rounded-[2rem] p-8 hover:border-[#ff014f]/30 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+                            class="group bg-card border border-card-border rounded-[2rem] p-8 hover:border-[#ff014f]/30 shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
                             <!-- Card Glow -->
                             <div
                                 class="absolute inset-0 bg-gradient-to-tr from-[#ff014f]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -77,50 +77,50 @@
 
                             <!-- Content -->
                             <div class="relative z-10">
-                                <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-[#ff014f] transition-colors line-clamp-1">
+                                <h3 class="text-xl font-extrabold text-foreground mb-1 group-hover:text-[#ff014f] transition-colors line-clamp-1">
                                     {{ $app->trade_name ?? ($app->legal_name ?? $user->name) }}
                                 </h3>
                                 <p class="text-[#ff014f] text-[11px] font-black uppercase tracking-widest mb-4">
                                     {{ $user->business_type }}
                                 </p>
 
-                                <hr class="border-white/5 mb-6">
+                                <hr class="border-card-border mb-6">
 
                                 <div class="space-y-4">
                                     @if ($viewerHasSubscription)
                                         <!-- Full Info -->
                                         <div class="flex flex-col gap-1">
-                                            <span class="text-[10px] text-gray-500 font-black uppercase tracking-widest leading-none">User / Owner Name</span>
-                                            <span class="text-gray-300 font-bold text-xs">{{ $user->name }}</span>
+                                            <span class="text-[10px] text-muted-foreground font-black uppercase tracking-widest leading-none">User / Owner Name</span>
+                                            <span class="text-foreground/80 font-bold text-xs">{{ $user->name }}</span>
                                         </div>
                                         <div class="flex flex-col gap-1">
-                                            <span class="text-[10px] text-gray-500 font-black uppercase tracking-widest leading-none">Contact No.</span>
-                                            <span class="text-gray-300 font-bold text-xs">{{ $user->contact_no ?? 'Private' }}</span>
+                                            <span class="text-[10px] text-muted-foreground font-black uppercase tracking-widest leading-none">Contact No.</span>
+                                            <span class="text-foreground/80 font-bold text-xs">{{ $user->contact_no ?? 'Private' }}</span>
                                         </div>
                                         <div class="flex flex-col gap-1">
-                                            <span class="text-[10px] text-gray-500 font-black uppercase tracking-widest leading-none">Email ID</span>
-                                            <span class="text-gray-300 font-bold text-xs lowercase">{{ $user->email }}</span>
+                                            <span class="text-[10px] text-muted-foreground font-black uppercase tracking-widest leading-none">Email ID</span>
+                                            <span class="text-foreground/80 font-bold text-xs lowercase">{{ $user->email }}</span>
                                         </div>
                                         <div class="flex flex-col gap-1">
-                                            <span class="text-[10px] text-gray-500 font-black uppercase tracking-widest leading-none">Address</span>
-                                            <span class="text-gray-300 font-bold text-xs italic line-clamp-2">
+                                            <span class="text-[10px] text-muted-foreground font-black uppercase tracking-widest leading-none">Address</span>
+                                            <span class="text-foreground/80 font-bold text-xs italic line-clamp-2">
                                                 {{ $app->billing_street }}, {{ $app->billing_city }}, {{ $app->billing_country }}
                                             </span>
                                         </div>
                                     @else
                                         <!-- Limited Info -->
                                         <div class="flex flex-col gap-1">
-                                            <span class="text-[10px] text-gray-500 font-black uppercase tracking-widest leading-none">Location</span>
-                                            <span class="text-gray-400 font-medium text-xs">
+                                            <span class="text-[10px] text-muted-foreground font-black uppercase tracking-widest leading-none">Location</span>
+                                            <span class="text-muted-foreground font-medium text-xs">
                                                 {{ $app->billing_country ?? ($user->country_concerned ?? 'Universal') }}
                                             </span>
                                         </div>
                                         
                                         <!-- Call to Action -->
-                                        <div class="mt-6 pt-6 border-t border-white/5">
+                                        <div class="mt-6 pt-6 border-t border-card-border">
                                             <div class="p-4 bg-[#ff014f]/5 border border-[#ff014f]/10 rounded-2xl text-center group/sub">
-                                                <p class="text-[9px] text-gray-400 font-black uppercase tracking-widest mb-3">Subscription Required</p>
-                                                <a href="{{ route('membership') }}" class="inline-block text-[10px] text-white font-black uppercase tracking-widest hover:text-[#ff014f] transition-colors">
+                                                <p class="text-[9px] text-muted-foreground font-black uppercase tracking-widest mb-3">Subscription Required</p>
+                                                <a href="{{ route('membership') }}" class="inline-block text-[10px] text-foreground font-black uppercase tracking-widest hover:text-[#ff014f] transition-colors">
                                                     Upgrade to view contact
                                                 </a>
                                             </div>
@@ -143,12 +143,12 @@
                 </div>
 
                 @if (!$viewerHasSubscription)
-                    <div class="mt-20 p-10 bg-[#0a0a0f] border border-[#ff014f]/20 rounded-[2.5rem] relative overflow-hidden group animate-fadeInUp" style="animation-delay: 0.3s">
+                    <div class="mt-20 p-10 bg-card border border-[#ff014f]/20 rounded-[2.5rem] relative overflow-hidden group animate-fadeInUp shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]" style="animation-delay: 0.3s">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-[#ff014f]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                         <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                             <div class="text-center md:text-left">
-                                <h3 class="text-2xl font-black text-white mb-2 italic uppercase tracking-tight">Unlock Professional <span class="text-[#ff014f]">Access</span></h3>
-                                <p class="text-gray-400 text-sm max-w-xl">You are currently viewing a limited data preview. Subscribe to the Turivanta Alliance to unlock full contact details, ownership information, and verified addresses of all registered members.</p>
+                                <h3 class="text-2xl font-black text-foreground mb-2 italic uppercase tracking-tight">Unlock Professional <span class="text-[#ff014f]">Access</span></h3>
+                                <p class="text-muted-foreground text-sm max-w-xl">You are currently viewing a limited data preview. Subscribe to the Turivanta Alliance to unlock full contact details, ownership information, and verified addresses of all registered members.</p>
                             </div>
                             <a href="{{ route('membership') }}" class="px-10 py-4 bg-[#ff014f] text-white font-black text-xs uppercase tracking-[0.2em] rounded-2xl shadow-[0_10px_30px_rgba(255,1,79,0.3)] hover:-translate-y-1 transition-all whitespace-nowrap">
                                 View Membership Plans

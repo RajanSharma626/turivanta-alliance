@@ -8,17 +8,52 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-border: var(--card-border);
+    --color-nav-bg: var(--nav-bg);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+}
+
+:root {
+    --background: #ffffff;
+    --foreground: #0f172a;
+    --card: #f8fafc;
+    --card-border: rgba(15, 23, 42, 0.1);
+    --nav-bg: rgba(255, 255, 255, 0.7);
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --primary: #0b21a8;
+    --primary-foreground: #ffffff;
+}
+
+.dark {
+    --background: #030712;
+    --foreground: #ffffff;
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    --card: #111827;
+    --card-border: rgba(255, 255, 255, 0.1);
+    --nav-bg: rgba(3, 7, 18, 0.6);
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
 }
 
 @layer base {
     body {
         font-family: 'Outfit', sans-serif;
-        background-color: #030712;
-        /* Deep dark blue/slate */
-        color: #ffffff;
+        background-color: var(--background);
+        color: var(--foreground);
         overflow-x: hidden;
         margin: 0;
         padding: 0;
+        main input:hover, main select:hover, main textarea:hover { border-color: #0b21a8 !important; }
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 }
 
@@ -72,12 +107,12 @@
 
     .hero-img-wave {
         animation: wave 8s ease-in-out infinite alternate;
-        box-shadow: 0 0 30px rgba(255, 1, 79, 0.4), inset 0 0 20px rgba(255, 1, 79, 0.4);
+        box-shadow: 0 0 30px rgba(11, 33, 168, 0.4), inset 0 0 20px rgba(11, 33, 168, 0.4);
         transition: all 0.5s ease;
         position: relative;
         z-index: 2;
         overflow: hidden;
-        background: linear-gradient(135deg, #e11d48, #ff014f);
+        background: linear-gradient(135deg, #0b21a8, #2563eb);
         padding: 4px;
         /* Border thickness */
     }
@@ -87,25 +122,24 @@
         height: 100%;
         animation: wave 8s ease-in-out infinite alternate;
         overflow: hidden;
-        background: #030712;
+        background: var(--background);
     }
 
     .hero-img-wave:hover {
-        box-shadow: 0 0 50px rgba(255, 1, 79, 0.6), inset 0 0 30px rgba(255, 1, 79, 0.6);
-        transform: scale(1.02);
+        box-shadow: 0 0 50px rgba(11, 33, 168, 0.6), inset 0 0 30px rgba(11, 33, 168, 0.6);
     }
 
     .glass-nav {
-        background: rgba(3, 7, 18, 0.6);
+        background: var(--nav-bg);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid var(--card-border);
     }
 
     .gradient-text {
-        background: linear-gradient(to right, #ff014f, #fb7185);
-        -webkit-background-clip: text;
         background-clip: text;
-        color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(90deg, #0b21a8, #2563eb);
     }
 }
