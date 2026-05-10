@@ -40,14 +40,40 @@
         @keyframes wave { 0%, 100% { border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%; } 34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; } 67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; } }
         
         .hero-img-container { animation: float 6s ease-in-out infinite; position: relative; }
-        .hero-img-wave { animation: wave 8s ease-in-out infinite alternate; box-shadow: 0 0 30px rgba(11, 33, 168, 0.4), inset 0 0 20px rgba(11, 33, 168, 0.4); transition: all 0.5s ease; position: relative; z-index: 2; overflow: hidden; background: linear-gradient(135deg, #0b21a8, #2563eb); padding: 4px; }
+        /* Hero image styles moved to app.css */
         .hero-img-inner { width: 100%; height: 100%; animation: wave 8s ease-in-out infinite alternate; overflow: hidden; background: var(--background); }
         
         main p { text-align: justify; }
         main input:hover, main select:hover, main textarea:hover { border-color: #0b21a8 !important; }
         
-        /* Theme Transition */
-        * { transition: background-color 0.3s ease, border-color 0.3s ease; }
+        /* Theme Transition handled in app.css */
+
+        .logo-light { display: block; }
+        .logo-dark { display: none; }
+        .dark .logo-light { display: none !important; }
+        .dark .logo-dark { display: block !important; }
+
+        /* Date picker popup theme fix */
+        html {
+            color-scheme: light;
+        }
+        html.dark {
+            color-scheme: dark;
+        }
+
+        /* Date picker icon theme fix */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: invert(0);
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        .dark input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+        input[type="date"]:hover::-webkit-calendar-picker-indicator {
+            opacity: 1;
+        }
     </style>
 
 
@@ -62,7 +88,10 @@
     <!-- Common Navbar -->
     <nav class="w-full z-50 px-6 py-4 lg:px-12 flex items-center justify-between bg-nav-bg glass-nav fixed top-0 transition-all duration-300">
         <div class="flex items-center cursor-pointer group">
-            <a href="{{ route('home') }}"><img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Logo" class="h-10 sm:h-12 w-auto object-contain rounded-md transition-transform duration-300 group-hover:scale-105"></a>
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('assets/img/Logo-of-Turivanta-light.png') }}" alt="Logo" class="h-10 sm:h-12 w-auto object-contain rounded-md transition-transform duration-300 group-hover:scale-105 logo-light">
+                <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Logo" class="h-10 sm:h-12 w-auto object-contain rounded-md transition-transform duration-300 group-hover:scale-105 logo-dark">
+            </a>
         </div>
         <div class="hidden md:flex items-center gap-1 bg-muted p-1 rounded-full border border-card-border backdrop-blur-md">
             <a href="{{ route('home') }}" class="px-6 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-foreground bg-background shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-background/50' }} rounded-full transition-all">Home</a>
@@ -194,7 +223,8 @@
             <!-- Left: Logo & Text -->
             <div class="md:w-1/3">
                 <a href="{{ route('home') }}" class="inline-block mb-6">
-                    <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Turivanta Alliance Logo" class="h-10 w-auto object-contain">
+                    <img src="{{ asset('assets/img/Logo-of-Turivanta-light.png') }}" alt="Turivanta Alliance Logo" class="h-10 w-auto object-contain logo-light">
+                    <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Turivanta Alliance Logo" class="h-10 w-auto object-contain logo-dark">
                 </a>
                 <h2 class="text-3xl font-extrabold text-foreground leading-tight">
                     Ready <span class="text-muted-foreground font-light"> to be </span><br/> endorsed?

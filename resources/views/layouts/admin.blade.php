@@ -31,7 +31,7 @@
             background-color: var(--background);
             color: var(--foreground);
             overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .heading-font { font-family: 'Outfit', sans-serif; }
         
@@ -42,9 +42,9 @@
         }
 
         .sidebar-link.active {
-            background: rgba(255, 1, 79, 0.1);
-            color: #ff014f;
-            border-right: 3px solid #ff014f;
+            background: rgba(var(--primary-rgb), 0.1);
+            color: var(--primary);
+            border-right: 3px solid var(--primary);
         }
 
         /* Custom Scrollbar */
@@ -54,7 +54,7 @@
             background: var(--card-border);
             border-radius: 20px;
         }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 1, 79, 0.5); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
     </style>
 </head>
 <body class="antialiased">
@@ -63,7 +63,8 @@
         <aside class="w-64 glass-panel border-r border-white/5 flex flex-col z-50">
             <div class="p-8">
                 <a href="/" class="flex items-center gap-3">
-                    <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Turivanta Alliance" class="h-20">
+                    <img src="{{ asset('assets/img/Logo-of-Turivanta-light.png') }}" alt="Turivanta Alliance" class="h-20 logo-light">
+                    <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" alt="Turivanta Alliance" class="h-20 logo-dark">
                 </a>
             </div>
 

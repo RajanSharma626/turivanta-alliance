@@ -8,17 +8,17 @@
     <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-background relative overflow-hidden">
         <!-- Background Accents -->
         <div
-            class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#ff014f]/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2">
+            class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2">
         </div>
         <div
-            class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-rose-600/5 rounded-full blur-[120px] -z-10 -translate-x-1/2 translate-y-1/2">
+            class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 -translate-x-1/2 translate-y-1/2">
         </div>
 
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
             <div class="mb-12 animate-fadeInUp">
                 <h1 class="text-4xl sm:text-5xl font-black text-foreground tracking-tight mb-4">
-                    Search <span class="text-[#ff014f]">Results</span>
+                    Search <span class="text-primary">Results</span>
                 </h1>
                 <p class="text-muted-foreground text-lg font-medium">
                     @if ($query)
@@ -43,7 +43,7 @@
                         Please double-check the ID or company name.</p>
                     <div class="mt-10">
                         <a href="{{ route('home') }}"
-                            class="inline-flex items-center gap-2 px-8 py-4 bg-muted border border-card-border text-foreground font-bold rounded-2xl hover:bg-muted/80 transition-all">
+                            class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer">
                             Return to Homepage
                         </a>
                     </div>
@@ -57,30 +57,30 @@
                     @foreach ($results as $user)
                         @php $app = $user->application; @endphp
                         <div
-                            class="group bg-card border border-card-border rounded-[2rem] p-8 hover:border-[#ff014f]/30 shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+                            class="group bg-card border border-card-border rounded-[2rem] p-8 hover:border-primary/30 shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
                             <!-- Card Glow -->
                             <div
-                                class="absolute inset-0 bg-gradient-to-tr from-[#ff014f]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                class="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                             </div>
 
                             <!-- Membership ID Badge -->
                             <div class="relative z-10 flex justify-between items-start mb-8">
-                                <div class="px-3 py-1 bg-[#ff014f]/10 border border-[#ff014f]/20 rounded-lg">
-                                    <span class="text-[10px] font-black text-[#ff014f] uppercase tracking-widest">GTIN:
+                                <div class="px-3 py-1 bg-primary/10 border border-primary/20 rounded-lg">
+                                    <span class="text-[10px] font-black text-primary uppercase tracking-widest">GTIN:
                                         {{ $user->membership_id }}</span>
                                 </div>
                                 <div
-                                    class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#ff014f] to-rose-400 flex items-center justify-center text-white font-black text-lg uppercase shadow-lg group-hover:scale-110 transition-transform">
+                                    class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary to-blue-400 flex items-center justify-center text-white font-black text-lg uppercase shadow-lg group-hover:scale-110 transition-transform">
                                     {{ substr($user->name, 0, 1) }}
                                 </div>
                             </div>
 
                             <!-- Content -->
                             <div class="relative z-10">
-                                <h3 class="text-xl font-extrabold text-foreground mb-1 group-hover:text-[#ff014f] transition-colors line-clamp-1">
+                                <h3 class="text-xl font-extrabold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
                                     {{ $app->trade_name ?? ($app->legal_name ?? $user->name) }}
                                 </h3>
-                                <p class="text-[#ff014f] text-[11px] font-black uppercase tracking-widest mb-4">
+                                <p class="text-primary text-[11px] font-black uppercase tracking-widest mb-4">
                                     {{ $user->business_type }}
                                 </p>
 
@@ -118,9 +118,9 @@
                                         
                                         <!-- Call to Action -->
                                         <div class="mt-6 pt-6 border-t border-card-border">
-                                            <div class="p-4 bg-[#ff014f]/5 border border-[#ff014f]/10 rounded-2xl text-center group/sub">
+                                            <div class="p-4 bg-primary/5 border border-primary/10 rounded-2xl text-center group/sub">
                                                 <p class="text-[9px] text-muted-foreground font-black uppercase tracking-widest mb-3">Subscription Required</p>
-                                                <a href="{{ route('membership') }}" class="inline-block text-[10px] text-foreground font-black uppercase tracking-widest hover:text-[#ff014f] transition-colors">
+                                                <a href="{{ route('membership') }}" class="inline-block text-[10px] text-foreground font-black uppercase tracking-widest hover:text-primary transition-colors cursor-pointer">
                                                     Upgrade to view contact
                                                 </a>
                                             </div>
@@ -131,7 +131,7 @@
 
                             <!-- Decorative Element -->
                             <div
-                                class="absolute -bottom-4 -right-4 w-24 h-24 bg-[#ff014f]/5 rounded-full blur-2xl group-hover:bg-[#ff014f]/20 transition-all">
+                                class="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/20 transition-all">
                             </div>
                         </div>
                     @endforeach
@@ -143,14 +143,14 @@
                 </div>
 
                 @if (!$viewerHasSubscription)
-                    <div class="mt-20 p-10 bg-card border border-[#ff014f]/20 rounded-[2.5rem] relative overflow-hidden group animate-fadeInUp shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]" style="animation-delay: 0.3s">
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-[#ff014f]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="mt-20 p-10 bg-card border border-primary/20 rounded-[2.5rem] relative overflow-hidden group animate-fadeInUp shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]" style="animation-delay: 0.3s">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                         <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                             <div class="text-center md:text-left">
-                                <h3 class="text-2xl font-black text-foreground mb-2 italic uppercase tracking-tight">Unlock Professional <span class="text-[#ff014f]">Access</span></h3>
+                                <h3 class="text-2xl font-black text-foreground mb-2 italic uppercase tracking-tight">Unlock Professional <span class="text-primary">Access</span></h3>
                                 <p class="text-muted-foreground text-sm max-w-xl">You are currently viewing a limited data preview. Subscribe to the Turivanta Alliance to unlock full contact details, ownership information, and verified addresses of all registered members.</p>
                             </div>
-                            <a href="{{ route('membership') }}" class="px-10 py-4 bg-[#ff014f] text-white font-black text-xs uppercase tracking-[0.2em] rounded-2xl shadow-[0_10px_30px_rgba(255,1,79,0.3)] hover:-translate-y-1 transition-all whitespace-nowrap">
+                            <a href="{{ route('membership') }}" class="px-10 py-4 bg-primary text-white font-black text-xs uppercase tracking-[0.2em] rounded-2xl shadow-[0_10px_30px_rgba(var(--primary-rgb),0.3)] hover:-translate-y-1 transition-all whitespace-nowrap cursor-pointer">
                                 View Membership Plans
                             </a>
                         </div>

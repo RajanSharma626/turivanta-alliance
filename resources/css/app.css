@@ -44,6 +44,11 @@
     --muted-foreground: #94a3b8;
 }
 
+.logo-light { display: block; }
+.logo-dark { display: none; }
+.dark .logo-light { display: none !important; }
+.dark .logo-dark { display: block !important; }
+
 @layer base {
     body {
         font-family: 'Outfit', sans-serif;
@@ -52,9 +57,16 @@
         overflow-x: hidden;
         margin: 0;
         padding: 0;
-        main input:hover, main select:hover, main textarea:hover { border-color: #0b21a8 !important; }
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    a, button, input, select, textarea, .sidebar-link, .tab-btn, .group {
+        transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+
+    main input:hover, main select:hover, main textarea:hover { border-color: var(--primary) !important; }
 }
 
 @layer utilities {
@@ -106,21 +118,17 @@
     }
 
     .hero-img-wave {
-        animation: wave 8s ease-in-out infinite alternate;
-        box-shadow: 0 0 30px rgba(11, 33, 168, 0.4), inset 0 0 20px rgba(11, 33, 168, 0.4);
         transition: all 0.5s ease;
         position: relative;
         z-index: 2;
         overflow: hidden;
-        background: linear-gradient(135deg, #0b21a8, #2563eb);
-        padding: 4px;
-        /* Border thickness */
+        padding: 0;
+        box-shadow: none;
     }
 
     .hero-img-inner {
         width: 100%;
         height: 100%;
-        animation: wave 8s ease-in-out infinite alternate;
         overflow: hidden;
         background: var(--background);
     }

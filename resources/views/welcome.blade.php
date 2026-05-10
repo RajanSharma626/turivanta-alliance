@@ -10,22 +10,11 @@
     <main class="flex-grow flex items-center justify-center w-full px-6 pt-24 sm:pt-32 pb-16 z-10 relative">
         <div class="max-w-4xl w-full flex flex-col items-center justify-center gap-8 lg:gap-14 mt-4">
 
-            <!-- Top Image with Wave -->
+            <!-- Top Image -->
             <div class="flex justify-center items-center h-[320px] sm:h-[420px] lg:h-[500px]">
-                <div class="hero-img-container">
-                    <div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-110"></div>
-                    <div class="hero-img-wave w-[260px] h-[260px] sm:w-[340px] sm:h-[340px] lg:w-[440px] lg:h-[440px]">
-                        <div class="hero-img-inner">
-                            <img src="{{ asset('assets/img/hero_img.png') }}" alt="Dreaming Person Face"
-                                class="w-full h-full object-cover transition-all duration-700">
-                        </div>
-                    </div>
-                    <div
-                        class="absolute -top-6 -right-6 lg:-top-10 lg:-right-10 w-24 h-24 bg-gradient-to-r from-primary to-blue-900 rounded-full blur-2xl opacity-60 animate-pulse">
-                    </div>
-                    <div
-                        class="absolute -bottom-8 -left-8 lg:-bottom-12 lg:-left-12 w-32 h-32 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur-3xl opacity-50">
-                    </div>
+                <div class="relative w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] lg:w-[460px] lg:h-[460px] rounded-[3rem] overflow-hidden">
+                    <img src="{{ asset('assets/img/hero_img.png') }}" alt="Hero Image"
+                        class="w-full h-full object-cover">
                 </div>
             </div>
 

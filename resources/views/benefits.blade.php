@@ -198,7 +198,8 @@
 
                 <div class="bg-card p-16 rounded-[4rem] border border-card-border space-y-8 relative overflow-hidden group text-center">
                     {{-- <div class="absolute inset-0 bg-gradient-to-tr from-[#ff014f]/10 to-transparent"></div> --}}
-                    <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" class="h-16 mx-auto mb-8 relative z-10 opacity-50 group-hover:opacity-100 transition-opacity">
+                    <img src="{{ asset('assets/img/Logo-of-Turivanta-light.png') }}" class="h-16 mx-auto mb-8 relative z-10 opacity-50 group-hover:opacity-100 transition-opacity logo-light">
+                    <img src="{{ asset('assets/img/Logo-of-Turivanta-Alliance.png') }}" class="h-16 mx-auto mb-8 relative z-10 opacity-50 group-hover:opacity-100 transition-opacity logo-dark">
                     <h4 class="text-2xl font-black text-foreground uppercase italic tracking-tight relative z-10 px-1">Why Join Turivanta</h4>
                     <p class="text-muted-foreground font-medium relative z-10 max-w-2xl mx-auto leading-relaxed">We verify your presence. We build your credibility. We connect you globally. Turivanta is more than a platform. It is a global tourism identity system. It is a growing hospitality business network.</p>
                     <div class="pt-8 border-t border-card-border relative z-10 flex justify-center">

@@ -3,18 +3,18 @@
 @section('title', 'My Application - Turivanta Alliance')
 
 @section('content')
-    <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-[#050505] relative overflow-hidden">
+    <main class="min-h-screen pt-32 pb-20 px-6 sm:px-12 bg-background relative overflow-hidden">
         <div
-            class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#ff014f]/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2">
+            class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2">
         </div>
 
         <div class="max-w-6xl mx-auto">
             <!-- Welcome Message -->
             <div class="mb-12 animate-fadeInUp">
-                <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-4">
-                    Welcome, <span class="text-[#ff014f]">{{ $user->first_name }}!</span>
+                <h1 class="text-4xl sm:text-5xl font-black text-foreground tracking-tight mb-4">
+                    Welcome, <span class="text-primary drop-shadow-sm">{{ $user->first_name }}!</span>
                 </h1>
-                <p class="text-gray-400 text-lg font-medium">
+                <p class="text-muted-foreground text-lg font-medium">
                     Ready to take your business to the next level? Complete your membership application below to join the
                     Turivanta Alliance.
                 </p>
@@ -24,15 +24,15 @@
             <div class="mb-12 w-full">
                 <div class="flex items-center justify-between relative max-w-4xl mx-auto px-2 sm:px-4">
                     <!-- Progress Line -->
-                    <div class="absolute top-4 sm:top-6 left-0 w-full h-[1px] sm:h-[2px] bg-white/5 -z-10"></div>
-                    <div class="absolute top-4 sm:top-6 left-0 h-[1px] sm:h-[2px] bg-[#ff014f] -z-10 transition-all duration-700"
+                    <div class="absolute top-4 sm:top-6 left-0 w-full h-[1px] sm:h-[2px] bg-card-border -z-10"></div>
+                    <div class="absolute top-4 sm:top-6 left-0 h-[1px] sm:h-[2px] bg-primary -z-10 transition-all duration-700"
                         style="width: {{ (($user->current_step - 1) / 3) * 100 }}%"></div>
 
                     @foreach (['Requirements', 'Basic Info', 'Application Form', 'Documents'] as $index => $stepName)
                         @php $s = $index + 1; @endphp
                         <div class="flex flex-col items-center gap-2 sm:gap-3 flex-1 px-1">
                             <div
-                                class="w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-500 shrink-0 {{ $user->current_step >= $s ? 'bg-[#ff014f] text-white shadow-[0_0_20px_rgba(255,1,79,0.4)]' : 'bg-[#131215] text-gray-500 border border-white/10' }}">
+                                class="w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-500 shrink-0 cursor-pointer {{ $user->current_step >= $s ? 'bg-primary text-white shadow-[0_0_20px_rgba(3,18,115,0.4)]' : 'bg-muted text-muted-foreground border border-card-border' }}">
                                 @if ($user->current_step > $s)
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
                                 @endif
                             </div>
                             <span
-                                class="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-widest text-center leading-tight {{ $user->current_step >= $s ? 'text-white' : 'text-gray-600' }}">{{ $stepName }}</span>
+                                class="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-widest text-center leading-tight {{ $user->current_step >= $s ? 'text-foreground' : 'text-muted-foreground/60' }}">{{ $stepName }}</span>
                         </div>
                     @endforeach
                 </div>
@@ -61,7 +61,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h4 class="text-white text-sm font-black uppercase tracking-widest mb-0.5">Success Confirm</h4>
+                        <h4 class="text-foreground text-sm font-black uppercase tracking-widest mb-0.5">Success Confirm</h4>
                         <p class="text-[13px] font-medium text-emerald-400/80 leading-snug tracking-tight">
                             {{ session('success') }}</p>
                     </div>
@@ -69,29 +69,29 @@
             @endif
 
             <!-- Step Content -->
-            <div class="bg-[#0a0a0f] border border-white/5 rounded-3xl overflow-hidden shadow-2xl animate-fadeIn">
+            <div class="bg-card border border-card-border rounded-3xl overflow-hidden shadow-2xl animate-fadeIn">
                 @if ($user->current_step == 1)
                     <!-- Step 1: View Requirements -->
                     <div class="p-8 sm:p-12">
                         <div class="max-w-6xl">
-                            <h2 class="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">Membership
+                            <h2 class="text-2xl font-bold text-foreground mb-8 border-b border-card-border pb-4">Membership
                                 Requirements Checklist</h2>
 
                             <div class="space-y-12">
                                 <!-- Legal Business Entity -->
                                 <section>
                                     <h3
-                                        class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-xs mb-6 px-4 py-2 bg-[#ff014f]/5 rounded-lg inline-block">
+                                        class="text-primary font-black uppercase tracking-[0.2em] text-xs mb-6 px-4 py-2 bg-primary/5 rounded-lg inline-block">
                                         Legal Business Entity</h3>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         <!-- Company -->
-                                        <div class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
-                                            <h4 class="text-white font-bold mb-4 text-sm flex items-center gap-2">
-                                                <span class="w-1.5 h-6 bg-[#ff014f] rounded-full"></span>
+                                        <div class="bg-card border border-card-border p-6 rounded-2xl h-full shadow-sm hover:shadow-md transition-shadow">
+                                            <h4 class="text-foreground font-bold mb-4 text-sm flex items-center gap-2">
+                                                <span class="w-1.5 h-6 bg-primary rounded-full"></span>
                                                 If business entity: Company
                                             </h4>
-                                            <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
+                                            <ul class="space-y-3 text-muted-foreground text-sm leading-relaxed">
                                                 <li class="flex gap-3"><span>•</span> Notarized Certificate of Incorporation
                                                 </li>
                                                 <li class="flex gap-3"><span>•</span> Article & Memorandum of Association
@@ -106,12 +106,12 @@
                                         </div>
 
                                         <!-- LLP -->
-                                        <div class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
-                                            <h4 class="text-white font-bold mb-4 text-sm flex items-center gap-2">
-                                                <span class="w-1.5 h-6 bg-[#ff014f] rounded-full"></span>
+                                        <div class="bg-card border border-card-border p-6 rounded-2xl h-full shadow-sm hover:shadow-md transition-shadow">
+                                            <h4 class="text-foreground font-bold mb-4 text-sm flex items-center gap-2">
+                                                <span class="w-1.5 h-6 bg-primary rounded-full"></span>
                                                 If business entity: LLP
                                             </h4>
-                                            <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
+                                            <ul class="space-y-3 text-muted-foreground text-sm leading-relaxed">
                                                 <li class="flex gap-3"><span>•</span> Notarized Certificate of Incorporation
                                                 </li>
                                                 <li class="flex gap-3"><span>•</span> Registered Limited Liability
@@ -126,12 +126,12 @@
                                         </div>
 
                                         <!-- Partnership -->
-                                        <div class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
-                                            <h4 class="text-white font-bold mb-4 text-sm flex items-center gap-2">
-                                                <span class="w-1.5 h-6 bg-[#ff014f] rounded-full"></span>
+                                        <div class="bg-card border border-card-border p-6 rounded-2xl h-full shadow-sm hover:shadow-md transition-shadow">
+                                            <h4 class="text-foreground font-bold mb-4 text-sm flex items-center gap-2">
+                                                <span class="w-1.5 h-6 bg-primary rounded-full"></span>
                                                 If business entity: Partnership
                                             </h4>
-                                            <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
+                                            <ul class="space-y-3 text-muted-foreground text-sm leading-relaxed">
                                                 <li class="flex gap-3"><span>•</span> Registered Deed of Partnership with
                                                     Registrar of Firm</li>
                                                 <li class="flex gap-3"><span>•</span> CA Letter confirming the partnership
@@ -144,24 +144,24 @@
                                         </div>
 
                                         <!-- Sole Proprietor -->
-                                        <div class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
-                                            <h4 class="text-white font-bold mb-4 text-sm flex items-center gap-2">
-                                                <span class="w-1.5 h-6 bg-[#ff014f] rounded-full"></span>
+                                        <div class="bg-card border border-card-border p-6 rounded-2xl h-full shadow-sm hover:shadow-md transition-shadow">
+                                            <h4 class="text-foreground font-bold mb-4 text-sm flex items-center gap-2">
+                                                <span class="w-1.5 h-6 bg-primary rounded-full"></span>
                                                 If business entity: Sole Proprietor
                                             </h4>
-                                            <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
+                                            <ul class="space-y-3 text-muted-foreground text-sm leading-relaxed">
                                                 <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID Card of
                                                     sole proprietor</li>
                                             </ul>
                                         </div>
 
                                         <!-- Servicing Professionals -->
-                                        <div class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
-                                            <h4 class="text-white font-bold mb-4 text-sm flex items-center gap-2">
-                                                <span class="w-1.5 h-6 bg-[#ff014f] rounded-full"></span>
+                                        <div class="bg-card border border-card-border p-6 rounded-2xl h-full shadow-sm hover:shadow-md transition-shadow">
+                                            <h4 class="text-foreground font-bold mb-4 text-sm flex items-center gap-2">
+                                                <span class="w-1.5 h-6 bg-primary rounded-full"></span>
                                                 In Service Professionals
                                             </h4>
-                                            <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
+                                            <ul class="space-y-3 text-muted-foreground text-sm leading-relaxed">
                                                 <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the
                                                     applicant.</li>
                                                 <li class="flex gap-3"><span>•</span> Experience Certificate</li>
@@ -170,12 +170,12 @@
                                         </div>
 
                                         <!-- Students -->
-                                        <div class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
-                                            <h4 class="text-white font-bold mb-4 text-sm flex items-center gap-2">
-                                                <span class="w-1.5 h-6 bg-[#ff014f] rounded-full"></span>
+                                        <div class="bg-card border border-card-border p-6 rounded-2xl h-full shadow-sm hover:shadow-md transition-shadow">
+                                            <h4 class="text-foreground font-bold mb-4 text-sm flex items-center gap-2">
+                                                <span class="w-1.5 h-6 bg-primary rounded-full"></span>
                                                 Students
                                             </h4>
-                                            <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
+                                            <ul class="space-y-3 text-muted-foreground text-sm leading-relaxed">
                                                 <li class="flex gap-3"><span>•</span> Student ID Card / Admission Proof /
                                                      Endorsement Letter by Designated Institute</li>
                                                 <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the
@@ -188,24 +188,24 @@
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <!-- Proof of TAX (Commented temporarily) -->
-                                    {{-- <section class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
+                                    {{-- <section class="bg-muted/30 border border-card-border p-6 rounded-2xl h-full">
                                         <h3
-                                            class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-xs mb-6 px-4 py-2 bg-[#ff014f]/5 rounded-lg inline-block">
+                                            class="text-primary font-black uppercase tracking-[0.2em] text-xs mb-6 px-4 py-2 bg-primary/5 rounded-lg inline-block">
                                             Proof of TAX Registration</h3>
-                                        <ul class="space-y-3 text-gray-400 text-sm leading-relaxed ml-4">
+                                        <ul class="space-y-3 text-muted-foreground text-sm leading-relaxed ml-4">
                                             <li class="flex gap-3"><span>•</span> Valid Proof of Tax Registration</li>
                                            
                                         </ul>
                                     </section> --}}
 
                                     <!-- Owner ID -->
-                                    <section class="bg-white/[0.02] border border-white/5 p-6 rounded-2xl h-full">
+                                    <section class="bg-muted/30 border border-card-border p-6 rounded-2xl h-full">
                                         <h3
-                                            class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-xs mb-6 px-4 py-2 bg-[#ff014f]/5 rounded-lg inline-block">
+                                            class="text-primary font-black uppercase tracking-[0.2em] text-xs mb-6 px-4 py-2 bg-primary/5 rounded-lg inline-block">
                                             Owners / Shareholders Identification</h3>
-                                        <p class="text-gray-500 text-[11px] font-bold mb-4 uppercase tracking-wider ml-4">
+                                        <p class="text-muted-foreground/80 text-[11px] font-bold mb-4 uppercase tracking-wider ml-4">
                                             Please provide details as following:</p>
-                                        <ul class="space-y-3 text-gray-400 text-sm leading-relaxed ml-4">
+                                        <ul class="space-y-3 text-muted-foreground text-sm leading-relaxed ml-4">
                                             <li class="flex gap-3"><span>•</span> Valid Passport or Photo ID of the Owners /
                                                 Shareholders</li>
                                             <li class="flex gap-3"><span>•</span> If shareholders are corporation, provide
@@ -216,11 +216,11 @@
                             </div>
 
                             <form action="{{ route('profile.next') }}" method="POST"
-                                class="mt-16 pt-8 border-t border-white/5">
+                                class="mt-16 pt-8 border-t border-card-border">
                                 @csrf
                                 <input type="hidden" name="step" value="1">
                                 <button type="submit"
-                                    class="inline-flex items-center gap-3 px-10 py-3.5 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all hover:shadow-[0_0_30px_rgba(255,1,79,0.3)] hover:-translate-y-1">
+                                    class="inline-flex items-center gap-3 px-10 py-3.5 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)] hover:-translate-y-1 cursor-pointer">
                                     Proceed to Basic Details
                                     <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -234,25 +234,25 @@
                 @elseif($user->current_step == 2)
                     <!-- Step 2: Basic Details -->
                     <div class="p-8 sm:p-12">
-                        <h2 class="text-2xl font-bold text-white mb-2">Basic Information</h2>
-                        <p class="text-gray-500 mb-6 font-medium">Please confirm your personal and primary business
+                        <h2 class="text-2xl font-bold text-foreground mb-2">Basic Information</h2>
+                        <p class="text-muted-foreground/80 mb-6 font-medium">Please confirm your personal and primary business
                             details.</p>
 
                         <!-- Important Note -->
-                        <div class="mb-10 p-6 bg-[#ff014f]/5 border border-[#ff014f]/10 rounded-2xl">
-                            <h4 class="text-white font-bold text-sm mb-4 flex items-center gap-2">
-                                <svg class="w-5 h-5 text-[#ff014f]" fill="none" stroke="currentColor"
+                        <div class="mb-10 p-6 bg-primary/5 border border-primary/10 rounded-2xl">
+                            <h4 class="text-foreground font-bold text-sm mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 Important Note
                             </h4>
-                            <ul class="space-y-4 text-gray-400 text-[13px] leading-relaxed">
+                            <ul class="space-y-4 text-muted-foreground text-[13px] leading-relaxed">
                                 <li class="flex gap-3"><span class="shrink-0">•</span> <span>Date of Commencement of
                                         business must be 4
                                         Years Old from the date of application OR You must have minimum <span
-                                            class="text-white font-bold">10 years</span> of Experience of the
+                                            class="text-foreground font-bold">10 years</span> of Experience of the
                                         industry</span></li>
                                 <li class="flex gap-3"><span class="shrink-0">•</span> <span>Letter of recommendation
                                         from Turivanta Member on
@@ -272,25 +272,25 @@
                             <input type="hidden" name="step" value="2">
 
                             <div class="flex flex-col gap-2">
-                                <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Country
+                                <label class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">Country
                                     Concerned</label>
                                 <select name="country_concerned"
-                                    class="w-full bg-[#131215] border @error('country_concerned') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none text-sm">
+                                    class="w-full bg-muted border @error('country_concerned') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all appearance-none text-sm">
                                     @include('partials.countries', [
                                         'selected' => old('country_concerned', $user->country_concerned),
                                     ])
                                 </select>
                                 @error('country_concerned')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="flex flex-col gap-2">
-                                <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Legal
+                                <label class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">Legal
                                     Status</label>
                                 <select name="legal_status"
-                                    class="w-full bg-[#131215] border @error('legal_status') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none text-sm">
+                                    class="w-full bg-muted border @error('legal_status') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all appearance-none text-sm">
                                     <option value="">Select Legal Status</option>
                                     @foreach (['Association', 'Co-operative', 'Corporation', 'Joint Venture', 'Limited Company', 'Limited Partnership', 'Partnership', 'Sole Proprietorship', 'State Owned Enterprise', 'Trust Company', 'In Service Professional', 'Student'] as $status)
                                         <option value="{{ $status }}"
@@ -300,38 +300,38 @@
                                 </select>
                                 @error('legal_status')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="flex flex-col gap-2">
-                                <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">First
+                                <label class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">First
                                     Name</label>
                                 <input type="text" name="first_name"
                                     value="{{ old('first_name', $user->first_name) }}"
-                                    class="w-full bg-[#131215] border @error('first_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
+                                    class="w-full bg-muted border @error('first_name') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all text-sm">
                                 @error('first_name')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="flex flex-col gap-2">
-                                <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Last
+                                <label class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">Last
                                     Name</label>
                                 <input type="text" name="last_name" value="{{ old('last_name', $user->last_name) }}"
-                                    class="w-full bg-[#131215] border @error('last_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
+                                    class="w-full bg-muted border @error('last_name') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all text-sm">
                                 @error('last_name')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="flex flex-col gap-2">
                                 <label
-                                    class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Gender</label>
+                                    class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">Gender</label>
                                 <select name="gender"
-                                    class="w-full bg-[#131215] border @error('gender') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none text-sm">
+                                    class="w-full bg-muted border @error('gender') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all appearance-none text-sm">
                                     <option value="">Select Gender</option>
                                     <option value="male" {{ old('gender', $user->gender) == 'male' ? 'selected' : '' }}>
                                         Male</option>
@@ -340,50 +340,50 @@
                                 </select>
                                 @error('gender')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="flex flex-col gap-2">
-                                <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Date of
+                                <label class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">Date of
                                     Birth</label>
                                 <input type="date" name="dob" value="{{ old('dob', $user->dob) }}"
-                                    class="w-full bg-[#131215] border @error('dob') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all [color-scheme:dark] text-sm">
+                                    class="w-full bg-muted border @error('dob') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all scheme-light dark:scheme-dark text-sm">
                                 @error('dob')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="flex flex-col gap-2">
-                                <label class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Contact
+                                <label class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">Contact
                                     No.</label>
                                 <input type="text" name="contact_no"
                                     value="{{ old('contact_no', $user->contact_no) }}"
-                                    class="w-full bg-[#131215] border @error('contact_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
+                                    class="w-full bg-muted border @error('contact_no') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all text-sm">
                                 @error('contact_no')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="flex flex-col gap-2">
                                 <label
-                                    class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Email</label>
+                                    class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">Email</label>
                                 <input type="email" name="email" value="{{ old('email', $user->email) }}"
-                                    class="w-full bg-[#131215] border @error('email') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all text-sm">
+                                    class="w-full bg-muted border @error('email') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all text-sm">
                                 @error('email')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="flex flex-col gap-2 md:col-span-2">
                                 <label
-                                    class="text-[11px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Business
+                                    class="text-[11px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] ml-1">Business
                                     Type</label>
                                 <select name="business_type"
-                                    class="w-full bg-[#131215] border @error('business_type') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] transition-all appearance-none text-sm">
+                                    class="w-full bg-muted border @error('business_type') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary transition-all appearance-none text-sm">
                                     <option value="">Select Business Type</option>
                                     <option value="Accommodation"
                                         {{ old('business_type', $user->business_type) == 'Accommodation' ? 'selected' : '' }}>
@@ -409,17 +409,17 @@
                                 </select>
                                 @error('business_type')
                                     <span
-                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="md:col-span-2 mt-10 pt-6 border-t border-white/5 flex gap-4">
+                            <div class="md:col-span-2 mt-10 pt-6 border-t border-card-border flex gap-4">
                                 <button type="submit" name="action" value="back"
                                     formaction="{{ route('profile.back') }}"
-                                    class="px-6 py-3 sm:px-8 sm:py-3.5 border border-white/10 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all text-xs sm:text-sm">
+                                    class="px-6 py-3 sm:px-8 sm:py-3.5 border border-card-border text-muted-foreground font-bold rounded-2xl hover:bg-muted/50 transition-all text-xs sm:text-sm cursor-pointer">
                                     Previous Step
                                 </button>
                                 <button type="submit"
-                                    class="flex-1 sm:flex-none px-8 py-3 sm:px-12 sm:py-3.5 bg-[#ff014f] text-white font-bold rounded-2xl hover:bg-[#e11d48] transition-all shadow-xl text-xs sm:text-sm">
+                                    class="flex-1 sm:flex-none px-8 py-3 sm:px-12 sm:py-3.5 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all shadow-xl text-xs sm:text-sm cursor-pointer">
                                     Save & Continue
                                 </button>
                             </div>
@@ -428,8 +428,8 @@
                 @elseif($user->current_step == 3)
                     <!-- Step 3: Complete Application Form -->
                     <div class="p-8 sm:p-12">
-                        <h2 class="text-2xl font-bold text-white mb-2">Application Form</h2>
-                        <p class="text-gray-500 mb-10 font-medium">Detailed business and management identification.</p>
+                        <h2 class="text-2xl font-bold text-foreground mb-2">Application Form</h2>
+                        <p class="text-muted-foreground/80 mb-10 font-medium">Detailed business and management identification.</p>
 
                         <form id="step3-form" action="{{ route('profile.next') }}" method="POST"
                             class="flex flex-col gap-12">
@@ -439,7 +439,7 @@
                             <!-- Section 1 -->
                             <div class="space-y-8">
                                 <h3
-                                    class="bg-[#ff014f]/10 text-[#ff014f] font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
+                                    class="bg-primary/10 text-primary font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
                                     SECTION 1 - Identification for which Approval Requested</h3>
 
                                 <!-- Identification Grid -->
@@ -447,124 +447,124 @@
                                     <!-- Row 1 -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Legal Name <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Legal Name <span class="text-primary">*</span>
                                         </label>
                                         <input type="text" name="legal_name"
                                             value="{{ old('legal_name', $application->legal_name) }}"
-                                            class="w-full bg-[#131215] border @error('legal_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('legal_name') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('legal_name')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Trade
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Trade
                                             Name</label>
                                         <input type="text" name="trade_name"
                                             value="{{ old('trade_name', $application->trade_name) }}"
-                                            class="w-full bg-[#131215] border @error('trade_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('trade_name') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('trade_name')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <!-- Row 2 -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Office Phone <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Office Phone <span class="text-primary">*</span>
                                         </label>
                                         <input type="tel" name="office_phone"
                                             value="{{ old('office_phone', $application->office_phone) }}"
-                                            class="w-full bg-[#131215] border @error('office_phone') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('office_phone') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('office_phone')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Office Email <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Office Email <span class="text-primary">*</span>
                                         </label>
                                         <input type="email" name="office_email"
                                             value="{{ old('office_email', $application->office_email) }}"
-                                            class="w-full bg-[#131215] border @error('office_email') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('office_email') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('office_email')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <!-- Row 3 -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Mobile</label>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Mobile</label>
                                         <input type="tel" name="mobile"
                                             value="{{ old('mobile', $application->mobile) }}"
-                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border border-card-border rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('mobile')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Website</label>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Website</label>
                                         <input type="url" name="website"
                                             value="{{ old('website', $application->website) }}"
-                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm"
+                                            class="w-full bg-muted border border-card-border rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm"
                                             placeholder="https://">
                                         @error('website')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <!-- Row 4 -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Fax</label>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Fax</label>
                                         <input type="text" name="fax" value="{{ old('fax', $application->fax) }}"
-                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border border-card-border rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('fax')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Service TAX Number<span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Service TAX Number<span class="text-primary">*</span>
                                         </label>
                                         <input type="text" name="service_tax"
                                             value="{{ old('service_tax', $application->service_tax) }}"
-                                            class="w-full bg-[#131215] border @error('service_tax') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm"
+                                            class="w-full bg-muted border @error('service_tax') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm"
                                             placeholder="Gst/Pan/Other No.">
                                         @error('service_tax')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <hr class="border-white/5 my-10">
+                                <hr class="border-card-border my-10">
 
                                 <!-- Address Section -->
-                                <h4 class="text-white font-bold text-sm mb-4">Full Address of the Office for which
+                                <h4 class="text-foreground font-bold text-sm mb-4">Full Address of the Office for which
                                     Application for Approval is made</h4>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                                     <!-- Row 1: Country -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Country <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Country <span class="text-primary">*</span>
                                         </label>
                                         <select name="billing_country" id="billing_country"
-                                            class="w-full bg-[#131215] border @error('billing_country') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('billing_country') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                             @include('partials.countries', [
                                                 'selected' => old(
                                                     'billing_country',
@@ -573,16 +573,16 @@
                                         </select>
                                         @error('billing_country')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Shipping Country <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Shipping Country <span class="text-primary">*</span>
                                         </label>
                                         <select name="shipping_country" id="shipping_country"
-                                            class="w-full bg-[#131215] border @error('shipping_country') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('shipping_country') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                             @include('partials.countries', [
                                                 'selected' => old(
                                                     'shipping_country',
@@ -591,116 +591,116 @@
                                         </select>
                                         @error('shipping_country')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <!-- Row 2: State -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            State/Province <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            State/Province <span class="text-primary">*</span>
                                         </label>
                                         <input type="text" name="billing_state" id="billing_state"
                                             value="{{ old('billing_state', $application->billing_state) }}"
-                                            class="w-full bg-[#131215] border @error('billing_state') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('billing_state') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('billing_state')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Shipping
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Shipping
                                             State</label>
                                         <input type="text" name="shipping_state" id="shipping_state"
                                             value="{{ old('shipping_state', $application->shipping_state) }}"
-                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border border-card-border rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('shipping_state')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <!-- Row 3: City -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            City <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            City <span class="text-primary">*</span>
                                         </label>
                                         <input type="text" name="billing_city" id="billing_city"
                                             value="{{ old('billing_city', $application->billing_city) }}"
-                                            class="w-full bg-[#131215] border @error('billing_city') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('billing_city') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('billing_city')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Shipping City <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Shipping City <span class="text-primary">*</span>
                                         </label>
                                         <input type="text" name="shipping_city" id="shipping_city"
                                             value="{{ old('shipping_city', $application->shipping_city) }}"
-                                            class="w-full bg-[#131215] border @error('shipping_city') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('shipping_city') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('shipping_city')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <!-- Row 4: Street -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Street Name & Number <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Street Name & Number <span class="text-primary">*</span>
                                         </label>
                                         <input type="text" name="billing_street" id="billing_street"
                                             value="{{ old('billing_street', $application->billing_street) }}"
-                                            class="w-full bg-[#131215] border @error('billing_street') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('billing_street') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('billing_street')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Shipping Street <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Shipping Street <span class="text-primary">*</span>
                                         </label>
                                         <input type="text" name="shipping_street" id="shipping_street"
                                             value="{{ old('shipping_street', $application->shipping_street) }}"
-                                            class="w-full bg-[#131215] border @error('shipping_street') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border @error('shipping_street') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('shipping_street')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <!-- Row 5: Postal Code -->
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Postal
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Postal
                                             code</label>
                                         <input type="text" name="billing_postal_code" id="billing_postal_code"
                                             value="{{ old('billing_postal_code', $application->billing_postal_code) }}"
-                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border border-card-border rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('billing_postal_code')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Shipping
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Shipping
                                             Postal Code</label>
                                         <input type="text" name="shipping_postal_code" id="shipping_postal_code"
                                             value="{{ old('shipping_postal_code', $application->shipping_postal_code) }}"
-                                            class="w-full bg-[#131215] border border-white/5 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                            class="w-full bg-muted border border-card-border rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                         @error('shipping_postal_code')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -708,10 +708,10 @@
                                 <!-- Copy Address Checkbox -->
                                 <div class="mt-10 flex items-center gap-2">
                                     <input type="checkbox" name="same_as_billing" id="same_as_billing"
-                                        class="rounded-lg border-white/10 bg-[#131215] accent-[#ff014f] cursor-pointer"
+                                        class="rounded-lg border-card-border bg-muted accent-primary cursor-pointer"
                                         {{ old('same_as_billing', $application->same_as_billing) ? 'checked' : '' }}>
                                     <label for="same_as_billing"
-                                        class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] cursor-pointer hover:text-white transition-colors">Copy
+                                        class="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] cursor-pointer hover:text-foreground transition-colors">Copy
                                         Billing Address to Shipping Address</label>
                                 </div>
 
@@ -735,12 +735,12 @@
                                 <!-- Section 2 -->
                                 <div class="space-y-12">
                                     <h3
-                                        class="bg-[#ff014f]/10 text-[#ff014f] font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
+                                        class="bg-primary/10 text-primary font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
                                         SECTION 2 - Company Contacts</h3>
 
-                                    <div class="p-6 sm:p-8 bg-white/[0.02] border border-white/5 rounded-3xl">
+                                    <div class="p-6 sm:p-8 bg-muted/30 border border-card-border rounded-3xl">
                                         <p
-                                            class="text-xs sm:text-sm text-gray-400 font-medium leading-relaxed mb-10 px-4 sm:px-0">
+                                            class="text-xs sm:text-sm text-muted-foreground font-medium leading-relaxed mb-10 px-4 sm:px-0">
                                             If your agency is fully- or partially-owned by one or more people, please enter
                                             their details here as owners, partners or shareholders. Select at least one
                                             authorised signatory.
@@ -766,8 +766,8 @@
                                                 .contact-row {
                                                     margin-bottom: 2rem !important;
                                                     padding: 1.5rem !important;
-                                                    background: rgba(255, 255, 255, 0.02) !important;
-                                                    border: 1px border rgba(255, 255, 255, 0.05) !important;
+                                                    background: var(--muted) !important;
+                                                    border: 1px solid var(--card-border) !important;
                                                     border-radius: 1.5rem !important;
                                                 }
 
@@ -782,7 +782,7 @@
                                                     display: block;
                                                     font-size: 10px;
                                                     font-weight: 900;
-                                                    color: #ff014f;
+                                                    color: var(--primary);
                                                     text-transform: uppercase;
                                                     letter-spacing: 0.1em;
                                                     margin-bottom: 0.5rem;
@@ -809,7 +809,7 @@
                                                     width: 100% !important;
                                                     margin-top: 1rem !important;
                                                     padding-top: 1.5rem !important;
-                                                    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+                                                    border-top: 1px solid var(--card-border) !important;
                                                     text-align: center !important;
                                                     margin-bottom: 0 !important;
                                                 }
@@ -824,7 +824,7 @@
                                             <table class="w-full text-left border-collapse sm:min-w-[900px]"
                                                 id="contacts-table">
                                                 <thead class="hidden sm:table-header-group">
-                                                    <tr class="border-b border-white/10 text-[#ff014f]">
+                                                    <tr class="border-b border-card-border text-primary">
                                                         <th
                                                             class="py-4 px-4 text-[10px] font-black uppercase tracking-widest min-w-[150px]">
                                                             First Name</th>
@@ -849,50 +849,50 @@
                                                 <tbody id="contacts-body">
                                                     @foreach (old('contacts', $application->contacts ?? [['first_name' => '', 'last_name' => '', 'email' => '', 'owner' => false, 'manager' => false, 'signatory' => false]]) as $index => $contact)
                                                         <tr
-                                                            class="contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]">
+                                                            class="contact-row border-b border-card-border transition-colors hover:bg-muted/30">
                                                             <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="First Name">
                                                                 <input type="text"
                                                                     name="contacts[{{ $index }}][first_name]"
                                                                     value="{{ $contact['first_name'] ?? '' }}"
-                                                                    class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                                    class="w-full bg-muted border border-card-border rounded-xl px-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-primary transition-all">
                                                             </td>
                                                             <td class="py-2 sm:py-3.5 px-0 sm:px-4" data-label="Last Name">
                                                                 <input type="text"
                                                                     name="contacts[{{ $index }}][last_name]"
                                                                     value="{{ $contact['last_name'] ?? '' }}"
-                                                                    class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                                    class="w-full bg-muted border border-card-border rounded-xl px-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-primary transition-all">
                                                             </td>
                                                             <td class="py-2 sm:py-3.5 px-0 sm:px-4"
                                                                 data-label="Email Address">
                                                                 <input type="email"
                                                                     name="contacts[{{ $index }}][email]"
                                                                     value="{{ $contact['email'] ?? '' }}"
-                                                                    class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                                    class="w-full bg-muted border border-card-border rounded-xl px-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-primary transition-all">
                                                             </td>
                                                             <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
                                                                 data-label="Owner">
                                                                 <input type="checkbox"
                                                                     name="contacts[{{ $index }}][owner]"
                                                                     {{ $contact['owner'] ?? false ? 'checked' : '' }}
-                                                                    class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                                    class="accent-primary w-5 h-5 cursor-pointer">
                                                             </td>
                                                             <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
                                                                 data-label="Manager">
                                                                 <input type="checkbox"
                                                                     name="contacts[{{ $index }}][manager]"
                                                                     {{ $contact['manager'] ?? false ? 'checked' : '' }}
-                                                                    class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                                    class="accent-primary w-5 h-5 cursor-pointer">
                                                             </td>
                                                             <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center"
                                                                 data-label="Signatory">
                                                                 <input type="checkbox"
                                                                     name="contacts[{{ $index }}][signatory]"
                                                                     {{ $contact['signatory'] ?? false ? 'checked' : '' }}
-                                                                    class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                                    class="accent-primary w-5 h-5 cursor-pointer">
                                                             </td>
                                                             <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
                                                                 <button type="button" onclick="removeRow(this)"
-                                                                    class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
+                                                                    class="text-muted-foreground/80 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg cursor-pointer">
                                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                                         viewBox="0 0 24 24">
                                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -912,28 +912,28 @@
                                                 const body = document.getElementById('contacts-body');
                                                 const index = body.children.length;
                                                 const row = document.createElement('tr');
-                                                row.className = 'contact-row border-b border-white/5 transition-colors hover:bg-white/[0.02]';
+                                                row.className = 'contact-row border-b border-card-border transition-colors hover:bg-muted/30';
                                                 row.innerHTML = `
                                                     <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="First Name">
-                                                        <input type="text" name="contacts[${index}][first_name]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                        <input type="text" name="contacts[${index}][first_name]" class="w-full bg-muted border border-card-border rounded-xl px-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-primary transition-all">
                                                     </td>
                                                     <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="Last Name">
-                                                        <input type="text" name="contacts[${index}][last_name]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                        <input type="text" name="contacts[${index}][last_name]" class="w-full bg-muted border border-card-border rounded-xl px-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-primary transition-all">
                                                     </td>
                                                     <td class="py-2 sm:py-3.5 px-2 sm:px-4" data-label="Email Address">
-                                                        <input type="email" name="contacts[${index}][email]" class="w-full bg-[#131215] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#ff014f] transition-all">
+                                                        <input type="email" name="contacts[${index}][email]" class="w-full bg-muted border border-card-border rounded-xl px-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-primary transition-all">
                                                     </td>
                                                     <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Owner">
-                                                        <input type="checkbox" name="contacts[${index}][owner]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <input type="checkbox" name="contacts[${index}][owner]" class="accent-primary w-5 h-5 cursor-pointer">
                                                     </td>
                                                     <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Manager">
-                                                        <input type="checkbox" name="contacts[${index}][manager]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <input type="checkbox" name="contacts[${index}][manager]" class="accent-primary w-5 h-5 cursor-pointer">
                                                     </td>
                                                     <td class="checkbox-td py-2 sm:py-3.5 px-0 sm:px-4 text-center" data-label="Signatory">
-                                                        <input type="checkbox" name="contacts[${index}][signatory]" class="accent-[#ff014f] w-5 h-5 cursor-pointer">
+                                                        <input type="checkbox" name="contacts[${index}][signatory]" class="accent-primary w-5 h-5 cursor-pointer">
                                                     </td>
                                                     <td class="action-td py-2 sm:py-3.5 px-0 sm:px-4 text-center">
-                                                        <button type="button" onclick="removeRow(this)" class="text-gray-500 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg">
+                                                        <button type="button" onclick="removeRow(this)" class="text-muted-foreground/80 hover:text-rose-500 p-2 transition-all hover:bg-rose-500/10 rounded-lg cursor-pointer">
                                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                                         </button>
                                                     </td>
@@ -951,8 +951,8 @@
                                         </script>
 
                                         <button type="button" onclick="addRow()"
-                                            class="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl text-[9px] sm:text-[10px] font-black text-white uppercase tracking-[0.2em] hover:bg-[#ff014f] hover:border-[#ff014f] transition-all group shadow-xl">
-                                            <svg class="w-3.5 h-3.5 sm:w-4 h-4 text-[#ff014f] group-hover:text-white transition-colors"
+                                            class="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-muted/50 border border-card-border rounded-xl sm:rounded-2xl text-[9px] sm:text-[10px] font-black text-foreground uppercase tracking-[0.2em] hover:bg-primary hover:border-primary transition-all group shadow-xl cursor-pointer">
+                                            <svg class="w-3.5 h-3.5 sm:w-4 h-4 text-primary group-hover:text-foreground transition-colors"
                                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                                     d="M12 4v16m8-8H4"></path>
@@ -961,11 +961,11 @@
                                         </button>
                                     </div>
 
-                                    <div class="p-4 sm:p-8 bg-zinc-950/20 border border-white/5 rounded-3xl space-y-10">
+                                    <div class="p-4 sm:p-8 bg-muted/20 border border-card-border rounded-3xl space-y-10">
                                         <label
-                                            class="text-xs sm:text-sm font-bold text-gray-300 leading-relaxed block max-w-5xl">
+                                            class="text-xs sm:text-sm font-bold text-muted-foreground/70 leading-relaxed block max-w-5xl">
                                             <span
-                                                class="text-[#ff014f] font-black mr-3 uppercase text-[9px] sm:text-[10px] tracking-widest leading-none bg-[#ff014f]/10 px-2 py-1 rounded inline-block mb-2 sm:mb-0">Important
+                                                class="text-primary font-black mr-3 uppercase text-[9px] sm:text-[10px] tracking-widest leading-none bg-primary/10 px-2 py-1 rounded inline-block mb-2 sm:mb-0">Important
                                                 disclosure</span>
                                             Have you, or any person who is a director of, or who holds a material financial
                                             interest or a position of management in the Applicant currently or previously been
@@ -982,13 +982,13 @@
                                                     class="sr-only peer"
                                                     {{ old('fiduciary_breach', $application->fiduciary_breach ? 'yes' : 'no') == 'yes' ? 'checked' : '' }}>
                                                 <div
-                                                    class="w-6 h-6 rounded-full border-2 border-white/10 flex items-center justify-center peer-checked:border-[#ff014f] peer-checked:bg-[#ff014f] transition-all group-hover:border-white/20">
+                                                    class="w-6 h-6 rounded-full border-2 border-card-border flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-all group-hover:border-primary/20">
                                                     <div
                                                         class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-all">
                                                     </div>
                                                 </div>
                                                 <span
-                                                    class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">Yes</span>
+                                                    class="text-[10px] font-black uppercase text-muted-foreground/80 tracking-widest peer-checked:text-foreground transition-colors">Yes</span>
                                             </label>
 
                                             <label class="flex items-center gap-4 cursor-pointer group">
@@ -996,84 +996,84 @@
                                                     class="sr-only peer"
                                                     {{ old('fiduciary_breach', $application->fiduciary_breach ? 'yes' : 'no') == 'no' ? 'checked' : '' }}>
                                                 <div
-                                                    class="w-6 h-6 rounded-full border-2 border-white/10 flex items-center justify-center peer-checked:border-[#ff014f] peer-checked:bg-[#ff014f] transition-all group-hover:border-white/20">
+                                                    class="w-6 h-6 rounded-full border-2 border-card-border flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-all group-hover:border-primary/20">
                                                     <div
                                                         class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-all">
                                                     </div>
                                                 </div>
                                                 <span
-                                                    class="text-[10px] font-black uppercase text-gray-500 tracking-widest peer-checked:text-white transition-colors">No</span>
+                                                    class="text-[10px] font-black uppercase text-muted-foreground/80 tracking-widest peer-checked:text-foreground transition-colors">No</span>
                                             </label>
                                         </div>
 
                                         <div id="breach_details_container"
                                             class="space-y-6 animate-fadeIn transition-all {{ old('fiduciary_breach', $application->fiduciary_breach) == 'yes' ? '' : 'hidden' }}">
                                             <label
-                                                class="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                                class="text-[11px] font-black text-muted-foreground uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
                                                 Please provide full details below
                                             </label>
 
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div class="flex flex-col gap-2">
                                                     <label
-                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full
+                                                        class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Full
                                                         Name</label>
                                                     <input type="text" name="breach_full_name"
                                                         value="{{ old('breach_full_name', $application->breach_full_name) }}"
-                                                        class="bg-[#131215] border @error('breach_full_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                        class="bg-muted border @error('breach_full_name') border-primary/50 @else border-card-border @enderror rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                                     @error('breach_full_name')
                                                         <span
-                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                            class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="flex flex-col gap-2">
                                                     <label
-                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Concerned
+                                                        class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Concerned
                                                         Company</label>
                                                     <input type="text" name="breach_concerned_company"
                                                         value="{{ old('breach_concerned_company', $application->breach_concerned_company) }}"
-                                                        class="w-full bg-[#131215] border @error('breach_concerned_company') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                        class="w-full bg-muted border @error('breach_concerned_company') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                                     @error('breach_concerned_company')
                                                         <span
-                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                            class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="flex flex-col gap-2">
                                                     <label
-                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Relationship</label>
+                                                        class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Relationship</label>
                                                     <input type="text" name="breach_relationship"
                                                         value="{{ old('breach_relationship', $application->breach_relationship) }}"
-                                                        class="w-full bg-[#131215] border @error('breach_relationship') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                        class="w-full bg-muted border @error('breach_relationship') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                                     @error('breach_relationship')
                                                         <span
-                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                            class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="flex flex-col gap-2">
                                                     <label
-                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">TAX
+                                                        class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">TAX
                                                         ID</label>
                                                     <input type="text" name="breach_tax_id"
                                                         value="{{ old('breach_tax_id', $application->breach_tax_id) }}"
-                                                        class="w-full bg-[#131215] border @error('breach_tax_id') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                        class="w-full bg-muted border @error('breach_tax_id') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-5 py-2 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                                     @error('breach_tax_id')
                                                         <span
-                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                            class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </div>
 
                                             <div class="flex flex-col gap-2 mt-4">
                                                 <label
-                                                    class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Additional
+                                                    class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Additional
                                                     Pertinent Details</label>
                                                 <textarea name="breach_details"
-                                                    class="w-full bg-[#0f0f15] border border-white/5 rounded-3xl p-6 text-sm text-white focus:outline-none focus:border-[#ff014f] min-h-[120px] placeholder-gray-700 transition-all"
+                                                    class="w-full bg-muted border border-card-border rounded-3xl p-6 text-sm text-foreground focus:outline-none focus:border-primary min-h-[120px] placeholder-muted-foreground/40 transition-all"
                                                     placeholder="Enter all other details here...">{{ old('breach_details', $application->breach_details) }}</textarea>
                                                 @error('breach_details')
                                                     <span
-                                                        class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                        class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -1092,164 +1092,164 @@
                             <!-- Section 3 -->
                             <div class="space-y-8">
                                 <h3
-                                    class="bg-[#ff014f]/10 text-[#ff014f] font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
+                                    class="bg-primary/10 text-primary font-black uppercase text-xs tracking-widest px-4 py-2 rounded-lg inline-block">
                                     {{ in_array($user->legal_status, ['In Service Professional', 'Student']) ? 'SECTION 2' : 'SECTION 3' }} - Other Information</h3>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                                     @if ($user->legal_status == 'Student')
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                                Date of Admission <span class="text-[#ff014f]">*</span>
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Date of Admission <span class="text-primary">*</span>
                                             </label>
                                             <input type="date" name="admission_date"
                                                 value="{{ old('admission_date', $application->admission_date ? $application->admission_date->format('Y-m-d') : '') }}"
-                                                class="w-full bg-[#131215] border @error('admission_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark] text-sm">
+                                                class="w-full bg-muted border @error('admission_date') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary scheme-light dark:scheme-dark text-sm">
                                             @error('admission_date')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                                Name of College / Institute <span class="text-[#ff014f]">*</span>
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Name of College / Institute <span class="text-primary">*</span>
                                             </label>
                                             <input type="text" name="college_name"
                                                 value="{{ old('college_name', $application->college_name) }}"
-                                                class="w-full bg-[#131215] border @error('college_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                class="w-full bg-muted border @error('college_name') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                             @error('college_name')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                                Duration of Course <span class="text-[#ff014f]">*</span>
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Duration of Course <span class="text-primary">*</span>
                                             </label>
                                             <input type="text" name="course_duration"
                                                 value="{{ old('course_duration', $application->course_duration) }}"
-                                                class="w-full bg-[#131215] border @error('course_duration') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm"
+                                                class="w-full bg-muted border @error('course_duration') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm"
                                                 placeholder="e.g. 3 Years">
                                             @error('course_duration')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @elseif($user->legal_status == 'In Service Professional')
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex flex-col gap-1">
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex flex-col gap-1">
                                                 <div class="flex items-center gap-1">Date of Joining the Industry <span
-                                                        class="text-[#ff014f]">*</span> <span
-                                                        class="text-[10px] lowercase italic font-bold text-gray-600 tracking-normal">(Should
+                                                        class="text-primary">*</span> <span
+                                                        class="text-[10px] lowercase italic font-bold text-muted-foreground/60 tracking-normal">(Should
                                                         be minimum 10 Years Old as on date)</span></div>
                                             </label>
                                             <input type="date" name="joining_industry_date"
                                                 max="{{ now()->subYears(10)->toDateString() }}"
                                                 value="{{ old('joining_industry_date', $application->joining_industry_date ? $application->joining_industry_date->format('Y-m-d') : '') }}"
-                                                class="w-full bg-[#131215] border @error('joining_industry_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark] text-sm">
+                                                class="w-full bg-muted border @error('joining_industry_date') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary scheme-light dark:scheme-dark text-sm">
                                             @error('joining_industry_date')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                                Name of First Company <span class="text-[#ff014f]">*</span>
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Name of First Company <span class="text-primary">*</span>
                                             </label>
                                             <input type="text" name="first_company_name"
                                                 value="{{ old('first_company_name', $application->first_company_name) }}"
-                                                class="w-full bg-[#131215] border @error('first_company_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                class="w-full bg-muted border @error('first_company_name') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                             @error('first_company_name')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                                Name of Current Company <span class="text-[#ff014f]">*</span>
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Name of Current Company <span class="text-primary">*</span>
                                             </label>
                                             <input type="text" name="current_company_name"
                                                 value="{{ old('current_company_name', $application->current_company_name) }}"
-                                                class="w-full bg-[#131215] border @error('current_company_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                class="w-full bg-muted border @error('current_company_name') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                             @error('current_company_name')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @else
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex flex-col gap-1">
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex flex-col gap-1">
                                                 <div class="flex items-center gap-1">Date of Commencement of business <span
-                                                        class="text-[#ff014f]">*</span> <span
-                                                        class="text-[10px] lowercase italic font-bold text-gray-600 tracking-normal">(Should
+                                                        class="text-primary">*</span> <span
+                                                        class="text-[10px] lowercase italic font-bold text-muted-foreground/60 tracking-normal">(Should
                                                         be minimum 4 Years Old as on date)</span></div>
 
                                             </label>
                                             <input type="date" name="commencement_date"
                                                 max="{{ now()->subYears(4)->toDateString() }}"
                                                 value="{{ old('commencement_date', $application->commencement_date ? $application->commencement_date->format('Y-m-d') : '') }}"
-                                                class="w-full bg-[#131215] border @error('commencement_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark] text-sm">
+                                                class="w-full bg-muted border @error('commencement_date') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary scheme-light dark:scheme-dark text-sm">
                                             @error('commencement_date')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                                Trade registration Number <span class="text-[#ff014f]">*</span>
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Trade registration Number <span class="text-primary">*</span>
                                             </label>
                                             <input type="text" name="trade_registration_no"
                                                 value="{{ old('trade_registration_no', $application->trade_registration_no) }}"
-                                                class="w-full bg-[#131215] border @error('trade_registration_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f] text-sm">
+                                                class="w-full bg-muted border @error('trade_registration_no') border-primary/50 @else border-card-border @enderror rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-foreground focus:outline-none focus:border-primary text-sm">
                                             @error('trade_registration_no')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
 
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                                Registrant <span class="text-[#ff014f]">*</span>
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Registrant <span class="text-primary">*</span>
                                             </label>
                                             <input type="text" name="registrant"
                                                 value="{{ old('registrant', $application->registrant) }}"
-                                                class="bg-[#131215] border @error('registrant') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3 sm:py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
+                                                class="bg-muted border @error('registrant') border-primary/50 @else border-card-border @enderror rounded-2xl px-5 py-3 sm:py-3.5 text-foreground focus:outline-none focus:border-primary"
                                                 placeholder="Name of registrant">
                                             @error('registrant')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label
-                                                class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                                Date When Registration was Granted <span class="text-[#ff014f]">*</span>
+                                                class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                                Date When Registration was Granted <span class="text-primary">*</span>
                                             </label>
                                             <input type="date" name="registration_granted_date"
                                                 value="{{ old('registration_granted_date', $application->registration_granted_date ? $application->registration_granted_date->format('Y-m-d') : '') }}"
-                                                class="bg-[#131215] border @error('registration_granted_date') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f] [color-scheme:dark]">
+                                                class="bg-muted border @error('registration_granted_date') border-primary/50 @else border-card-border @enderror rounded-2xl px-5 py-3.5 text-foreground focus:outline-none focus:border-primary scheme-light dark:scheme-dark">
                                             @error('registration_granted_date')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
 
                                     <div class="flex flex-col gap-2">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            Are you an IATA? <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            Are you an IATA? <span class="text-primary">*</span>
                                         </label>
                                         <select name="iata_registered" id="iata_registered"
-                                            class="bg-[#131215] border @error('iata_registered') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="bg-muted border @error('iata_registered') border-primary/50 @else border-card-border @enderror rounded-2xl px-5 py-3.5 text-foreground focus:outline-none focus:border-primary">
                                             <option value="">Select Option</option>
                                             <option value="yes"
                                                 {{ old('iata_registered', $application->iata_registered ? 'yes' : 'no') == 'yes' ? 'selected' : '' }}>
@@ -1260,44 +1260,44 @@
                                         </select>
                                         @error('iata_registered')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div id="iata_no_container"
                                         class="flex flex-col gap-2 {{ old('iata_registered', $application->iata_registered ? 'yes' : 'no') == 'yes' ? '' : 'hidden' }}">
                                         <label
-                                            class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1">
-                                            IATA No. <span class="text-[#ff014f]">*</span>
+                                            class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1 flex items-center gap-1">
+                                            IATA No. <span class="text-primary">*</span>
                                         </label>
                                         <input type="text" name="iata_no" id="iata_no"
                                             value="{{ old('iata_no', $application->iata_no) }}"
-                                            class="bg-[#131215] border @error('iata_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]">
+                                            class="bg-muted border @error('iata_no') border-primary/50 @else border-card-border @enderror rounded-2xl px-5 py-3.5 text-foreground focus:outline-none focus:border-primary">
                                         @error('iata_no')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     @if (!in_array($user->legal_status, ['Student', 'In Service Professional']))
                                         <!-- Tourism Board Registration Block -->
                                         <div
-                                            class="flex flex-col gap-6 p-8 bg-[#ff014f]/5 rounded-[2.5rem] border border-[#ff014f]/10 mt-6 md:col-span-2">
+                                            class="flex flex-col gap-6 p-8 bg-primary/5 rounded-[2.5rem] border border-primary/10 mt-6 md:col-span-2">
                                             <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                                 <div class="space-y-1">
-                                                    <h4 class="text-white font-bold tracking-tight">Tourism Board Registration
+                                                    <h4 class="text-foreground font-bold tracking-tight">Tourism Board Registration
                                                     </h4>
-                                                    <p class="text-[11px] text-gray-500 font-medium uppercase tracking-wider">
+                                                    <p class="text-[11px] text-muted-foreground/80 font-medium uppercase tracking-wider">
                                                         Is your business registered with any Tourism Board?</p>
                                                 </div>
                                                 <div
-                                                    class="flex items-center gap-2 bg-[#131215] p-1.5 rounded-2xl border border-white/5">
+                                                    class="flex items-center gap-2 bg-muted p-1.5 rounded-2xl border border-card-border">
                                                     <label class="relative flex-1 group">
                                                         <input type="radio" name="tourism_board_registered" value="yes"
                                                             {{ old('tourism_board_registered', $application->tourism_board_registered) ? 'checked' : '' }}
                                                             onclick="toggleTourismFields(true)" class="peer sr-only">
                                                         <div
-                                                            class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-500 cursor-pointer transition-all
-                                                                    peer-checked:bg-[#ff014f] peer-checked:text-white group-hover:text-gray-300">
+                                                            class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-muted-foreground/80 cursor-pointer transition-all
+                                                                    peer-checked:bg-primary peer-checked:text-white group-hover:text-muted-foreground/70">
                                                             Yes
                                                         </div>
                                                     </label>
@@ -1306,8 +1306,8 @@
                                                             {{ !old('tourism_board_registered', $application->tourism_board_registered) ? 'checked' : '' }}
                                                             onclick="toggleTourismFields(false)" class="peer sr-only">
                                                         <div
-                                                            class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-500 cursor-pointer transition-all
-                                                                    peer-checked:bg-[#ff014f] peer-checked:text-white group-hover:text-gray-300">
+                                                            class="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-muted-foreground/80 cursor-pointer transition-all
+                                                                    peer-checked:bg-primary peer-checked:text-white group-hover:text-muted-foreground/70">
                                                             No
                                                         </div>
                                                     </label>
@@ -1315,31 +1315,31 @@
                                             </div>
 
                                             <div id="tourism_board_fields"
-                                                class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/5 mt-2 {{ old('tourism_board_registered', $application->tourism_board_registered) ? '' : 'hidden' }}">
+                                                class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-card-border mt-2 {{ old('tourism_board_registered', $application->tourism_board_registered) ? '' : 'hidden' }}">
                                                 <div class="flex flex-col gap-2">
                                                     <label
-                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Name
-                                                        of Tourism Board <span class="text-[#ff014f]">*</span></label>
+                                                        class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Name
+                                                        of Tourism Board <span class="text-primary">*</span></label>
                                                     <input type="text" name="tourism_board_name"
                                                         value="{{ old('tourism_board_name', $application->tourism_board_name) }}"
-                                                        class="bg-[#131215] border @error('tourism_board_name') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
+                                                        class="bg-muted border @error('tourism_board_name') border-primary/50 @else border-card-border @enderror rounded-2xl px-5 py-3.5 text-foreground focus:outline-none focus:border-primary"
                                                         placeholder="Board name">
                                                     @error('tourism_board_name')
                                                         <span
-                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                            class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="flex flex-col gap-2">
                                                     <label
-                                                        class="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Registration
-                                                        Number <span class="text-[#ff014f]">*</span></label>
+                                                        class="text-[10px] font-black text-muted-foreground/80 uppercase tracking-widest ml-1">Registration
+                                                        Number <span class="text-primary">*</span></label>
                                                     <input type="text" name="tourism_board_reg_no"
                                                         value="{{ old('tourism_board_reg_no', $application->tourism_board_reg_no) }}"
-                                                        class="bg-[#131215] border @error('tourism_board_reg_no') border-[#ff014f]/50 @else border-white/5 @enderror rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-[#ff014f]"
+                                                        class="bg-muted border @error('tourism_board_reg_no') border-primary/50 @else border-card-border @enderror rounded-2xl px-5 py-3.5 text-foreground focus:outline-none focus:border-primary"
                                                         placeholder="Reg no.">
                                                     @error('tourism_board_reg_no')
                                                         <span
-                                                            class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                            class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -1360,14 +1360,14 @@
                                 </script>
                             </div>
 
-                            <div class="mt-10 pt-10 border-t border-white/5 flex flex-col sm:flex-row gap-4">
+                            <div class="mt-10 pt-10 border-t border-card-border flex flex-col sm:flex-row gap-4">
                                 <button type="submit" name="action" value="back"
                                     formaction="{{ route('profile.back') }}"
-                                    class="px-8 py-3.5 sm:px-8 sm:py-3.5 border border-white/10 text-gray-400 font-bold rounded-xl sm:rounded-2xl hover:bg-white/5 transition-all text-xs sm:text-sm">
+                                    class="px-8 py-3.5 sm:px-8 sm:py-3.5 border border-card-border text-muted-foreground font-bold rounded-xl sm:rounded-2xl hover:bg-muted/50 transition-all text-xs sm:text-sm cursor-pointer">
                                     Previous Step
                                 </button>
                                 <button type="submit"
-                                    class="flex-1 sm:flex-none px-12 py-3.5 sm:px-12 sm:py-3.5 bg-[#ff014f] text-white font-bold rounded-xl sm:rounded-2xl hover:bg-[#e11d48] transition-all shadow-xl text-xs sm:text-sm">
+                                    class="flex-1 sm:flex-none px-12 py-3.5 sm:px-12 sm:py-3.5 bg-primary text-white font-bold rounded-xl sm:rounded-2xl hover:bg-primary/90 transition-all shadow-xl text-xs sm:text-sm cursor-pointer">
                                     Final Step: Upload Documents
                                 </button>
                             </div>
@@ -1385,12 +1385,12 @@
                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-bold text-white tracking-tight">Document Submission</h2>
+                            <h2 class="text-2xl font-bold text-foreground tracking-tight">Document Submission</h2>
                         </div>
-                        <p class="text-gray-500 mb-10 font-medium">Please upload the required documents as per your legal
+                        <p class="text-muted-foreground/80 mb-10 font-medium">Please upload the required documents as per your legal
                             status:
                             <span
-                                class="text-white font-black uppercase text-xs tracking-widest px-2 py-0.5 bg-white/5 rounded">{{ $user->legal_status }}</span>
+                                class="text-foreground font-black uppercase text-xs tracking-widest px-2 py-0.5 bg-muted/50 rounded">{{ $user->legal_status }}</span>
                         </p>
 
                         @if ($errors->any())
@@ -1412,7 +1412,7 @@
 
                             <!-- Section 1: Legal Entity Documents -->
                             <div class="space-y-8">
-                                <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[11px] mb-6">1. LEGAL
+                                <h3 class="text-primary font-black uppercase tracking-[0.2em] text-[11px] mb-6">1. LEGAL
                                     ENTITY DOCUMENTS</h3>
 
                                 <div class="grid grid-cols-1 gap-8">
@@ -1420,23 +1420,23 @@
                                     @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
                                         <div class="flex flex-col gap-3">
                                             <label
-                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">*
+                                                class="text-[10px] font-black text-muted-foreground uppercase tracking-widest ml-1">*
                                                 TRADE LICENSE / INCORPORATION CERTIFICATE</label>
                                             <div class="relative group">
                                                 <input type="file" name="trade_license" id="trade_license"
                                                     class="sr-only" onchange="updateFilename(this)">
                                                 <label for="trade_license"
-                                                    class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    class="flex items-center gap-4 bg-muted border border-card-border rounded-2xl p-2 pr-6 cursor-pointer hover:border-card-border transition-all">
                                                     <span
-                                                        class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                        class="px-6 py-3 bg-primary text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-primary/90 transition-colors cursor-pointer">Choose
                                                         file</span>
-                                                    <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                    <span class="text-muted-foreground/80 text-xs font-medium filename-display">No
                                                         file chosen</span>
                                                 </label>
                                             </div>
                                             @error('trade_license')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
@@ -1444,24 +1444,24 @@
                                     {{-- Recommendation Letter --}}
                                     <div class="flex flex-col gap-3">
                                         <label
-                                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">* RECOMMENDATION
+                                            class="text-[10px] font-black text-muted-foreground uppercase tracking-widest ml-1">* RECOMMENDATION
                                             LETTER (FROM TURIVANTA MEMBER)</label>
                                         <div class="relative group">
                                             <input type="file" name="recommendation_letter"
                                                 id="recommendation_letter" class="sr-only"
                                                 onchange="updateFilename(this)">
                                             <label for="recommendation_letter"
-                                                class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                class="flex items-center gap-4 bg-muted border border-card-border rounded-2xl p-2 pr-6 cursor-pointer hover:border-card-border transition-all">
                                                 <span
-                                                    class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                    class="px-6 py-3 bg-primary text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-primary/90 transition-colors cursor-pointer">Choose
                                                     file</span>
-                                                <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                <span class="text-muted-foreground/80 text-xs font-medium filename-display">No
                                                     file chosen</span>
                                             </label>
                                         </div>
                                         @error('recommendation_letter')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -1469,23 +1469,23 @@
                                     @if ($user->legal_status == 'In Service Professional')
                                         <div class="flex flex-col gap-3">
                                             <label
-                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">*
+                                                class="text-[10px] font-black text-muted-foreground uppercase tracking-widest ml-1">*
                                                 EXPERIENCE CERTIFICATE</label>
                                             <div class="relative group">
                                                 <input type="file" name="exp_cert" id="exp_cert" class="sr-only"
                                                     onchange="updateFilename(this)">
                                                 <label for="exp_cert"
-                                                    class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    class="flex items-center gap-4 bg-muted border border-card-border rounded-2xl p-2 pr-6 cursor-pointer hover:border-card-border transition-all">
                                                     <span
-                                                        class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                        class="px-6 py-3 bg-primary text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-primary/90 transition-colors cursor-pointer">Choose
                                                         file</span>
-                                                    <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                    <span class="text-muted-foreground/80 text-xs font-medium filename-display">No
                                                         file chosen</span>
                                                 </label>
                                             </div>
                                             @error('exp_cert')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
@@ -1494,24 +1494,24 @@
                                     @if ($user->legal_status == 'Student')
                                         <div class="flex flex-col gap-3">
                                             <label
-                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">*
+                                                class="text-[10px] font-black text-muted-foreground uppercase tracking-widest ml-1">*
                                                 STUDENT ID CARD / ADMISSION PROOF / ENDORSEMENT LETTER BY DESIGNATED
                                                 INSTITUTE</label>
                                             <div class="relative group">
                                                 <input type="file" name="endorsement_letter" id="endorsement_letter"
                                                     class="sr-only" onchange="updateFilename(this)">
                                                 <label for="endorsement_letter"
-                                                    class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all">
+                                                    class="flex items-center gap-4 bg-muted border border-card-border rounded-2xl p-2 pr-6 cursor-pointer hover:border-card-border transition-all">
                                                     <span
-                                                        class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                        class="px-6 py-3 bg-primary text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-primary/90 transition-colors cursor-pointer">Choose
                                                         file</span>
-                                                    <span class="text-gray-500 text-xs font-medium filename-display">No
+                                                    <span class="text-muted-foreground/80 text-xs font-medium filename-display">No
                                                         file chosen</span>
                                                 </label>
                                             </div>
                                             @error('endorsement_letter')
                                                 <span
-                                                    class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                    class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @endif
@@ -1520,45 +1520,45 @@
 
                             <!-- Section 2: ID Verification -->
                             <div class="space-y-8">
-                                <h3 class="text-[#ff014f] font-black uppercase tracking-[0.2em] text-[11px] mb-6">2. ID
+                                <h3 class="text-primary font-black uppercase tracking-[0.2em] text-[11px] mb-6">2. ID
                                     VERIFICATION</h3>
 
                                 <div class="grid grid-cols-1 gap-8">
                                     <div class="flex flex-col gap-3">
                                         <label
-                                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">PASSPORT
+                                            class="text-[10px] font-black text-muted-foreground uppercase tracking-widest ml-1">PASSPORT
                                             / PHOTO ID (ALL OWNERS/PARTNERS)</label>
                                         <div class="relative group">
                                             <input type="file" name="owner_ids[]" id="owner_ids" class="sr-only"
                                                 multiple onchange="updateFilename(this)">
                                             <label for="owner_ids"
-                                                class="flex items-center gap-4 bg-[#131215] border border-white/5 rounded-2xl p-2 pr-6 cursor-pointer hover:border-white/10 transition-all max-w-md">
+                                                class="flex items-center gap-4 bg-muted border border-card-border rounded-2xl p-2 pr-6 cursor-pointer hover:border-card-border transition-all max-w-md">
                                                 <span
-                                                    class="px-6 py-3 bg-[#ff014f] text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-[#e11d48] transition-colors">Choose
+                                                    class="px-6 py-3 bg-primary text-white text-[11px] font-black uppercase tracking-wider rounded-xl group-hover:bg-primary/90 transition-colors cursor-pointer">Choose
                                                     files</span>
-                                                <span class="text-gray-500 text-xs font-medium filename-display">No file
+                                                <span class="text-muted-foreground/80 text-xs font-medium filename-display">No file
                                                     chosen</span>
                                             </label>
                                         </div>
-                                        <p class="text-[9px] text-gray-600 mt-1 ml-1 lowercase tracking-normal italic">*
+                                        <p class="text-[9px] text-muted-foreground/60 mt-1 ml-1 lowercase tracking-normal italic">*
                                             you can select multiple files at once</p>
                                         @error('owner_ids')
                                             <span
-                                                class="text-[#ff014f] text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
+                                                class="text-primary text-[10px] font-bold mt-1 ml-1 uppercase tracking-wider">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Bottom Actions -->
-                            <div class="mt-16 pt-10 border-t border-white/5 flex flex-col sm:flex-row gap-4">
+                            <div class="mt-16 pt-10 border-t border-card-border flex flex-col sm:flex-row gap-4">
                                 <button type="submit" name="action" value="back"
                                     formaction="{{ route('profile.back') }}"
-                                    class="px-6 py-3 sm:px-10 sm:py-5 bg-[#131215] border border-white/5 text-gray-400 font-bold rounded-2xl hover:bg-white/5 transition-all text-xs sm:text-sm">
+                                    class="px-6 py-3 sm:px-10 sm:py-5 bg-muted border border-card-border text-muted-foreground font-bold rounded-2xl hover:bg-muted/50 transition-all text-xs sm:text-sm cursor-pointer">
                                     Previous Step
                                 </button>
                                 <button type="submit"
-                                    class="flex-1 sm:flex-none px-8 py-3 sm:px-12 sm:py-5 bg-emerald-500 text-white font-black uppercase text-[10px] sm:text-xs tracking-[0.2em] rounded-2xl hover:bg-emerald-600 transition-all shadow-xl hover:shadow-emerald-500/20 hover:-translate-y-1">
+                                    class="flex-1 sm:flex-none px-8 py-3 sm:px-12 sm:py-5 bg-emerald-500 text-white font-black uppercase text-[10px] sm:text-xs tracking-[0.2em] rounded-2xl hover:bg-emerald-600 transition-all shadow-xl hover:shadow-emerald-500/20 hover:-translate-y-1 cursor-pointer">
                                     Complete Membership Application
                                 </button>
                             </div>
@@ -1575,12 +1575,12 @@
                                 } else {
                                     display.textContent = input.files.length + ' files selected';
                                 }
-                                display.classList.remove('text-gray-500');
-                                display.classList.add('text-white');
+                                display.classList.remove('text-muted-foreground/80');
+                                display.classList.add('text-foreground');
                             } else {
                                 display.textContent = 'No file chosen';
-                                display.classList.remove('text-white');
-                                display.classList.add('text-gray-500');
+                                display.classList.remove('text-foreground');
+                                display.classList.add('text-muted-foreground/80');
                             }
                         }
                     </script>
@@ -1595,16 +1595,16 @@
                                 </path>
                             </svg>
                         </div>
-                        <h2 class="text-4xl font-black text-white mb-2 tracking-tight">Application Submitted!</h2>
+                        <h2 class="text-4xl font-black text-foreground mb-2 tracking-tight">Application Submitted!</h2>
 
                         <div class="flex flex-col items-center gap-2 mb-8 mt-6">
                             <div class="flex gap-4">
                                 <div class="flex flex-col items-center gap-2">
                                     <span
-                                        class="text-gray-500 font-black uppercase text-[10px] tracking-widest leading-none">Application
+                                        class="text-muted-foreground/80 font-black uppercase text-[10px] tracking-widest leading-none">Application
                                         ID</span>
                                     <div
-                                        class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white font-bold tracking-widest uppercase">
+                                        class="px-4 py-2 bg-muted/50 border border-card-border rounded-xl text-foreground font-bold tracking-widest uppercase">
                                         {{ $application->application_no }}
                                     </div>
                                 </div>
@@ -1612,10 +1612,10 @@
                                     @if($user->currentSubscription)
                                         <div class="flex flex-col items-center gap-2">
                                             <span
-                                                class="text-[#ff014f] font-black uppercase text-[10px] tracking-widest leading-none">Member
+                                                class="text-primary font-black uppercase text-[10px] tracking-widest leading-none">Member
                                                 ID (GTIN)</span>
                                             <div
-                                                class="px-4 py-2 bg-[#ff014f]/5 border border-[#ff014f]/20 rounded-xl text-[#ff014f] font-black tracking-widest uppercase">
+                                                class="px-4 py-2 bg-primary/5 border border-primary/20 rounded-xl text-primary font-black tracking-widest uppercase">
                                                 {{ $user->membership_id }}
                                             </div>
                                         </div>
@@ -1690,12 +1690,12 @@
                                             Audit Feedback / Reason for Rejection</h4>
                                     </div>
                                     <div class="border-l-2 border-rose-500/30 pl-6 py-2">
-                                        <p class="text-gray-300 text-[13px] font-bold leading-relaxed italic">
+                                        <p class="text-muted-foreground/70 text-[13px] font-bold leading-relaxed italic">
                                             "{{ $application->rejection_reason }}"
                                         </p>
                                     </div>
                                     <p
-                                        class="mt-8 text-[10px] text-gray-500 font-black uppercase tracking-[0.15em] flex items-center gap-2">
+                                        class="mt-8 text-[10px] text-muted-foreground/80 font-black uppercase tracking-[0.15em] flex items-center gap-2">
                                         <span class="w-1.5 h-1.5 rounded-full bg-rose-500/50"></span>
                                         Action Recommended: Click 'Revoke & Edit Details' below to rectify and resubmit.
                                     </p>
@@ -1706,16 +1706,16 @@
                         @if ($status == 'approved')
                             <!-- Full Approved Application Record -->
                             <div class="max-w-5xl mx-auto mt-16 text-left animate-fadeInUp" style="animation-delay: 0.2s">
-                                <div class="flex items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                                <div class="flex items-center justify-between gap-4 mb-8 border-b border-card-border pb-6">
                                     <div class="flex items-center gap-4">
-                                        <h3 class="text-xl font-bold text-white tracking-tight">Full Verified Membership
+                                        <h3 class="text-xl font-bold text-foreground tracking-tight">Full Verified Membership
                                             Record</h3>
                                         <span
                                             class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase tracking-widest rounded-full border border-emerald-500/20">Official
                                             Data</span>
                                     </div>
                                     <span
-                                        class="text-gray-600 text-[10px] font-black uppercase tracking-widest italic">Last
+                                        class="text-muted-foreground/60 text-[10px] font-black uppercase tracking-widest italic">Last
                                         Audit: Verified Accurate</span>
                                 </div>
 
@@ -1724,39 +1724,39 @@
                                     <!-- Personal & Basic Profile -->
                                     <div class="space-y-8">
                                         <h4
-                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            class="text-primary text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
                                             Personal Profile
                                         </h4>
                                         <div class="space-y-5">
                                             <div>
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                     Full Name & Gender</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->first_name }}
+                                                <p class="text-foreground text-sm font-medium">{{ $user->first_name }}
                                                     {{ $user->last_name }} <span
-                                                        class="text-gray-600">({{ ucfirst($user->gender) }})</span></p>
+                                                        class="text-muted-foreground/60">({{ ucfirst($user->gender) }})</span></p>
                                             </div>
                                             <div>
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                     Date of Birth</p>
-                                                <p class="text-white text-sm font-medium">
+                                                <p class="text-foreground text-sm font-medium">
                                                     {{ $user->dob ? \Carbon\Carbon::parse($user->dob)->format('M d, Y') : 'N/A' }}
                                                 </p>
                                             </div>
                                             <div>
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                     Primary Email & Phone</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->email }}</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->contact_no }}</p>
+                                                <p class="text-foreground text-sm font-medium">{{ $user->email }}</p>
+                                                <p class="text-foreground text-sm font-medium">{{ $user->contact_no }}</p>
                                             </div>
                                             <div>
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                     Country Concerned</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->country_concerned }}
+                                                <p class="text-foreground text-sm font-medium">{{ $user->country_concerned }}
                                                 </p>
                                             </div>
                                         </div>
@@ -1765,43 +1765,43 @@
                                     <!-- Business Identity & Contact -->
                                     <div class="space-y-8">
                                         <h4
-                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            class="text-primary text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
                                             Business Identity
                                         </h4>
                                         <div class="space-y-5">
                                             <div>
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                     Legal & Trade Name</p>
                                                 <p
-                                                    class="text-white text-sm font-bold uppercase tracking-tight text-[#ff014f]">
+                                                    class="text-foreground text-sm font-bold uppercase tracking-tight text-primary">
                                                     {{ $application->legal_name }}</p>
                                                 @if ($application->trade_name)
-                                                    <p class="text-gray-400 text-xs mt-0.5">T/A:
+                                                    <p class="text-muted-foreground text-xs mt-0.5">T/A:
                                                         {{ $application->trade_name }}</p>
                                                 @endif
                                             </div>
                                             <div>
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                     Legal Status & Type</p>
-                                                <p class="text-white text-sm font-medium">{{ $user->legal_status }} —
+                                                <p class="text-foreground text-sm font-medium">{{ $user->legal_status }} —
                                                     {{ $user->business_type }}</p>
                                             </div>
                                             <div>
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                     Tax / GST Identification</p>
-                                                <p class="text-white text-sm font-medium">{{ $application->service_tax }}
+                                                <p class="text-foreground text-sm font-medium">{{ $application->service_tax }}
                                                 </p>
                                             </div>
                                             <div>
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                     Website</p>
                                                 <p
-                                                    class="text-white text-sm font-medium underline underline-offset-4 decoration-white/10">
+                                                    class="text-foreground text-sm font-medium underline underline-offset-4 decoration-foreground/10">
                                                     {{ $application->website ?: 'None' }}</p>
                                             </div>
                                         </div>
@@ -1810,16 +1810,16 @@
                                     <!-- Registered Address -->
                                     <div class="space-y-8">
                                         <h4
-                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            class="text-primary text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
                                             Official Address
                                         </h4>
                                         <div class="space-y-6">
-                                            <div class="bg-white/5 border border-white/5 p-4 rounded-2xl">
+                                            <div class="bg-muted/50 border border-card-border p-4 rounded-2xl">
                                                 <p
-                                                    class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-2">
+                                                    class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-2">
                                                     Billing Address</p>
-                                                <p class="text-white text-sm font-medium leading-relaxed">
+                                                <p class="text-foreground text-sm font-medium leading-relaxed">
                                                     {{ $application->billing_street }}<br>
                                                     {{ $application->billing_city }},
                                                     {{ $application->billing_state }}<br>
@@ -1828,11 +1828,11 @@
                                                 </p>
                                             </div>
                                             @if (!$application->same_as_billing)
-                                                <div class="bg-white/5 border border-white/5 p-4 rounded-2xl">
+                                                <div class="bg-muted/50 border border-card-border p-4 rounded-2xl">
                                                     <p
-                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-2">
+                                                        class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-2">
                                                         Shipping Address</p>
-                                                    <p class="text-white text-sm font-medium leading-relaxed">
+                                                    <p class="text-foreground text-sm font-medium leading-relaxed">
                                                         {{ $application->shipping_street }}<br>
                                                         {{ $application->shipping_city }},
                                                         {{ $application->shipping_state }}<br>
@@ -1847,8 +1847,8 @@
                                     <!-- Operation & Registration -->
                                     <div class="space-y-8 md:col-span-2">
                                         <h4
-                                            class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                            class="text-primary text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
                                             Operations & Regulatory
                                         </h4>
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -1856,58 +1856,58 @@
                                                 @if ($user->legal_status == 'Student')
                                                     <div>
                                                         <p
-                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                             Date of Admission</p>
-                                                        <p class="text-white text-sm font-medium">
+                                                        <p class="text-foreground text-sm font-medium">
                                                             {{ $application->admission_date ? $application->admission_date->format('M d, Y') : 'N/A' }}
                                                         </p>
                                                     </div>
                                                     <div>
                                                         <p
-                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                             College / Institute</p>
-                                                        <p class="text-white text-sm font-medium">
+                                                        <p class="text-foreground text-sm font-medium">
                                                             {{ $application->college_name }}</p>
-                                                        <p class="text-gray-400 text-xs">Duration:
+                                                        <p class="text-muted-foreground text-xs">Duration:
                                                             {{ $application->course_duration }}</p>
                                                     </div>
                                                 @elseif($user->legal_status == 'In Service Professional')
                                                     <div>
                                                         <p
-                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                             Industry Experience Since</p>
-                                                        <p class="text-white text-sm font-medium">
+                                                        <p class="text-foreground text-sm font-medium">
                                                             {{ $application->joining_industry_date ? $application->joining_industry_date->format('M d, Y') : 'N/A' }}
                                                         </p>
                                                     </div>
                                                     <div>
                                                         <p
-                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                             Company History</p>
-                                                        <p class="text-white text-sm font-medium">Current:
+                                                        <p class="text-foreground text-sm font-medium">Current:
                                                             {{ $application->current_company_name }}</p>
-                                                        <p class="text-gray-400 text-xs">Started at:
+                                                        <p class="text-muted-foreground text-xs">Started at:
                                                             {{ $application->first_company_name }}</p>
                                                     </div>
                                                 @else
                                                     <div>
                                                         <p
-                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                             Commencement of Business</p>
-                                                        <p class="text-white text-sm font-medium">
+                                                        <p class="text-foreground text-sm font-medium">
                                                             {{ $application->commencement_date ? $application->commencement_date->format('M d, Y') : 'N/A' }}
                                                         </p>
                                                     </div>
                                                     <div>
                                                         <p
-                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                             Trade Registration Details</p>
-                                                        <p class="text-white text-sm font-medium">No:
+                                                        <p class="text-foreground text-sm font-medium">No:
                                                             {{ $application->trade_registration_no }}</p>
-                                                        <p class="text-gray-400 text-xs">Granted:
+                                                        <p class="text-muted-foreground text-xs">Granted:
                                                             {{ $application->registration_granted_date ? $application->registration_granted_date->format('M d, Y') : 'N/A' }}
                                                         </p>
-                                                        <p class="text-gray-400 text-xs">Registrant:
+                                                        <p class="text-muted-foreground text-xs">Registrant:
                                                             {{ $application->registrant }}</p>
                                                     </div>
                                                 @endif
@@ -1915,15 +1915,15 @@
                                             <div class="space-y-5">
                                                 <div>
                                                     <p
-                                                        class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                        class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                         Accreditations</p>
                                                     <div class="flex flex-wrap gap-2 mt-2">
                                                         <span
-                                                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white text-[10px] font-bold">IATA:
+                                                            class="px-3 py-1 bg-muted/50 border border-card-border rounded-lg text-foreground text-[10px] font-bold">IATA:
                                                             {{ $application->iata_registered ? $application->iata_no : 'NO' }}</span>
                                                         @if ($application->tourism_board_registered)
                                                             <span
-                                                                class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white text-[10px] font-bold">TOURISM
+                                                                class="px-3 py-1 bg-muted/50 border border-card-border rounded-lg text-foreground text-[10px] font-bold">TOURISM
                                                                 BOARD: {{ $application->tourism_board_name }}</span>
                                                         @endif
                                                     </div>
@@ -1931,7 +1931,7 @@
                                                 @if (!in_array($user->legal_status, ['In Service Professional', 'Student']))
                                                     <div>
                                                         <p
-                                                            class="text-gray-500 text-[9px] font-black uppercase tracking-widest mb-1">
+                                                            class="text-muted-foreground/80 text-[9px] font-black uppercase tracking-widest mb-1">
                                                             Disclosures</p>
                                                         <span
                                                             class="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest {{ $application->fiduciary_breach ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' }}">
@@ -1939,7 +1939,7 @@
                                                             {{ $application->fiduciary_breach ? 'YES' : 'NONE' }}
                                                         </span>
                                                         @if ($application->fiduciary_breach)
-                                                            <p class="text-gray-400 text-[11px] mt-2 italic">
+                                                            <p class="text-muted-foreground text-[11px] mt-2 italic">
                                                                 "{{ $application->breach_details }}"</p>
                                                         @endif
                                                     </div>
@@ -1952,40 +1952,40 @@
                                         <!-- Company Management -->
                                         <div class="space-y-8">
                                             <h4
-                                                class="text-[#ff014f] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-[#ff014f]"></span>
+                                                class="text-primary text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
                                                 Verified Contacts
                                             </h4>
                                             <div class="space-y-3">
                                                 @foreach ($application->contacts ?? [] as $contact)
                                                     <div
-                                                        class="flex flex-col gap-2 bg-white/5 p-4 rounded-2xl border border-white/5 group hover:border-[#ff014f]/30 transition-all">
+                                                        class="flex flex-col gap-2 bg-muted/50 p-4 rounded-2xl border border-card-border group hover:border-primary/30 transition-all">
                                                         <div class="flex items-center gap-3">
                                                             <div
-                                                                class="w-10 h-10 bg-[#ff014f]/10 rounded-xl flex items-center justify-center border border-[#ff014f]/20">
+                                                                class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
                                                                 <span
-                                                                    class="text-[#ff014f] text-xs font-black">{{ substr($contact['first_name'], 0, 1) }}{{ substr($contact['last_name'], 0, 1) }}</span>
+                                                                    class="text-primary text-xs font-black">{{ substr($contact['first_name'], 0, 1) }}{{ substr($contact['last_name'], 0, 1) }}</span>
                                                             </div>
                                                             <div>
-                                                                <p class="text-white font-bold text-xs uppercase">
+                                                                <p class="text-foreground font-bold text-xs uppercase">
                                                                     {{ $contact['first_name'] }} {{ $contact['last_name'] }}
                                                                 </p>
-                                                                <p class="text-[10px] text-gray-500 font-medium lowercase">
+                                                                <p class="text-[10px] text-muted-foreground/80 font-medium lowercase">
                                                                     {{ $contact['email'] }}</p>
                                                             </div>
                                                         </div>
                                                         <div class="flex flex-wrap gap-1.5 mt-2">
                                                             @if ($contact['owner'] ?? false)
                                                                 <span
-                                                                    class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Owner</span>
+                                                                    class="text-[9px] font-black bg-muted/50 px-2 py-0.5 rounded text-muted-foreground uppercase">Owner</span>
                                                             @endif
                                                             @if ($contact['manager'] ?? false)
                                                                 <span
-                                                                    class="text-[9px] font-black bg-white/5 px-2 py-0.5 rounded text-gray-400 uppercase">Manager</span>
+                                                                    class="text-[9px] font-black bg-muted/50 px-2 py-0.5 rounded text-muted-foreground uppercase">Manager</span>
                                                             @endif
                                                             @if ($contact['signatory'] ?? false)
                                                                 <span
-                                                                    class="text-[9px] font-black bg-[#ff014f]/10 px-2 py-0.5 rounded text-[#ff014f] uppercase">Signatory</span>
+                                                                    class="text-[9px] font-black bg-primary/10 px-2 py-0.5 rounded text-primary uppercase">Signatory</span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -2000,7 +2000,7 @@
 
                         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-20">
                             <a href="/"
-                                class="inline-block px-12 py-5 bg-white text-black font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-gray-200 transition-all shadow-xl hover:-translate-y-1">
+                                class="inline-block px-12 py-5 bg-foreground text-background font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:opacity-90 transition-all shadow-xl hover:-translate-y-1">
                                 Return to Dashboard
                             </a>
                             @if ($status == 'pending' || $status == 'rejected')
@@ -2008,7 +2008,7 @@
                                     onsubmit="return confirm('Are you sure you want to revoke your application? You will be able to edit your details and resubmit.')">
                                     @csrf
                                     <button type="submit"
-                                        class="inline-block px-12 py-5 bg-[#131215] border border-white/10 text-zinc-400 font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl hover:bg-white/5 hover:text-white transition-all shadow-xl hover:-translate-y-1 cursor-pointer">
+                                        class="inline-block px-12 py-5 bg-muted border border-card-border text-muted-foreground font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl hover:bg-muted/50 hover:text-foreground transition-all shadow-xl hover:-translate-y-1 cursor-pointer">
                                         Revoke & Edit Details
                                     </button>
                                 </form>
@@ -2035,7 +2035,7 @@
                             btn.disabled = true;
                             const originalText = btn.innerText;
                             btn.innerHTML = `
-                        <svg class="animate-spin h-5 w-5 text-white mr-3 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg class="animate-spin h-5 w-5 text-foreground mr-3 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
